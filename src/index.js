@@ -8,6 +8,7 @@ import RegisterPage from './views/register-page'
 import LoginPage from './views/login-page'
 import UserFilePage from './views/user-file-page'
 import GoodsDetailsPage from './views/goods-details-page'
+import OrdersPage from './views/orders-page'
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <Route exact component={LoginPage} path="/login-page" />
         <Route exact component={UserFilePage} path="/user-file-page" />
         <Route exact component={GoodsDetailsPage} path="/goods-details-page" />
+        <Route exact component={OrdersPage} path="/orders-page" />
       </div>
     </Router>
   )
