@@ -142,10 +142,11 @@
     margin-left: var(--dl-space-space-unit);
     flex-direction: column;
   }
-  .text05 {
+  .navlink2 {
     margin-bottom: var(--dl-space-space-unit);
+    text-decoration: none;
   }
-  .text06 {
+  .text05 {
     margin-bottom: var(--dl-space-space-unit);
   }
   .NavItem2 {
@@ -153,11 +154,11 @@
     margin-bottom: var(--dl-space-space-unit);
     flex-direction: column;
   }
-  .text08 {
+  .text07 {
     font-weight: 600;
     margin-bottom: var(--dl-space-space-unit);
   }
-  .text09 {
+  .text08 {
     text-transform: uppercase;
   }
   .Options1 {
@@ -165,13 +166,43 @@
     margin-left: var(--dl-space-space-unit);
     flex-direction: column;
   }
+  .text09 {
+    margin-bottom: var(--dl-space-space-unit);
+  }
   .text10 {
     margin-bottom: var(--dl-space-space-unit);
   }
-  .text11 {
-    margin-bottom: var(--dl-space-space-unit);
-  }
   .container3 {
+    top: 615px;
+    flex: 0 0 auto;
+    left: 260px;
+    width: 942px;
+    height: 260px;
+    display: flex;
+    position: absolute;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .text12 {
+    width: 263px;
+  }
+  .text13 {
+    top: 134px;
+    left: 10px;
+    position: absolute;
+  }
+  .textinput {
+    top: 69px;
+    left: 141px;
+    position: absolute;
+  }
+  .text14 {
+    top: 79px;
+    left: 10px;
+    position: absolute;
+  }
+  .container4 {
     flex: 0 0 auto;
     width: auto;
     height: 188px;
@@ -179,7 +210,7 @@
     align-items: flex-start;
     justify-content: center;
   }
-  .container4 {
+  .container5 {
     top: 305px;
     flex: 0 0 auto;
     left: 261px;
@@ -190,18 +221,22 @@
     align-items: flex-start;
     flex-direction: column;
   }
+  .navlink3 {
+    display: contents;
+  }
   .image3 {
     width: 124px;
     height: 130px;
     object-fit: cover;
+    text-decoration: none;
   }
-  .text14 {
+  .text16 {
     top: 75px;
     left: 173px;
     color: #ec0c0c;
     position: absolute;
   }
-  .text15 {
+  .text17 {
     top: 73px;
     left: 242px;
     position: absolute;

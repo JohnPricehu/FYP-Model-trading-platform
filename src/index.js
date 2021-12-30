@@ -6,6 +6,8 @@ import './style.module.css'
 import Home from './views/home'
 import RegisterPage from './views/register-page'
 import LoginPage from './views/login-page'
+import UserFilePage from './views/user-file-page'
+import GoodsDetailsPage from './views/goods-details-page'
 
 const App = () => {
   return (
@@ -14,6 +16,8 @@ const App = () => {
         <Route exact component={Home} path="/" />
         <Route exact component={RegisterPage} path="/register-page" />
         <Route exact component={LoginPage} path="/login-page" />
+        <Route exact component={UserFilePage} path="/user-file-page" />
+        <Route exact component={GoodsDetailsPage} path="/goods-details-page" />
       </div>
     </Router>
   )

@@ -92,11 +92,13 @@ const Home = () => {
       ></video>
       <h1 className={styles['text']}>Best-selling models</h1>
       <div className={styles['container2']}>
-        <img
-          alt="image"
-          src="https://play.teleporthq.io/static/svg/default-img.svg"
-          className={styles['image2']}
-        />
+        <Link to="/goods-details-page" className={styles['navlink3']}>
+          <img
+            alt="image"
+            src="https://play.teleporthq.io/static/svg/default-img.svg"
+            className={styles['image2']}
+          />
+        </Link>
         <span className={styles['text1']}>goods name</span>
         <span className={styles['text2']}>$999</span>
       </div>
