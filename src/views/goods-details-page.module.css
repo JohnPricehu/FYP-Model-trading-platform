@@ -1,0 +1,199 @@
+.container {
+    width: 100%;
+    display: flex;
+    overflow: auto;
+    min-height: 100vh;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .container1 {
+    top: -374px;
+    flex: 0 0 auto;
+    left: 491px;
+    width: 200px;
+    border: 2px dashed rgba(120, 120, 120, 0.4);
+    height: 100px;
+    display: flex;
+    position: absolute;
+    align-self: center;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .container2 {
+    top: 105px;
+    left: 291px;
+    width: 541.0375061035156px;
+    height: 305.3999996185303px;
+    display: flex;
+    position: absolute;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .image {
+    top: 6px;
+    left: 0px;
+    width: 280px;
+    height: 251px;
+    position: absolute;
+    object-fit: cover;
+  }
+  .text {
+    top: 0px;
+    right: 0px;
+    position: absolute;
+  }
+  .text01 {
+    left: 9px;
+    bottom: -39px;
+    position: absolute;
+  }
+  .button {
+    left: 337px;
+    bottom: 33px;
+    position: absolute;
+  }
+  .Header {
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    position: absolute;
+    max-width: var(--dl-size-size-maxwidth);
+    align-items: center;
+    padding-top: var(--dl-space-space-twounits);
+    padding-left: var(--dl-space-space-threeunits);
+    padding-right: var(--dl-space-space-threeunits);
+    padding-bottom: var(--dl-space-space-twounits);
+    justify-content: space-between;
+  }
+  .Image1 {
+    height: 2rem;
+  }
+  .Nav {
+    display: flex;
+  }
+  .BtnGroup {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .navlink {
+    border-width: 0px;
+    margin-right: var(--dl-space-space-twounits);
+    text-decoration: none;
+  }
+  .navlink1 {
+    text-decoration: none;
+  }
+  .MenuBurger {
+    display: none;
+  }
+  .icon {
+    width: var(--dl-size-size-xsmall);
+    height: var(--dl-size-size-xsmall);
+    display: none;
+  }
+  .Nav1 {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .Container3 {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--dl-space-space-threeunits);
+    justify-content: space-between;
+  }
+  .image2 {
+    height: 2rem;
+  }
+  .icon02 {
+    width: var(--dl-size-size-xsmall);
+    height: var(--dl-size-size-xsmall);
+  }
+  .icon04 {
+    width: var(--dl-size-size-xsmall);
+    height: var(--dl-size-size-xsmall);
+    margin-right: var(--dl-space-space-twounits);
+  }
+  .icon06 {
+    width: var(--dl-size-size-xsmall);
+    height: var(--dl-size-size-xsmall);
+    margin-right: var(--dl-space-space-twounits);
+  }
+  .icon08 {
+    width: var(--dl-size-size-xsmall);
+    height: var(--dl-size-size-xsmall);
+  }
+  .button2 {
+    top: 340px;
+    left: 831px;
+    position: absolute;
+  }
+  .container4 {
+    width: 206px;
+    height: 702px;
+    display: flex;
+    align-self: flex-start;
+    margin-top: var(--dl-space-space-sixunits);
+    align-items: center;
+    margin-bottom: var(--dl-space-space-sixunits);
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+  .image3 {
+    width: 172px;
+    height: 165px;
+    object-fit: cover;
+  }
+  .text06 {
+    top: 306px;
+    left: 81px;
+    position: absolute;
+  }
+  .text07 {
+    color: #fb0707;
+  }
+  .text08 {
+    color: #f30529;
+  }
+  .text09 {
+    top: 285px;
+    left: 54px;
+    margin: auto;
+    position: absolute;
+  }
+  @media(max-width: 991px) {
+    .icon {
+      display: flex;
+    }
+  }
+  @media(max-width: 767px) {
+    .Header {
+      padding-left: var(--dl-space-space-twounits);
+      padding-right: var(--dl-space-space-twounits);
+    }
+    .Nav {
+      display: none;
+    }
+    .BtnGroup {
+      display: none;
+    }
+    .MenuBurger {
+      display: flex;
+    }
+  }
+  @media(max-width: 479px) {
+    .Header {
+      padding: var(--dl-space-space-unit);
+    }
+    .MenuMobile {
+      padding: 16px;
+    }
+  }
+  
