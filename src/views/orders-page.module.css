@@ -165,22 +165,26 @@
     margin-left: var(--dl-space-space-unit);
     flex-direction: column;
   }
+  .navlink2 {
+    margin-bottom: var(--dl-space-space-unit);
+    text-decoration: none;
+  }
   .text06 {
     margin-bottom: var(--dl-space-space-unit);
   }
-  .text07 {
-    margin-bottom: var(--dl-space-space-unit);
+  .navlink3 {
+    text-decoration: none;
   }
   .NavItem2 {
     display: flex;
     margin-bottom: var(--dl-space-space-unit);
     flex-direction: column;
   }
-  .text09 {
+  .text07 {
     font-weight: 600;
     margin-bottom: var(--dl-space-space-unit);
   }
-  .text10 {
+  .text08 {
     text-transform: uppercase;
   }
   .Options1 {
@@ -188,10 +192,10 @@
     margin-left: var(--dl-space-space-unit);
     flex-direction: column;
   }
-  .text11 {
+  .text09 {
     margin-bottom: var(--dl-space-space-unit);
   }
-  .text12 {
+  .text10 {
     margin-bottom: var(--dl-space-space-unit);
   }
   @media(max-width: 991px) {

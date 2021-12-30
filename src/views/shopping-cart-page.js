@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 
 import NavigationLinks from '../components/navigation-links'
 import projectStyles from '../style.module.css'
-import styles from './order-details-page.module.css'
+import styles from './shopping-cart-page.module.css'
 
-const OrderDetailsPage = () => {
+const ShoppingCartPage = () => {
   return (
     <div className={styles['container']}>
       <header className={styles['Header']}>
@@ -15,12 +15,11 @@ const OrderDetailsPage = () => {
           className={styles['image']}
         />
         <div className={styles['Nav']}>
-          <NavigationLinks rootClassName="rootClassName22"></NavigationLinks>
+          <NavigationLinks rootClassName="rootClassName24"></NavigationLinks>
         </div>
         <button className={` ${styles['button']} ${projectStyles['button']} `}>
           Sell
         </button>
-        <div className={styles['BtnGroup']}></div>
         <div
           className={` ${styles['MenuBurger']} ${projectStyles['teleport-menu-burger']} `}
         >
@@ -44,7 +43,7 @@ const OrderDetailsPage = () => {
                 </svg>
               </div>
             </div>
-            <NavigationLinks rootClassName="rootClassName23"></NavigationLinks>
+            <NavigationLinks rootClassName="rootClassName25"></NavigationLinks>
           </div>
           <div>
             <svg
@@ -68,53 +67,77 @@ const OrderDetailsPage = () => {
           </div>
         </div>
       </header>
+      <div className={styles['container2']}>
+        <div className={styles['container3']}>
+          <img
+            src="https://play.teleporthq.io/static/svg/default-img.svg"
+            alt="image"
+            className={styles['image2']}
+          />
+          <span className={styles['text']}>
+            <span>$</span>
+            <span className={styles['text02']}>999</span>
+          </span>
+          <input
+            type="checkbox"
+            checked="true"
+            className={styles['checkbox']}
+          />
+        </div>
+        <div className={styles['container4']}>
+          <img
+            src="https://play.teleporthq.io/static/svg/default-img.svg"
+            alt="image"
+            className={styles['image3']}
+          />
+          <span className={styles['text03']}>
+            <span>$999</span>
+            <span className={styles['text05']}></span>
+          </span>
+          <input
+            type="checkbox"
+            checked="true"
+            className={styles['checkbox1']}
+          />
+        </div>
+        <button className={` ${styles['button1']} ${projectStyles['button']} `}>
+          <span className={styles['text06']}>Checkout</span>
+        </button>
+      </div>
       <div className={styles['Sidebar']}>
         <div className={styles['NavItem']}>
           <Link to="/" className={styles['navlink']}>
-            <span className={styles['text']}>home page</span>
+            <span className={styles['text07']}>home page</span>
           </Link>
         </div>
         <div className={styles['NavItem1']}>
-          <span className={styles['text01']}>
-            <span className={styles['text02']}>my transaction</span>
-            <span className={styles['text03']}></span>
+          <span className={styles['text08']}>
+            <span className={styles['text09']}>my transaction</span>
+            <span className={styles['text10']}></span>
           </span>
           <div className={styles['Options']}>
             <Link to="/orders-page" className={styles['navlink1']}>
               My order
             </Link>
-            <span className={styles['text04']}>My goods</span>
+            <span className={styles['text11']}>My goods</span>
             <Link to="/shopping-cart-page" className={styles['navlink2']}>
               My shopping carts
             </Link>
           </div>
         </div>
         <div className={styles['NavItem2']}>
-          <span className={styles['text05']}>
-            <span className={styles['text06']}>My account</span>
+          <span className={styles['text12']}>
+            <span className={styles['text13']}>My account</span>
           </span>
           <div className={styles['Options1']}>
-            <span className={styles['text07']}>My favourites</span>
-            <span className={styles['text08']}>Browsing History</span>
+            <span className={styles['text14']}>My favourites</span>
+            <span className={styles['text15']}>Browsing History</span>
             <span>Shopping address</span>
           </div>
         </div>
-      </div>
-      <div className={styles['container2']}>
-        <span>Order NO.</span>
-      </div>
-      <div className={styles['container3']}>
-        <span>
-          <span>Order Details</span>
-        </span>
-      </div>
-      <div className={styles['container4']}>
-        <span>
-          <span>Buyer information</span>
-        </span>
       </div>
     </div>
   )
 }
 
-export default OrderDetailsPage
+export default ShoppingCartPage

@@ -80,7 +80,7 @@ const UserFilePage = () => {
       </div>
       <div className={styles['Sidebar']}>
         <div className={styles['NavItem']}>
-          <Link to="/home" className={styles['navlink1']}>
+          <Link to="/" className={styles['navlink1']}>
             <span className={styles['text01']}>home page</span>
           </Link>
         </div>
@@ -94,42 +94,44 @@ const UserFilePage = () => {
               My order
             </Link>
             <span className={styles['text05']}>My goods</span>
-            <span>My shopping carts</span>
+            <Link to="/shopping-cart-page" className={styles['navlink3']}>
+              My shopping carts
+            </Link>
           </div>
         </div>
         <div className={styles['NavItem2']}>
-          <span className={styles['text07']}>
-            <span className={styles['text08']}>My account</span>
+          <span className={styles['text06']}>
+            <span className={styles['text07']}>My account</span>
           </span>
           <div className={styles['Options1']}>
-            <span className={styles['text09']}>My favourites</span>
-            <span className={styles['text10']}>Browsing History</span>
+            <span className={styles['text08']}>My favourites</span>
+            <span className={styles['text09']}>Browsing History</span>
             <span>Shopping address</span>
           </div>
         </div>
       </div>
       <div className={styles['container3']}>
-        <h1 className={styles['text12']}>User information</h1>
-        <span className={styles['text13']}>Level:</span>
+        <h1 className={styles['text11']}>User information</h1>
+        <span className={styles['text12']}>Level:</span>
         <input
           type="text"
           placeholder="placeholder"
           className={` ${styles['textinput']} ${projectStyles['input']} `}
         />
-        <span className={styles['text14']}>Email address :</span>
+        <span className={styles['text13']}>Email address :</span>
       </div>
       <div className={styles['container4']}>
         <div className={styles['container5']}>
           <span>My orders</span>
-          <Link to="/order-details-page" className={styles['navlink3']}>
+          <Link to="/order-details-page" className={styles['navlink4']}>
             <img
               src="https://play.teleporthq.io/static/svg/default-img.svg"
               alt="image"
               className={styles['image3']}
             />
           </Link>
-          <span className={styles['text16']}>$999</span>
-          <span className={styles['text17']}>2021-12-31</span>
+          <span className={styles['text15']}>$999</span>
+          <span className={styles['text16']}>2021-12-31</span>
         </div>
       </div>
     </div>

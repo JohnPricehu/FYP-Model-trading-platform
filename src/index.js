@@ -10,6 +10,8 @@ import UserFilePage from './views/user-file-page'
 import GoodsDetailsPage from './views/goods-details-page'
 import OrdersPage from './views/orders-page'
 import OrderDetailsPage from './views/order-details-page'
+import ShoppingCartPage from './views/shopping-cart-page'
+
 
 
 const App = () => {
@@ -23,6 +25,7 @@ const App = () => {
         <Route exact component={GoodsDetailsPage} path="/goods-details-page" />
         <Route exact component={OrdersPage} path="/orders-page" />
         <Route exact component={OrderDetailsPage} path="/order-details-page" />
+        <Route exact component={ShoppingCartPage} path="/shopping-cart-page" />
       </div>
     </Router>
   )

@@ -83,7 +83,7 @@ const OrdersPage = () => {
       </div>
       <div className={styles['Sidebar']}>
         <div className={styles['NavItem']}>
-          <Link to="/home" className={styles['navlink1']}>
+          <Link to="/" className={styles['navlink1']}>
             <span className={styles['text02']}>home page</span>
           </Link>
         </div>
@@ -93,18 +93,22 @@ const OrdersPage = () => {
             <span className={styles['text05']}></span>
           </span>
           <div className={styles['Options']}>
-            <span className={styles['text06']}>My order</span>
-            <span className={styles['text07']}>My goods</span>
-            <span>My shopping carts</span>
+            <Link to="/orders-page" className={styles['navlink2']}>
+              My order
+            </Link>
+            <span className={styles['text06']}>My goods</span>
+            <Link to="/shopping-cart-page" className={styles['navlink3']}>
+              My shopping carts
+            </Link>
           </div>
         </div>
         <div className={styles['NavItem2']}>
-          <span className={styles['text09']}>
-            <span className={styles['text10']}>My account</span>
+          <span className={styles['text07']}>
+            <span className={styles['text08']}>My account</span>
           </span>
           <div className={styles['Options1']}>
-            <span className={styles['text11']}>My favourites</span>
-            <span className={styles['text12']}>Browsing History</span>
+            <span className={styles['text09']}>My favourites</span>
+            <span className={styles['text10']}>Browsing History</span>
             <span>Shopping address</span>
           </div>
         </div>
