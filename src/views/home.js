@@ -77,6 +77,7 @@ const Home = () => {
             </svg>
           </div>
         </div>
+        <button className={projectStyles['button']}>Sell</button>
       </header>
       <video
         src

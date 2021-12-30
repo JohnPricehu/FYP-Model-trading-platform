@@ -101,11 +101,13 @@ const GoodsDetailsPage = () => {
       </button>
       <div className={styles['container4']}>
         <span>Similar goods</span>
-        <img
-          src="https://play.teleporthq.io/static/svg/default-img.svg"
-          alt="image"
-          className={styles['image3']}
-        />
+        <Link to="/goods-details-page" className={styles['navlink2']}>
+          <img
+            src="https://play.teleporthq.io/static/svg/default-img.svg"
+            alt="image"
+            className={styles['image3']}
+          />
+        </Link>
         <span className={styles['text06']}>
           <span className={styles['text07']}>$999</span>
           <span className={styles['text08']}>&amp;#8203;</span>
@@ -117,3 +119,4 @@ const GoodsDetailsPage = () => {
 }
 
 export default GoodsDetailsPage
+
