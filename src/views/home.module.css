@@ -83,6 +83,9 @@
   width: var(--dl-size-size-xsmall);
   height: var(--dl-size-size-xsmall);
 }
+.navlink2 {
+  text-decoration: none;
+}
 .video {
   top: 146px;
   width: 433px;

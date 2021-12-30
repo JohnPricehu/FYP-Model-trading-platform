@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import NavigationLinks from './navigation-links'
-import projectStyles from '.style.module.css'
+import NavigationLinks from '../components/navigation-links'
+import projectStyles from '../style.module.css'
 import styles from './home.module.css'
 
 const Home = () => {
@@ -78,6 +78,12 @@ const Home = () => {
           </div>
         </div>
         <button className={projectStyles['button']}>Sell</button>
+        <Link
+          to="/user-file-page"
+          className={` ${styles['navlink2']} ${projectStyles['button']} `}
+        >
+          My account
+        </Link>
       </header>
       <video
         src

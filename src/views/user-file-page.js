@@ -1,9 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import NavigationLinks from './navigation-links'
-import projectStyles from '.style.module.css'
+import NavigationLinks from '../components/navigation-links'
+import projectStyles from '../style.module.css'
 import styles from './user-file-page.module.css'
+
 
 const UserFilePage = () => {
   return (
