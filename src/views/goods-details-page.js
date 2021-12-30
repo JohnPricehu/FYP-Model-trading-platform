@@ -1,13 +1,19 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+
+import { Helmet } from 'react-helmet'
+
 import NavigationLinks from '../components/navigation-links'
 import projectStyles from '../style.module.css'
 import styles from './goods-details-page.module.css'
 
-
 const GoodsDetailsPage = () => {
   return (
     <div className={styles['container']}>
+      <Helmet>
+        <title>goodsDetailsPage - FYP</title>
+        <meta property="og:title" content="goodsDetailsPage - FYP" />
+      </Helmet>
       <div className={styles['container1']}></div>
       <div className={styles['container2']}>
         <img
@@ -94,14 +100,19 @@ const GoodsDetailsPage = () => {
             </svg>
           </div>
         </div>
-        <button className={projectStyles['button']}>Sell</button>
+        <Link
+          to="/sell-goods-page"
+          className={` ${styles['navlink2']} ${projectStyles['button']} `}
+        >
+          Sell
+        </Link>
       </header>
-      <button className={` ${styles['button2']} ${projectStyles['button']} `}>
+      <button className={` ${styles['button1']} ${projectStyles['button']} `}>
         add to shopping cart
       </button>
       <div className={styles['container4']}>
         <span>Similar goods</span>
-        <Link to="/goods-details-page" className={styles['navlink2']}>
+        <Link to="/goods-details-page" className={styles['navlink3']}>
           <img
             src="https://play.teleporthq.io/static/svg/default-img.svg"
             alt="image"
@@ -119,4 +130,3 @@ const GoodsDetailsPage = () => {
 }
 
 export default GoodsDetailsPage
-

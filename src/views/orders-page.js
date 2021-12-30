@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import { Helmet } from 'react-helmet'
+
 import NavigationLinks from '../components/navigation-links'
 import projectStyles from '../style.module.css'
 import styles from './orders-page.module.css'
@@ -8,6 +10,10 @@ import styles from './orders-page.module.css'
 const OrdersPage = () => {
   return (
     <div className={styles['container']}>
+      <Helmet>
+        <title>ordersPage - FYP</title>
+        <meta property="og:title" content="ordersPage - FYP" />
+      </Helmet>
       <header className={styles['Header']}>
         <img
           alt="logo"
@@ -17,9 +23,12 @@ const OrdersPage = () => {
         <div className={styles['Nav']}>
           <NavigationLinks rootClassName="rootClassName20"></NavigationLinks>
         </div>
-        <button className={` ${styles['button']} ${projectStyles['button']} `}>
+        <Link
+          to="/sell-goods-page"
+          className={` ${styles['navlink']} ${projectStyles['button']} `}
+        >
           Sell
-        </button>
+        </Link>
         <div className={styles['BtnGroup']}></div>
         <div
           className={` ${styles['MenuBurger']} ${projectStyles['teleport-menu-burger']} `}
@@ -73,7 +82,7 @@ const OrdersPage = () => {
           <span className={styles['text']}>Order NO.</span>
         </div>
         <span className={styles['text01']}>$999</span>
-        <Link to="/order-details-page" className={styles['navlink']}>
+        <Link to="/order-details-page" className={styles['navlink1']}>
           <img
             src="https://play.teleporthq.io/static/svg/default-img.svg"
             alt="image"
@@ -83,7 +92,7 @@ const OrdersPage = () => {
       </div>
       <div className={styles['Sidebar']}>
         <div className={styles['NavItem']}>
-          <Link to="/" className={styles['navlink1']}>
+          <Link to="/" className={styles['navlink2']}>
             <span className={styles['text02']}>home page</span>
           </Link>
         </div>
@@ -93,11 +102,11 @@ const OrdersPage = () => {
             <span className={styles['text05']}></span>
           </span>
           <div className={styles['Options']}>
-            <Link to="/orders-page" className={styles['navlink2']}>
+            <Link to="/orders-page" className={styles['navlink3']}>
               My order
             </Link>
             <span className={styles['text06']}>My goods</span>
-            <Link to="/shopping-cart-page" className={styles['navlink3']}>
+            <Link to="/shopping-cart-page" className={styles['navlink4']}>
               My shopping carts
             </Link>
           </div>

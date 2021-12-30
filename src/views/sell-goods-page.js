@@ -5,14 +5,14 @@ import { Helmet } from 'react-helmet'
 
 import NavigationLinks from '../components/navigation-links'
 import projectStyles from '../style.module.css'
-import styles from './shopping-cart-page.module.css'
+import styles from './sell-goods-page.module.css'
 
-const ShoppingCartPage = () => {
+const SellGoodsPage = () => {
   return (
     <div className={styles['container']}>
       <Helmet>
-        <title>shoppingCartPage - FYP</title>
-        <meta property="og:title" content="shoppingCartPage - FYP" />
+        <title>sellGoodsPage - FYP</title>
+        <meta property="og:title" content="sellGoodsPage - FYP" />
       </Helmet>
       <header className={styles['Header']}>
         <img
@@ -21,7 +21,7 @@ const ShoppingCartPage = () => {
           className={styles['image']}
         />
         <div className={styles['Nav']}>
-          <NavigationLinks rootClassName="rootClassName24"></NavigationLinks>
+          <NavigationLinks rootClassName="rootClassName26"></NavigationLinks>
         </div>
         <Link
           to="/sell-goods-page"
@@ -52,7 +52,7 @@ const ShoppingCartPage = () => {
                 </svg>
               </div>
             </div>
-            <NavigationLinks rootClassName="rootClassName25"></NavigationLinks>
+            <NavigationLinks rootClassName="rootClassName27"></NavigationLinks>
           </div>
           <div>
             <svg
@@ -76,77 +76,61 @@ const ShoppingCartPage = () => {
           </div>
         </div>
       </header>
-      <div className={styles['container2']}>
-        <div className={styles['container3']}>
-          <img
-            src="https://play.teleporthq.io/static/svg/default-img.svg"
-            alt="image"
-            className={styles['image2']}
-          />
-          <span className={styles['text']}>
-            <span>$</span>
-            <span className={styles['text02']}>999</span>
-          </span>
-          <input
-            type="checkbox"
-            checked="true"
-            className={styles['checkbox']}
-          />
-        </div>
-        <div className={styles['container4']}>
-          <img
-            src="https://play.teleporthq.io/static/svg/default-img.svg"
-            alt="image"
-            className={styles['image3']}
-          />
-          <span className={styles['text03']}>
-            <span>$999</span>
-            <span className={styles['text05']}></span>
-          </span>
-          <input
-            type="checkbox"
-            checked="true"
-            className={styles['checkbox1']}
-          />
-        </div>
-        <button className={` ${styles['button']} ${projectStyles['button']} `}>
-          <span className={styles['text06']}>Checkout</span>
-        </button>
-      </div>
+      <img
+        src="https://play.teleporthq.io/static/svg/default-img.svg"
+        alt="image"
+        className={styles['image2']}
+      />
       <div className={styles['Sidebar']}>
         <div className={styles['NavItem']}>
           <Link to="/" className={styles['navlink1']}>
-            <span className={styles['text07']}>home page</span>
+            <span className={styles['text']}>home page</span>
           </Link>
         </div>
         <div className={styles['NavItem1']}>
-          <span className={styles['text08']}>
-            <span className={styles['text09']}>my transaction</span>
-            <span className={styles['text10']}></span>
+          <span className={styles['text01']}>
+            <span className={styles['text02']}>my transaction</span>
+            <span className={styles['text03']}></span>
           </span>
           <div className={styles['Options']}>
             <Link to="/orders-page" className={styles['navlink2']}>
               My order
             </Link>
-            <span className={styles['text11']}>My goods</span>
+            <span className={styles['text04']}>My goods</span>
             <Link to="/shopping-cart-page" className={styles['navlink3']}>
               My shopping carts
             </Link>
           </div>
         </div>
         <div className={styles['NavItem2']}>
-          <span className={styles['text12']}>
-            <span className={styles['text13']}>My account</span>
+          <span className={styles['text05']}>
+            <span className={styles['text06']}>My account</span>
           </span>
           <div className={styles['Options1']}>
-            <span className={styles['text14']}>My favourites</span>
-            <span className={styles['text15']}>Browsing History</span>
+            <span className={styles['text07']}>My favourites</span>
+            <span className={styles['text08']}>Browsing History</span>
             <span>Shopping address</span>
           </div>
         </div>
       </div>
+      <textarea
+        placeholder="placeholder"
+        className={` ${styles['textarea']} ${projectStyles['textarea']} `}
+      ></textarea>
+      <input
+        type="text"
+        placeholder="placeholder"
+        className={` ${styles['textinput']} ${projectStyles['input']} `}
+      />
+      <span className={styles['text10']}>goods name:</span>
+      <img
+        src="https://play.teleporthq.io/static/svg/default-img.svg"
+        alt="image"
+        className={styles['image3']}
+      />
+      <span className={styles['text11']}>goods name:</span>
     </div>
   )
 }
 
-export default ShoppingCartPage
+export default SellGoodsPage

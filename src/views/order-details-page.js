@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import { Helmet } from 'react-helmet'
+
 import NavigationLinks from '../components/navigation-links'
 import projectStyles from '../style.module.css'
 import styles from './order-details-page.module.css'
@@ -8,6 +10,10 @@ import styles from './order-details-page.module.css'
 const OrderDetailsPage = () => {
   return (
     <div className={styles['container']}>
+      <Helmet>
+        <title>orderDetailsPage - FYP</title>
+        <meta property="og:title" content="orderDetailsPage - FYP" />
+      </Helmet>
       <header className={styles['Header']}>
         <img
           alt="logo"
@@ -17,9 +23,12 @@ const OrderDetailsPage = () => {
         <div className={styles['Nav']}>
           <NavigationLinks rootClassName="rootClassName22"></NavigationLinks>
         </div>
-        <button className={` ${styles['button']} ${projectStyles['button']} `}>
+        <Link
+          to="/sell-goods-page"
+          className={` ${styles['navlink']} ${projectStyles['button']} `}
+        >
           Sell
-        </button>
+        </Link>
         <div className={styles['BtnGroup']}></div>
         <div
           className={` ${styles['MenuBurger']} ${projectStyles['teleport-menu-burger']} `}
@@ -70,7 +79,7 @@ const OrderDetailsPage = () => {
       </header>
       <div className={styles['Sidebar']}>
         <div className={styles['NavItem']}>
-          <Link to="/" className={styles['navlink']}>
+          <Link to="/" className={styles['navlink1']}>
             <span className={styles['text']}>home page</span>
           </Link>
         </div>
@@ -80,11 +89,11 @@ const OrderDetailsPage = () => {
             <span className={styles['text03']}></span>
           </span>
           <div className={styles['Options']}>
-            <Link to="/orders-page" className={styles['navlink1']}>
+            <Link to="/orders-page" className={styles['navlink2']}>
               My order
             </Link>
             <span className={styles['text04']}>My goods</span>
-            <Link to="/shopping-cart-page" className={styles['navlink2']}>
+            <Link to="/shopping-cart-page" className={styles['navlink3']}>
               My shopping carts
             </Link>
           </div>

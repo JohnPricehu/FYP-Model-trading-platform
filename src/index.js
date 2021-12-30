@@ -6,13 +6,12 @@ import './style.module.css'
 import Home from './views/home'
 import RegisterPage from './views/register-page'
 import LoginPage from './views/login-page'
-import UserFilePage from './views/user-file-page'
 import GoodsDetailsPage from './views/goods-details-page'
+import UserFilePage from './views/user-file-page'
 import OrdersPage from './views/orders-page'
 import OrderDetailsPage from './views/order-details-page'
 import ShoppingCartPage from './views/shopping-cart-page'
-
-
+import SellGoodsPage from './views/sell-goods-page'
 
 const App = () => {
   return (
@@ -21,11 +20,12 @@ const App = () => {
         <Route exact component={Home} path="/" />
         <Route exact component={RegisterPage} path="/register-page" />
         <Route exact component={LoginPage} path="/login-page" />
-        <Route exact component={UserFilePage} path="/user-file-page" />
         <Route exact component={GoodsDetailsPage} path="/goods-details-page" />
+        <Route exact component={UserFilePage} path="/user-file-page" />
         <Route exact component={OrdersPage} path="/orders-page" />
         <Route exact component={OrderDetailsPage} path="/order-details-page" />
         <Route exact component={ShoppingCartPage} path="/shopping-cart-page" />
+        <Route exact component={SellGoodsPage} path="/sell-goods-page" />
       </div>
     </Router>
   )

@@ -1,0 +1,31 @@
+.container {
+  width: 200px;
+  height: 660px;
+  display: flex;
+  position: relative;
+  align-items: center;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.image {
+  width: 172px;
+  height: 165px;
+  object-fit: cover;
+}
+.text1 {
+  top: 213px;
+  left: 81px;
+  position: absolute;
+}
+.text2 {
+  color: #fb0707;
+}
+.text3 {
+  color: #f30529;
+}
+.text4 {
+  top: 188px;
+  left: 58px;
+  margin: auto;
+  position: absolute;
+}

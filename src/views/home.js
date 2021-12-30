@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import { Helmet } from 'react-helmet'
+
 import NavigationLinks from '../components/navigation-links'
 import projectStyles from '../style.module.css'
 import styles from './home.module.css'
@@ -8,6 +10,10 @@ import styles from './home.module.css'
 const Home = () => {
   return (
     <div className={styles['container']}>
+      <Helmet>
+        <title>FYP</title>
+        <meta property="og:title" content="FYP" />
+      </Helmet>
       <header className={styles['Header']}>
         <img
           alt="logo"
@@ -77,10 +83,15 @@ const Home = () => {
             </svg>
           </div>
         </div>
-        <button className={projectStyles['button']}>Sell</button>
+        <Link
+          to="/sell-goods-page"
+          className={` ${styles['navlink2']} ${projectStyles['button']} `}
+        >
+          Sell
+        </Link>
         <Link
           to="/user-file-page"
-          className={` ${styles['navlink2']} ${projectStyles['button']} `}
+          className={` ${styles['navlink3']} ${projectStyles['button']} `}
         >
           My account
         </Link>
@@ -92,7 +103,7 @@ const Home = () => {
       ></video>
       <h1 className={styles['text']}>Best-selling models</h1>
       <div className={styles['container2']}>
-        <Link to="/goods-details-page" className={styles['navlink3']}>
+        <Link to="/goods-details-page" className={styles['navlink4']}>
           <img
             alt="image"
             src="https://play.teleporthq.io/static/svg/default-img.svg"

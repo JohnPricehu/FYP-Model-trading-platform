@@ -31,13 +31,6 @@
   align-self: center;
   text-decoration: none;
 }
-.BtnGroup {
-  border: 2px dashed rgba(120, 120, 120, 0.4);
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
-}
 .MenuBurger {
   display: none;
 }
@@ -79,46 +72,14 @@
   width: var(--dl-size-size-xsmall);
   height: var(--dl-size-size-xsmall);
 }
-.container2 {
-  top: var(--dl-space-space-sixunits);
-  left: 294px;
-  right: 0px;
-  width: 908px;
-  height: 317px;
-  display: flex;
-  position: absolute;
-  align-items: flex-start;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-.container3 {
-  flex: 0 0 auto;
-  width: 100%;
-  height: 100px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-}
-.text {
-  align-self: center;
-}
-.text01 {
-  top: 211px;
-  left: 380px;
-  color: #f50833;
-  position: absolute;
-}
-.navlink1 {
-  display: contents;
-}
 .image2 {
-  left: 10px;
-  bottom: 20px;
-  height: 50%;
+  top: 151px;
+  left: 395px;
+  width: 233px;
+  height: 223px;
+  margin: auto;
   position: absolute;
-  align-self: flex-start;
   object-fit: cover;
-  text-decoration: none;
 }
 .Sidebar {
   width: 300px;
@@ -138,12 +99,12 @@
   margin-bottom: var(--dl-space-space-unit);
   flex-direction: column;
 }
-.navlink2 {
+.navlink1 {
   font-weight: 600;
   margin-bottom: var(--dl-space-space-unit);
   text-decoration: none;
 }
-.text02 {
+.text {
   text-transform: uppercase;
 }
 .NavItem1 {
@@ -151,14 +112,14 @@
   margin-bottom: var(--dl-space-space-unit);
   flex-direction: column;
 }
-.text03 {
+.text01 {
   font-weight: 600;
   margin-bottom: var(--dl-space-space-unit);
 }
-.text04 {
+.text02 {
   text-transform: uppercase;
 }
-.text05 {
+.text03 {
   text-transform: capitalize;
 }
 .Options {
@@ -166,14 +127,14 @@
   margin-left: var(--dl-space-space-unit);
   flex-direction: column;
 }
-.navlink3 {
+.navlink2 {
   margin-bottom: var(--dl-space-space-unit);
   text-decoration: none;
 }
-.text06 {
+.text04 {
   margin-bottom: var(--dl-space-space-unit);
 }
-.navlink4 {
+.navlink3 {
   text-decoration: none;
 }
 .NavItem2 {
@@ -181,11 +142,11 @@
   margin-bottom: var(--dl-space-space-unit);
   flex-direction: column;
 }
-.text07 {
+.text05 {
   font-weight: 600;
   margin-bottom: var(--dl-space-space-unit);
 }
-.text08 {
+.text06 {
   text-transform: uppercase;
 }
 .Options1 {
@@ -193,11 +154,42 @@
   margin-left: var(--dl-space-space-unit);
   flex-direction: column;
 }
-.text09 {
+.text07 {
   margin-bottom: var(--dl-space-space-unit);
 }
-.text10 {
+.text08 {
   margin-bottom: var(--dl-space-space-unit);
+}
+.textarea {
+  top: 513px;
+  left: 504px;
+  position: absolute;
+}
+.textinput {
+  top: 453px;
+  left: 504px;
+  position: absolute;
+}
+.text10 {
+  top: 462px;
+  left: 392px;
+  margin: auto;
+  position: absolute;
+}
+.image3 {
+  top: 151px;
+  left: 670px;
+  width: 233px;
+  height: 223px;
+  margin: auto;
+  position: absolute;
+  object-fit: cover;
+}
+.text11 {
+  top: 511px;
+  left: 392px;
+  margin: auto;
+  position: absolute;
 }
 @media(max-width: 991px) {
   .icon {
@@ -210,9 +202,6 @@
     padding-right: var(--dl-space-space-twounits);
   }
   .Nav {
-    display: none;
-  }
-  .BtnGroup {
     display: none;
   }
   .MenuBurger {

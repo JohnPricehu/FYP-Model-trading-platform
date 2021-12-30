@@ -86,6 +86,9 @@
 .navlink2 {
   text-decoration: none;
 }
+.navlink3 {
+  text-decoration: none;
+}
 .video {
   top: 146px;
   width: 433px;
@@ -109,6 +112,9 @@
   align-items: flex-end;
   justify-content: flex-start;
 }
+.navlink4 {
+  display: contents;
+}
 .image2 {
   top: 29px;
   left: 40px;
@@ -116,6 +122,7 @@
   height: 141px;
   position: absolute;
   object-fit: cover;
+  text-decoration: none;
 }
 .text1 {
   top: 179px;

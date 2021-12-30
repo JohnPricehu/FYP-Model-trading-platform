@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+import { Helmet } from 'react-helmet'
+
 import NavigationLinks from '../components/navigation-links'
 import projectStyles from '../style.module.css'
 import styles from './user-file-page.module.css'
@@ -8,6 +10,10 @@ import styles from './user-file-page.module.css'
 const UserFilePage = () => {
   return (
     <div className={styles['container']}>
+      <Helmet>
+        <title>userFilePage - FYP</title>
+        <meta property="og:title" content="userFilePage - FYP" />
+      </Helmet>
       <header className={styles['Header']}>
         <img
           alt="logo"
@@ -17,9 +23,12 @@ const UserFilePage = () => {
         <div className={styles['Nav']}>
           <NavigationLinks rootClassName="rootClassName18"></NavigationLinks>
         </div>
-        <button className={` ${styles['button']} ${projectStyles['button']} `}>
+        <Link
+          to="/sell-goods-page"
+          className={` ${styles['navlink']} ${projectStyles['button']} `}
+        >
           Sell
-        </button>
+        </Link>
         <div className={styles['BtnGroup']}></div>
         <div
           className={` ${styles['MenuBurger']} ${projectStyles['teleport-menu-burger']} `}
@@ -70,7 +79,7 @@ const UserFilePage = () => {
       </header>
       <div className={styles['container2']}>
         <span>My favourite</span>
-        <Link to="/goods-details-page" className={styles['navlink']}>
+        <Link to="/goods-details-page" className={styles['navlink1']}>
           <img
             src="https://play.teleporthq.io/static/svg/default-img.svg"
             alt="image"
@@ -80,7 +89,7 @@ const UserFilePage = () => {
       </div>
       <div className={styles['Sidebar']}>
         <div className={styles['NavItem']}>
-          <Link to="/" className={styles['navlink1']}>
+          <Link to="/" className={styles['navlink2']}>
             <span className={styles['text01']}>home page</span>
           </Link>
         </div>
@@ -90,11 +99,11 @@ const UserFilePage = () => {
             <span className={styles['text04']}></span>
           </span>
           <div className={styles['Options']}>
-            <Link to="/orders-page" className={styles['navlink2']}>
+            <Link to="/orders-page" className={styles['navlink3']}>
               My order
             </Link>
             <span className={styles['text05']}>My goods</span>
-            <Link to="/shopping-cart-page" className={styles['navlink3']}>
+            <Link to="/shopping-cart-page" className={styles['navlink4']}>
               My shopping carts
             </Link>
           </div>
@@ -123,7 +132,7 @@ const UserFilePage = () => {
       <div className={styles['container4']}>
         <div className={styles['container5']}>
           <span>My orders</span>
-          <Link to="/order-details-page" className={styles['navlink4']}>
+          <Link to="/order-details-page" className={styles['navlink5']}>
             <img
               src="https://play.teleporthq.io/static/svg/default-img.svg"
               alt="image"
