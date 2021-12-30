@@ -9,6 +9,8 @@ import LoginPage from './views/login-page'
 import UserFilePage from './views/user-file-page'
 import GoodsDetailsPage from './views/goods-details-page'
 import OrdersPage from './views/orders-page'
+import OrderDetailsPage from './views/order-details-page'
+
 
 const App = () => {
   return (
@@ -20,6 +22,7 @@ const App = () => {
         <Route exact component={UserFilePage} path="/user-file-page" />
         <Route exact component={GoodsDetailsPage} path="/goods-details-page" />
         <Route exact component={OrdersPage} path="/orders-page" />
+        <Route exact component={OrderDetailsPage} path="/order-details-page" />
       </div>
     </Router>
   )
