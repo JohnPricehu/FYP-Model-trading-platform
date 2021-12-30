@@ -1,19 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { Helmet } from 'react-helmet'
-
-import NavigationLinks from '../components/navigation-links'
-import projectStyles from '../style.module.css'
+import NavigationLinks from './navigation-links'
+import projectStyles from '.style.module.css'
 import styles from './home.module.css'
 
 const Home = () => {
   return (
     <div className={styles['container']}>
-      <Helmet>
-        <title>FYP</title>
-        <meta property="og:title" content="FYP" />
-      </Helmet>
       <header className={styles['Header']}>
         <img
           alt="logo"
@@ -96,6 +90,8 @@ const Home = () => {
           src="https://play.teleporthq.io/static/svg/default-img.svg"
           className={styles['image2']}
         />
+        <span className={styles['text1']}>goods name</span>
+        <span className={styles['text2']}>$999</span>
       </div>
     </div>
   )
