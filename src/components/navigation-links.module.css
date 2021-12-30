@@ -1,0 +1,27 @@
+.Nav {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@media(max-width: 767px) {
+  .Nav {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .text {
+    margin-bottom: var(--dl-space-space-unit);
+  }
+}
