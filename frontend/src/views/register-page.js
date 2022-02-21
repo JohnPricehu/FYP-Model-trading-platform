@@ -3,11 +3,13 @@ import React, { useState, useEffect } from "react";
 import Loading from "./Loading";
 import ErrorMessage from "./ErrorMessage";
 import { Helmet } from 'react-helmet'
-import axios from "axios";
+// import axios from "axios";
 import { Form, Button, Row, Col } from "react-bootstrap";
 import NavigationLinks from '../components/navigation-links'
 import projectStyles from '../style.module.css'
 import styles from './register-page.module.css'
+import { useDispatch,useSelector } from "react-redux";
+import { register } from "../actions/userActions";
 
 const RegisterPage = ({history}) => {
 
@@ -20,51 +22,57 @@ const RegisterPage = ({history}) => {
   const [confirmpassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
   // const [picMessage, setPicMessage] = useState(null);
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState(false);
+  // const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+
+  const userRegister = useSelector((state) => state.userRegister);
+  const { loading, error, userInfo } = userRegister;
 
   useEffect(() => {
-    const userInfo = localStorage.getItem("userInfo");
+    // const userInfo = localStorage.getItem("userInfo");
 
     if (userInfo) {
       history.push("/");
     }
-  }, [history]);
+  }, [history, userInfo]);
 
   const submitHandler = async(e) => {
     e.preventDefault();
 
     if (password !== confirmpassword) {
       setMessage("Passwords do not match");
-    } else {
-      setMessage(null)
-      try {
-        const config = {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        };
+    } else{
+      dispatch(register(name, email, password));
+    //   setMessage(null)
+    //   try {
+    //     const config = {
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //     };
   
-        setLoading(true);
+    //     setLoading(true);
   
-        const {data} = await axios.post(
-          '/api/users',
-          {
-            name,
-            password,
-            email
-          },
-            config
-            );
-      console.log(data);
-      setLoading(false);
-      localStorage.setItem("userInfo",JSON.stringify(data));
+    //     const {data} = await axios.post(
+    //       '/api/users',
+    //       {
+    //         name,
+    //         password,
+    //         email
+    //       },
+    //         config
+    //         );
+    //   console.log(data);
+    //   setLoading(false);
+    //   localStorage.setItem("userInfo",JSON.stringify(data));
 
-    }catch(error) {
-      setError(error.response.data.message);
-      setLoading(false);
+    // }catch(error) {
+    //   setError(error.response.data.message);
+    //   setLoading(false);
+    // }
     }
-    }
+
   };
   return (
     <div className={styles['container']}>

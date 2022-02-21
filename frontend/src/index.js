@@ -12,9 +12,14 @@ import OrdersPage from './views/orders-page'
 import OrderDetailsPage from './views/order-details-page'
 import ShoppingCartPage from './views/shopping-cart-page'
 import SellGoodsPage from './views/sell-goods-page'
+import { Provider } from 'react-redux'
+import store from "./store"
+
+
 
 const App = () => {
   return (
+    <Provider store={store}>
     <Router>
       <div>
         <Route exact component={Home} path="/" />
@@ -28,6 +33,7 @@ const App = () => {
         <Route exact component={SellGoodsPage} path="/sell-goods-page" />
       </div>
     </Router>
+    </Provider>
   )
 }
 

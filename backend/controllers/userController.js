@@ -15,7 +15,10 @@ const authUser = asyncHandler(async (req, res) => {
       _id: user._id,
       name: user.name,
       email: user.email,
+      phone: user.phone,
+      address: user.address,
       isAdmin: user.isAdmin,
+      isMember: user.isMember,
       // pic: user.pic,
       token: generateToken(user._id),
     });
@@ -69,6 +72,9 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   if (user) {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
+    user.phone = req.body.phone || user.phone;
+    user.address = req.body.address || user.address;
+    
     // user.pic = req.body.pic || user.pic;
     if (req.body.password) {
       user.password = req.body.password;
@@ -80,8 +86,11 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       _id: updatedUser._id,
       name: updatedUser.name,
       email: updatedUser.email,
+      phone: updatedUser.phone,
+      address: updatedUser.address,
       // pic: updatedUser.pic,
       isAdmin: updatedUser.isAdmin,
+      isMember: updatedUser.isMember,
       token: generateToken(updatedUser._id),
     });
   } else {

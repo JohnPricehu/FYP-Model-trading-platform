@@ -3,61 +3,62 @@ import { Link } from 'react-router-dom'
 import Loading from "./Loading";
 import ErrorMessage from "./ErrorMessage";
 import { Helmet } from 'react-helmet'
-// import { AuthContext } from '../authContext';
+import { login } from "../actions/userActions";
 import NavigationLinks from '../components/navigation-links'
 import projectStyles from '../style.module.css'
 import styles from './login-page.module.css'
 import axios from "axios";
 import { Form, Button, Row, Col } from "react-bootstrap";
+import { useDispatch,useSelector } from "react-redux";
 
 const LoginPage = ({history}) => {
   // const context = useContext(AuthContext)
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState(false);
+  // const [loading, setLoading] = useState(false);
 
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // const userLogin = useSelector((state) => state.userLogin);
-  // const { loading, error, userInfo } = userLogin;
+  const userLogin = useSelector((state) => state.userLogin);
+  const { loading, error, userInfo } = userLogin;
 
   useEffect(() => {
-    const userInfo = localStorage.getItem("userInfo");
+    // const userInfo = localStorage.getItem("userInfo");
 
     if (userInfo) {
       history.push("/");
     }
-  }, [history]);
+  }, [history, userInfo]);
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    // dispatch(login(username, password));
+    dispatch(login(name, password));
 
-    try {
-      const config = {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      };
+  //   try {
+  //     const config = {
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       },
+  //     };
 
-      setLoading(true);
+  //     setLoading(true);
 
-      const {data} = await axios.post(
-        '/api/users/login',
-        {
-          name,
-          password
-        },
-          config
-          );
-    console.log(data);
-    localStorage.setItem("userInfo",JSON.stringify(data));
-    setLoading(false);
-  }catch(error) {
-    setError(error.response.data.message);
-    setLoading(false);
-  }
+  //     const {data} = await axios.post(
+  //       '/api/users/login',
+  //       {
+  //         name,
+  //         password
+  //       },
+  //         config
+  //         );
+  //   console.log(data);
+  //   localStorage.setItem("userInfo",JSON.stringify(data));
+  //   setLoading(false);
+  // }catch(error) {
+  //   setError(error.response.data.message);
+  //   setLoading(false);
+  // }
   };
   return (
     <div className={styles['container']}>

@@ -192,8 +192,8 @@
   width: 263px;
 }
 .text12 {
-  top: 134px;
   left: 10px;
+  bottom: 16px;
   position: absolute;
 }
 .textinput {
@@ -206,44 +206,34 @@
   left: 10px;
   position: absolute;
 }
-.container4 {
-  flex: 0 0 auto;
-  width: auto;
-  height: 188px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-}
-.container5 {
-  top: 305px;
-  flex: 0 0 auto;
-  left: 261px;
-  width: 430px;
-  height: 188px;
-  display: flex;
+.text14 {
+  top: 130px;
+  left: 10px;
   position: absolute;
-  align-items: flex-start;
-  flex-direction: column;
 }
-.navlink5 {
-  display: contents;
-}
-.image3 {
-  width: 124px;
-  height: 130px;
-  object-fit: cover;
-  text-decoration: none;
+.textinput1 {
+  top: 120px;
+  left: 79px;
+  position: absolute;
 }
 .text15 {
-  top: 75px;
-  left: 173px;
-  color: #ec0c0c;
+  top: 180px;
+  left: 13px;
   position: absolute;
 }
-.text16 {
-  top: 73px;
-  left: 242px;
+.textinput2 {
+  top: 171px;
+  left: 92px;
   position: absolute;
+}
+.button {
+  top: 0px;
+  left: 300px;
+  position: absolute;
+  font-family: Inter;
+  list-style-type: disc;
+  list-style-image: none;
+  list-style-position: outside;
 }
 @media(max-width: 991px) {
   .icon {

@@ -1,15 +1,33 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom'
-
 import { Helmet } from 'react-helmet'
-
 import NavigationLinks from '../components/navigation-links'
 import projectStyles from '../style.module.css'
 import styles from './home.module.css'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
+import { useDispatch,useSelector } from "react-redux";
+import { logout } from "../actions/userActions";
+import {
+  Container,
+  Form,
+  FormControl,
+  Nav,
+  Navbar,
+  NavDropdown,
+} from "react-bootstrap";
 
 const Home = () => {
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  const logoutHandler = () => {
+    dispatch(logout());
+  };
+
+  useEffect(() => {}, [userInfo]);
   return (
     <div className={styles['container']}>
     <header className={styles['Header']}>
@@ -21,21 +39,38 @@ const Home = () => {
       <div className={styles['Nav']}>
         <NavigationLinks rootClassName="rootClassName1"></NavigationLinks>
       </div>
-      <div className={styles['BtnGroup']}>
-        <Link
-          to="/login-page"
-          className={` ${styles['navlink']} ${projectStyles['button']} `}
-        >
-          Login
-        </Link>
-        <button className={projectStyles['button']}
-        onClick={() => {
-          localStorage.removeItem("userInfo");
-          history.push("/")
-        }
-        }
-        >logout</button>
-      </div>
+      {/* <div className={styles['BtnGroup']}> */}
+      {/* <Typography  className={classes.title}> */}
+      <Nav>
+            {userInfo ? (
+              <>
+                <Nav.Link href="/">Home page</Nav.Link>
+                <NavDropdown
+                  title={`${userInfo.name}`}
+                  id="collasible-nav-dropdown"
+                >
+                  <NavDropdown.Item href="/user-profile-page">
+                    {/* <img
+                      alt=""
+                      src={`${userInfo.pic}`}
+                      width="25"
+                      height="25"
+                      style={{ marginRight: 10 }}
+                    /> */}
+                    My Profile
+                  </NavDropdown.Item>
+
+                  <NavDropdown.Divider />
+                  <NavDropdown.Item onClick={logoutHandler}>
+                    Logout
+                  </NavDropdown.Item>
+                </NavDropdown>
+              </>
+            ) : (
+              <Nav.Link href="/login-page">Login</Nav.Link>
+            )}
+          </Nav>
+      {/* </div> */}
       <div
         className={` ${styles['MenuBurger']} ${projectStyles['teleport-menu-burger']} `}
       >
