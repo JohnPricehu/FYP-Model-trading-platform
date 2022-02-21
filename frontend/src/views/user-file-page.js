@@ -1,15 +1,54 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom'
-
-import { Helmet } from 'react-helmet'
-
+import { useDispatch,useSelector } from "react-redux";
+// import { Helmet } from 'react-helmet'
+import { Form, Button, Row, Col } from "react-bootstrap";
 import NavigationLinks from '../components/navigation-links'
 import projectStyles from '../style.module.css'
 import styles from './user-file-page.module.css'
+import ErrorMessage from "./ErrorMessage";
+import { updateProfile } from '../actions/userActions';
+import Loading from "./Loading";
 
 const UserFilePage = () => {
+  // const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  // const [pic, setPic] = useState();
+  // const [password, setPassword] = useState("");
+  // const [confirmPassword, setConfirmPassword] = useState("");
+  // const [picMessage, setPicMessage] = useState();
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+
+  const dispatch = useDispatch();
+
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+
+  const userUpdate = useSelector((state) => state.userUpdate);
+  const { loading, error, success } = userUpdate;
+
+  useEffect(() => {
+    if (!userInfo) {
+      history.push("/");
+    } else {
+      // setName(userInfo.name);
+      setEmail(userInfo.email);
+      setPhone(userInfo.phone);
+      setAddress(userInfo.address)
+      // setPic(userInfo.pic);
+    }
+  }, [history, userInfo]);
+
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+
+    dispatch(updateProfile({ phone, email, address}));
+  };
   return (
     <div className={styles['container']}>
+
     <header className={styles['Header']}>
       <img
         alt="logo"
@@ -116,30 +155,48 @@ const UserFilePage = () => {
       </div>
     </div>
     <div className={styles['container3']}>
-      <h1 className={styles['text11']}>User information</h1>
-      <span className={styles['text12']}>Member:</span>
-      <input
-        type="text"
-        placeholder="placeholder"
+    <Form onSubmit={submitHandler}>
+            {loading && <Loading />}
+              {success && (
+                <ErrorMessage variant="success">
+                  Updated Successfully
+                </ErrorMessage>
+              )}
+              {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
+    <h1 className={styles['text11']}>User information</h1>
+        <span className={styles['text12']}>Member:</span>
+        <span className={styles['text13']}>Email address :</span>
+        <input
+        type="email"
+        placeholder="Enter new Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
         className={` ${styles['textinput']} ${projectStyles['input']} `}
-      />
-      <span className={styles['text13']}>Email address :</span>
-      <span className={styles['text14']}>Phone:</span>
-      <input
-        type="text"
-        placeholder="placeholder"
-        className={` ${styles['textinput1']} ${projectStyles['input']} `}
-      />
-      <span className={styles['text15']}>
-        <span>Adddres</span>
-        <span>:</span>
-      </span>
-      <input
-        type="text"
-        placeholder="placeholder"
-        className={` ${styles['textinput2']} ${projectStyles['input']} `}
-      />
-    </div>
+        />
+        <span className={styles['text14']}>Phone:</span>
+        <input
+          type="text"
+          placeholder="Enter new phone"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          className={` ${styles['textinput1']} ${projectStyles['input']} `}
+        />
+        <span className={styles['text15']}>
+          <span>Adddres:</span>
+        </span>
+        <input
+          type="text"
+          placeholder="Enter new address"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+          className={` ${styles['textinput2']} ${projectStyles['input']} `}
+        />
+        <button className={` ${styles['button']} ${projectStyles['button']} `}
+        type="submit" varient="primary">
+          Update
+        </button>
+       </Form> 
+    </div>  
   </div>
 )
 }
