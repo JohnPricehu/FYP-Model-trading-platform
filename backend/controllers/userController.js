@@ -1,5 +1,5 @@
 import asyncHandler from "express-async-handler";
-import User from "../../backend/models/userModel.js";
+import User from "../models/userModel.js";
 import generateToken from "../utils/generateToken.js";
 
 //@description     Auth the user
@@ -33,9 +33,7 @@ const authUser = asyncHandler(async (req, res) => {
 //@access          Public
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password, } = req.body;
-
-  const userExists = await User.findOne({ email });
-
+  const userExists = await User.findOne({ name });
   if (userExists) {
     res.status(404);
     throw new Error("User already exists");
@@ -99,4 +97,63 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-export { authUser, updateUserProfile, registerUser };
+//@description     Delete single user
+//@route           GET /api/user/:id
+//@access          Private
+const deleteUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+
+  // if (note.user.toString() !== req.user._id.toString()) {
+  //   res.status(401);
+  //   throw new Error("You can't perform this action");
+  // }
+
+  if (user) {
+    await user.remove();
+    res.json({ message: "User Removed" });
+  } else {
+    res.status(404);
+    throw new Error("User not Found");
+  }
+});
+
+const getUserById = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id).select('-password')
+  if (user) {
+    res.json(user)
+  } else {
+    res.status(404)
+    throw new Error('User not found')
+  }
+})
+
+const viewUsers = asyncHandler(async (req, res) => {
+  const users = await User.find({})
+  res.json(users)
+});
+
+const updateUser = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id)
+  if (user) {
+    user.name = req.body.name || user.name;
+    user.email = req.body.email || user.email;
+    user.phone = req.body.phone || user.phone;
+    user.address = req.body.address || user.address;
+    const updatedUser = await user.save()
+    res.json({
+      _id: updatedUser._id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      phone: updatedUser.phone,
+      address: updatedUser.address,
+      isAdmin: updatedUser.isAdmin,
+      isMember: updatedUser.isMember,
+      token: generateToken(updatedUser._id),
+    })
+  } else {
+    res.status(404)
+    throw new Error('User not found')
+  }
+})
+
+export { authUser, updateUserProfile, registerUser, deleteUser, getUserById, viewUsers, updateUser };

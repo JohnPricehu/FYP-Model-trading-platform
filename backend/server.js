@@ -6,6 +6,7 @@ import path from "path";
 
 // import noteRoutes from "./routes/noteRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import goodsRoutes from "./routes/goodsRoutes.js";
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 
 dotenv.config();
@@ -17,6 +18,7 @@ const app = express(); // main thing
 app.use(express.json()); // to accept json data
 
 // app.use("/api/notes", noteRoutes);
+app.use("/api/goods", goodsRoutes);
 app.use("/api/users", userRoutes);
 
 // --------------------------deployment------------------------------

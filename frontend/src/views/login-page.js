@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom'
-import Loading from "./Loading";
-import ErrorMessage from "./ErrorMessage";
+import Loading from "../components/Loading";
+import ErrorMessage from "../components/ErrorMessage";
 import { Helmet } from 'react-helmet'
 import { login } from "../actions/userActions";
 import NavigationLinks from '../components/navigation-links'
@@ -62,8 +62,7 @@ const LoginPage = ({history}) => {
   };
   return (
     <div className={styles['container']}>
-      {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
-      {loading && <Loading />}
+      
       <Helmet>
         <title>loginPage - FYP</title>
         <meta property="og:title" content="loginPage - FYP" />
@@ -128,6 +127,8 @@ const LoginPage = ({history}) => {
       
       <div className={styles['container2']}>
       <Form onSubmit={submitHandler}>
+      {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
+      {loading && <Loading />}
         <input
           type="text"
           value={name}
@@ -160,7 +161,7 @@ const LoginPage = ({history}) => {
         >
           <span className={styles['text5']}>Register</span>
         </Link>
-        <span className={styles['text6']}>Other help？</span>
+        {/* <span className={styles['text6']}>Other help？</span> */}
       </div>
     </div>
   )

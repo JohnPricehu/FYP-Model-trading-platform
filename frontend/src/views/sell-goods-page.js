@@ -1,136 +1,177 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-
-import { Helmet } from 'react-helmet'
-
-import NavigationLinks from '../components/navigation-links'
+import React, { useEffect, useState } from "react";
+// import MainScreen from "../../components/MainScreen";
+import { Button, Card, Form } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import {createGoodsAction} from "../actions/goodsActions";
+import Loading from "../components/Loading";
+import ErrorMessage from "../components/ErrorMessage";
+import ReactMarkdown from "react-markdown";
 import projectStyles from '../style.module.css'
 import styles from './sell-goods-page.module.css'
+import { Helmet } from 'react-helmet'
 
-const SellGoodsPage = () => {
+function CreateGoods({ history }) {
+  const [goods_name, setGoods_name] = useState("");
+  const [goods_details, setGoods_details] = useState("");
+  const [goods_category, setGoods_category] = useState("");
+  const [goods_price, setGoods_price] = useState("");
+  const [goods_pic, setGoods_pic] = useState(
+    "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
+  );
+  const [picMessage, setPicMessage] = useState(null);
+
+  const dispatch = useDispatch();
+
+  const goodsCreate = useSelector((state) => state.goodsCreate);
+  const { loading, error, goods } = goodsCreate;
+
+
+  console.log(document.getElementsByTagName("input"))
+
+  const resetHandler = () => {
+    setGoods_name("");
+    setGoods_details("");
+    setGoods_category("");
+    setGoods_pic("");
+    setGoods_pic("");
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    dispatch(createGoodsAction(goods_name, goods_details, goods_category, goods_pic,goods_price));
+    if (!goods_name || !goods_details || !goods_category || !goods_price) return;
+
+    resetHandler();
+    history.push("/");
+  };
+  function previewFile() {
+    var preview = document.querySelector('img');
+    var file    = document.querySelector('input[type=file]').files[0];
+    var reader  = new FileReader();
+  
+    reader.onloadend = function () {
+      preview.src = reader.result;
+    }
+  
+    if (file) {
+      reader.readAsDataURL(file);
+    } else {
+      preview.src = "";
+    }
+  }
+  const postDetails = (pics) => {
+    if (
+      pics ===
+      "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
+    ) {
+      return setPicMessage("Please Select an Image");
+    }
+    setPicMessage(null);
+    if (pics.type === "image/jpeg" || pics.type === "image/png") {
+      const data = new FormData();
+      data.append("file", pics);
+      data.append("upload_preset", "goods_pic");
+      data.append("cloud_name", "fyp2022");
+      fetch("https://api.cloudinary.com/v1_1/fyp2022/image/upload", {
+        method: "post",
+        body: data,
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          setGoods_pic(data.url.toString());
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    } else {
+      return setPicMessage("Please Select an Image");
+    }
+  };
+
+  useEffect(() => {}, []);
+
   return (
-    <div className={styles['container']}>
+          <Form onSubmit={submitHandler}>
+            {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
+
+      <div className={styles['container']}>
       <Helmet>
         <title>sellGoodsPage - FYP</title>
         <meta property="og:title" content="sellGoodsPage - FYP" />
       </Helmet>
-      <header className={styles['Header']}>
-        <img
-          alt="logo"
-          src="https://presentation-website-assets.teleporthq.io/logos/logo.png"
-          className={styles['image']}
-        />
-        <div className={styles['Nav']}>
-          <NavigationLinks rootClassName="rootClassName26"></NavigationLinks>
-        </div>
-        <Link
-          to="/sell-goods-page"
-          className={` ${styles['navlink']} ${projectStyles['button']} `}
-        >
-          Sell
-        </Link>
-        <div
-          className={` ${styles['MenuBurger']} ${projectStyles['teleport-menu-burger']} `}
-        >
-          <svg viewBox="0 0 1024 1024" className={styles['icon']}>
-            <path d="M128 554.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 298.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667zM128 810.667h768c23.552 0 42.667-19.115 42.667-42.667s-19.115-42.667-42.667-42.667h-768c-23.552 0-42.667 19.115-42.667 42.667s19.115 42.667 42.667 42.667z"></path>
-          </svg>
-        </div>
-        <div
-          className={` ${projectStyles['teleport-menu-mobile']} ${styles['MenuMobile']} `}
-        >
-          <div className={styles['Nav1']}>
-            <div className={styles['Container1']}>
-              <img
-                alt="image"
-                src="https://presentation-website-assets.teleporthq.io/logos/logo.png"
-                className={styles['image1']}
-              />
-              <div className={projectStyles['teleport-menu-close']}>
-                <svg viewBox="0 0 1024 1024" className={styles['icon02']}>
-                  <path d="M810 274l-238 238 238 238-60 60-238-238-238 238-60-60 238-238-238-238 60-60 238 238 238-238z"></path>
-                </svg>
-              </div>
-            </div>
-            <NavigationLinks rootClassName="rootClassName27"></NavigationLinks>
-          </div>
-          <div>
-            <svg
-              viewBox="0 0 950.8571428571428 1024"
-              className={styles['icon04']}
-            >
-              <path d="M925.714 233.143c-25.143 36.571-56.571 69.143-92.571 95.429 0.571 8 0.571 16 0.571 24 0 244-185.714 525.143-525.143 525.143-104.571 0-201.714-30.286-283.429-82.857 14.857 1.714 29.143 2.286 44.571 2.286 86.286 0 165.714-29.143 229.143-78.857-81.143-1.714-149.143-54.857-172.571-128 11.429 1.714 22.857 2.857 34.857 2.857 16.571 0 33.143-2.286 48.571-6.286-84.571-17.143-148-91.429-148-181.143v-2.286c24.571 13.714 53.143 22.286 83.429 23.429-49.714-33.143-82.286-89.714-82.286-153.714 0-34.286 9.143-65.714 25.143-93.143 90.857 112 227.429 185.143 380.571 193.143-2.857-13.714-4.571-28-4.571-42.286 0-101.714 82.286-184.571 184.571-184.571 53.143 0 101.143 22.286 134.857 58.286 41.714-8 81.714-23.429 117.143-44.571-13.714 42.857-42.857 78.857-81.143 101.714 37.143-4 73.143-14.286 106.286-28.571z"></path>
-            </svg>
-            <svg
-              viewBox="0 0 877.7142857142857 1024"
-              className={styles['icon06']}
-            >
-              <path d="M585.143 512c0-80.571-65.714-146.286-146.286-146.286s-146.286 65.714-146.286 146.286 65.714 146.286 146.286 146.286 146.286-65.714 146.286-146.286zM664 512c0 124.571-100.571 225.143-225.143 225.143s-225.143-100.571-225.143-225.143 100.571-225.143 225.143-225.143 225.143 100.571 225.143 225.143zM725.714 277.714c0 29.143-23.429 52.571-52.571 52.571s-52.571-23.429-52.571-52.571 23.429-52.571 52.571-52.571 52.571 23.429 52.571 52.571zM438.857 152c-64 0-201.143-5.143-258.857 17.714-20 8-34.857 17.714-50.286 33.143s-25.143 30.286-33.143 50.286c-22.857 57.714-17.714 194.857-17.714 258.857s-5.143 201.143 17.714 258.857c8 20 17.714 34.857 33.143 50.286s30.286 25.143 50.286 33.143c57.714 22.857 194.857 17.714 258.857 17.714s201.143 5.143 258.857-17.714c20-8 34.857-17.714 50.286-33.143s25.143-30.286 33.143-50.286c22.857-57.714 17.714-194.857 17.714-258.857s5.143-201.143-17.714-258.857c-8-20-17.714-34.857-33.143-50.286s-30.286-25.143-50.286-33.143c-57.714-22.857-194.857-17.714-258.857-17.714zM877.714 512c0 60.571 0.571 120.571-2.857 181.143-3.429 70.286-19.429 132.571-70.857 184s-113.714 67.429-184 70.857c-60.571 3.429-120.571 2.857-181.143 2.857s-120.571 0.571-181.143-2.857c-70.286-3.429-132.571-19.429-184-70.857s-67.429-113.714-70.857-184c-3.429-60.571-2.857-120.571-2.857-181.143s-0.571-120.571 2.857-181.143c3.429-70.286 19.429-132.571 70.857-184s113.714-67.429 184-70.857c60.571-3.429 120.571-2.857 181.143-2.857s120.571-0.571 181.143 2.857c70.286 3.429 132.571 19.429 184 70.857s67.429 113.714 70.857 184c3.429 60.571 2.857 120.571 2.857 181.143z"></path>
-            </svg>
-            <svg
-              viewBox="0 0 602.2582857142856 1024"
-              className={styles['icon08']}
-            >
-              <path d="M548 6.857v150.857h-89.714c-70.286 0-83.429 33.714-83.429 82.286v108h167.429l-22.286 169.143h-145.143v433.714h-174.857v-433.714h-145.714v-169.143h145.714v-124.571c0-144.571 88.571-223.429 217.714-223.429 61.714 0 114.857 4.571 130.286 6.857z"></path>
-            </svg>
-          </div>
-        </div>
-      </header>
-      <img
-        src="https://play.teleporthq.io/static/svg/default-img.svg"
-        alt="image"
-        className={styles['image2']}
-      />
-      <div className={styles['Sidebar']}>
-        <div className={styles['NavItem']}>
-          <Link to="/" className={styles['navlink1']}>
-            <span className={styles['text']}>home page</span>
-          </Link>
-        </div>
-        <div className={styles['NavItem1']}>
-          <span className={styles['text01']}>
-            <span className={styles['text02']}>my transaction</span>
-            <span className={styles['text03']}></span>
-          </span>
-          <div className={styles['Options']}>
-            <Link to="/orders-page" className={styles['navlink2']}>
-              My order
-            </Link>
-            <span className={styles['text04']}>My goods</span>
-            <Link to="/shopping-cart-page" className={styles['navlink3']}>
-              My shopping carts
-            </Link>
-          </div>
-        </div>
-        <div className={styles['NavItem2']}>
-          <span className={styles['text05']}>
-            <span className={styles['text06']}>My account</span>
-          </span>
-          <div className={styles['Options1']}>
-            <span className={styles['text07']}>My favourites</span>
-            <span className={styles['text08']}>Browsing History</span>
-            <span>Shopping address</span>
-          </div>
-        </div>
-      </div>
-      <textarea
-        placeholder="placeholder"
-        className={` ${styles['textarea']} ${projectStyles['textarea']} `}
-      ></textarea>
-      <input
-        type="text"
-        placeholder="placeholder"
+      <input                    
+        id={goods_pic}
+        type="file"
+        label="Upload Profile Picture"
+        custom
+        accept="image/*"
+        // placeholder="Upload Profile Picture"
+        onChange={(e) => postDetails(e.target.files[0])}      
         className={` ${styles['textinput']} ${projectStyles['input']} `}
       />
-      <span className={styles['text10']}>goods name:</span>
       <img
-        src="https://play.teleporthq.io/static/svg/default-img.svg"
         alt="image"
-        className={styles['image3']}
+        src={goods_pic}
+        className={styles['image']}
       />
-      <span className={styles['text11']}>goods name:</span>
+      <span className={styles['text']}>goods name:</span>
+      <input
+        type="text"
+        value={goods_name}
+        placeholder="Enter the goods's name"
+        onChange={(e) => setGoods_name(e.target.value)}
+        className={` ${styles['textinput1']} ${projectStyles['input']} `}
+      />
+      <span className={styles['text1']}>goods price:</span>
+      <input
+        type="text"
+        value={goods_price}
+        placeholder="Enter the goods's price"
+        onChange={(e) => setGoods_price(e.target.value)}
+        className={` ${styles['textinput2']} ${projectStyles['input']} `}
+      />
+      <span className={styles['text2']}>goods category:</span>
+      <input
+        type="content"
+        value={goods_category}
+        placeholder="Enter the Category"
+        onChange={(e) => setGoods_category(e.target.value)}
+        className={` ${styles['textinput3']} ${projectStyles['input']} `}
+      />
+      
+      <span className={styles['text3']}>goods details:</span>
+      <textarea
+        value={goods_details}
+        placeholder="Enter the goods more details"
+        rows={4}
+        onChange={(e) => setGoods_details(e.target.value)}
+        className={` ${styles['textarea']} ${projectStyles['textarea']} `}
+      ></textarea>
+      {/* {goods_details && (
+              <Card>
+                <Card.Header>Detail Preview</Card.Header>
+                <Card.Body>
+                  <ReactMarkdown>{goods_details}</ReactMarkdown>
+                </Card.Body>
+                </Card>
+            )} */}
+        
+
+            {loading && <Loading size={50} />}
+      <button className={` ${styles['button']} ${projectStyles['button']} `}
+      type="submit" variant="primary">
+          Add a new goods
+      </button>
+      <button className={` ${styles['button1']} ${projectStyles['button']} `}
+      onClick={resetHandler} variant="danger">
+        Reset Feilds
+      </button>
+      <span className={styles['text4']}>
+        Creating on - {new Date().toLocaleDateString()}
+      </span>
     </div>
-  )
+    </Form>
+  );
 }
 
-export default SellGoodsPage
+export default CreateGoods;

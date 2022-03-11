@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 // import { Link } from 'react-router-dom'
-import Loading from "./Loading";
-import ErrorMessage from "./ErrorMessage";
+import Loading from "../components/Loading";
+import ErrorMessage from "../components/ErrorMessage";
 import { Helmet } from 'react-helmet'
 // import axios from "axios";
 import { Form, Button, Row, Col } from "react-bootstrap";
@@ -12,26 +12,16 @@ import { useDispatch,useSelector } from "react-redux";
 import { register } from "../actions/userActions";
 
 const RegisterPage = ({history}) => {
-
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
-  // const [pic, setPic] = useState(
-  //   "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
-  // );
   const [password, setPassword] = useState("");
   const [confirmpassword, setConfirmPassword] = useState("");
   const [message, setMessage] = useState(null);
-  // const [picMessage, setPicMessage] = useState(null);
-  // const [error, setError] = useState(false);
-  // const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
-
   const userRegister = useSelector((state) => state.userRegister);
   const { loading, error, userInfo } = userRegister;
 
   useEffect(() => {
-    // const userInfo = localStorage.getItem("userInfo");
-
     if (userInfo) {
       history.push("/");
     }
@@ -76,16 +66,17 @@ const RegisterPage = ({history}) => {
   };
   return (
     <div className={styles['container']}>
-      {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
-        {message && <ErrorMessage variant="danger">{message}</ErrorMessage>}
-        {loading && <Loading />}
+      
       <Helmet>
         <title>registerPage - FYP</title>
         <meta property="og:title" content="registerPage - FYP" />
       </Helmet>
       <div className={styles['container1']}>
       <Form onSubmit={submitHandler}>
-        <span className={styles['text']}>Username</span>
+        {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
+        {message && <ErrorMessage variant="danger">{message}</ErrorMessage>}
+        {loading && <Loading />}
+        
         <input
           type="text"
           value={name}
@@ -93,7 +84,7 @@ const RegisterPage = ({history}) => {
           className={` ${styles['Input']} ${projectStyles['input']} `}
           onChange={(e) => setName(e.target.value)}
         />
-        <span className={styles['text1']}>Password</span>
+        
         <input
           type="password"
           value={password}
@@ -109,7 +100,7 @@ const RegisterPage = ({history}) => {
           className={` ${styles['textinput1']} ${projectStyles['input']} `}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
-        <span className={styles['text3']}>Email address</span>
+        
         <input
           type="email"
           value={email}
@@ -117,7 +108,11 @@ const RegisterPage = ({history}) => {
           className={` ${styles['textinput2']} ${projectStyles['input']} `}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <button className={` ${styles['button']} ${projectStyles['button']} `}>
+        <span className={styles['text']}>Username</span>
+        <span className={styles['text1']}>Password</span>
+        <span className={styles['text3']}>Email address</span>
+        <button className={` ${styles['button']} ${projectStyles['button']} `}
+         variant="primary" type="submit">
           <span className={styles['text4']}>Register</span>
         </button>
         </Form>

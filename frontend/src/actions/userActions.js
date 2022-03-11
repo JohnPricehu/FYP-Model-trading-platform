@@ -47,7 +47,7 @@ import {
     dispatch({ type: USER_LOGOUT });
   };
   
-  export const register = (name, email, password, pic) => async (dispatch) => {
+  export const register = (name, email, password) => async (dispatch) => {
     try {
       dispatch({ type: USER_REGISTER_REQUEST });
   
@@ -59,7 +59,7 @@ import {
   
       const { data } = await axios.post(
         "/api/users",
-        { name, pic, email, password },
+        { name, email, password },
         config
       );
   
@@ -97,7 +97,6 @@ import {
       const { data } = await axios.post("/api/users/profile", user, config);
   
       dispatch({ type: USER_UPDATE_SUCCESS, payload: data });
-  
       dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
   
       localStorage.setItem("userInfo", JSON.stringify(data));

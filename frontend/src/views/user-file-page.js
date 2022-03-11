@@ -6,25 +6,18 @@ import { Form, Button, Row, Col } from "react-bootstrap";
 import NavigationLinks from '../components/navigation-links'
 import projectStyles from '../style.module.css'
 import styles from './user-file-page.module.css'
-import ErrorMessage from "./ErrorMessage";
+import ErrorMessage from "../components/ErrorMessage";
 import { updateProfile } from '../actions/userActions';
-import Loading from "./Loading";
+import Loading from "../components/Loading";
 
 const UserFilePage = () => {
   // const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  // const [pic, setPic] = useState();
-  // const [password, setPassword] = useState("");
-  // const [confirmPassword, setConfirmPassword] = useState("");
-  // const [picMessage, setPicMessage] = useState();
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
-
   const dispatch = useDispatch();
-
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-
   const userUpdate = useSelector((state) => state.userUpdate);
   const { loading, error, success } = userUpdate;
 
@@ -32,18 +25,14 @@ const UserFilePage = () => {
     if (!userInfo) {
       history.push("/");
     } else {
-      // setName(userInfo.name);
       setEmail(userInfo.email);
       setPhone(userInfo.phone);
       setAddress(userInfo.address)
-      // setPic(userInfo.pic);
     }
   }, [history, userInfo]);
 
-
   const submitHandler = (e) => {
     e.preventDefault();
-
     dispatch(updateProfile({ phone, email, address}));
   };
   return (
@@ -124,7 +113,7 @@ const UserFilePage = () => {
     </div>
     <div className={styles['Sidebar']}>
       <div className={styles['NavItem']}>
-        <Link to="/home" className={styles['navlink2']}>
+        <Link to="/" className={styles['navlink2']}>
           <span className={styles['text01']}>home page</span>
         </Link>
       </div>

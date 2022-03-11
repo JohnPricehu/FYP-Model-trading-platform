@@ -9,43 +9,44 @@
 .container1 {
   top: 231px;
   right: 22px;
-  width: 402.20001220703125px;
-  height: 302.4000015258789px;
+  width: 450px;
+  height: 385px;
   display: flex;
   position: absolute;
   align-items: center;
+  margin-bottom: var(--dl-space-space-halfunit);
   flex-direction: column;
 }
 .text {
-  top: 8px;
-  left: 59px;
+  top: 60px;
+  left: 63px;
   position: absolute;
 }
 .Input {
-  top: 0px;
-  left: 147.20001220703125px;
+  top: 50px;
+  right: 2px;
   position: absolute;
   align-self: flex-end;
   text-align: left;
   text-transform: lowercase;
 }
 .text1 {
-  top: 75px;
-  left: 63px;
+  top: 130px;
+  left: 64px;
   position: absolute;
 }
 .textinput {
-  top: 63px;
-  left: 147.20001220703125px;
+  top: 123px;
+  right: 0px;
   position: absolute;
 }
 .text2 {
-  top: 138px;
-  left: 2px;
+  top: 203px;
+  left: 7px;
   position: absolute;
 }
 .textinput1 {
-  top: 130px;
+  top: 197px;
   right: 0px;
   position: absolute;
 }
@@ -60,9 +61,9 @@
   position: absolute;
 }
 .button {
-  right: var(--dl-space-space-fourunits);
+  left: 142px;
   width: 142px;
-  bottom: 21px;
+  bottom: -10px;
   position: absolute;
   text-align: center;
   background-color: var(--dl-color-primary-100);
