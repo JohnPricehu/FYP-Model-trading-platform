@@ -1,6 +1,22 @@
 import mongoose from "mongoose";
 // import bcrypt from "bcryptjs";
 
+const reviewSchema = mongoose.Schema(
+  {
+    name: { type: String, required: true },
+    rating: { type: Number, required: true },
+    comment: { type: String, required: true },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'User',
+    },
+  },
+  {
+    timestamps: true,
+  }
+)
+
 const goodsSchema = mongoose.Schema(
   {
     // goods_id: {
@@ -22,8 +38,9 @@ const goodsSchema = mongoose.Schema(
       required: true,
     },
     goods_price: {
-      type: String,
+      type: Number,
       required: true,
+      default: 0,
     },
     goods_pic: {
       type: String,
@@ -31,16 +48,43 @@ const goodsSchema = mongoose.Schema(
       default:
         "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg",
     },
+    rating: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    countInStock: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "User",
     },
+    // owner_name: {
+    //   type: String,
+    //   required: true,
+    // },
+    reviews: [reviewSchema],
+    numReviews: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    sales:{
+      type: Number,
+      required: true,
+      default: 0,
+    }
   },
+  
   {
     timestamps: true,
   }
 );
+
 
 const Goods = mongoose.model("Goods", goodsSchema);
 

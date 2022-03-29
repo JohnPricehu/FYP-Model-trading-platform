@@ -39,27 +39,33 @@ function Header(
     >
       <Container>
         <LinkContainer to='/'>
-          <Navbar.Brand>Welcome to the Model Trading System</Navbar.Brand>
+          <Navbar.Brand>Model Trading System</Navbar.Brand>
         </LinkContainer>
 
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
-          {/* <Route render={({ history }) => <SearchBox history={history} />} /> */}
-          <Nav className='ml-auto' sticky>
-          <LinkContainer to='/sell-goods'>
+          <Route render={({ history }) => <SearchBox history={history} />} />
+          <Nav className='ml-auto' sticky="true">
+          {/* <LinkContainer to='/sell-goods'>
               <Nav.Link>
                 <i className='fas fa-sell-goods'></i>Sell
               </Nav.Link>
-            </LinkContainer>
-            <LinkContainer to='/cart'>
+            </LinkContainer> */}
+            {/* <LinkContainer to='/cart'>
               <Nav.Link>
                 <i className='fas fa-shopping-cart'></i>Cart
               </Nav.Link>
-            </LinkContainer>
+            </LinkContainer> */}
             {userInfo ? (
               <NavDropdown title={userInfo.name} id='username'>
                 <LinkContainer to='/profile'>
                   <NavDropdown.Item>Profile</NavDropdown.Item>
+                </LinkContainer>
+                <LinkContainer to='/sell-goods'>
+                  <NavDropdown.Item>Sell</NavDropdown.Item>
+                </LinkContainer>
+                <LinkContainer to='/cart'>
+                  <NavDropdown.Item>Shopping Cart</NavDropdown.Item>
                 </LinkContainer>
                 <NavDropdown.Item onClick={logoutHandler}>
                   Logout
@@ -68,7 +74,7 @@ function Header(
             ) : (
               <LinkContainer to='/login'>
                 <Nav.Link>
-                  <i className='fas fa-user'></i>Sign In
+                  <i className='fas fa-user'></i>Login
                 </Nav.Link>
               </LinkContainer>
             )}
@@ -78,7 +84,7 @@ function Header(
                   <NavDropdown.Item>Users</NavDropdown.Item>
                 </LinkContainer>
                 <LinkContainer to='/admin/productlist'>
-                  <NavDropdown.Item>Products</NavDropdown.Item>
+                  <NavDropdown.Item>Goods</NavDropdown.Item>
                 </LinkContainer>
 
                 <LinkContainer to='/admin/orderlist'>

@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 // import Rating from './Rating'
 import { Card } from 'react-bootstrap'
-
+// import User from '../../../backend/models/userModel.js'
 const Goods = ({ goods }) => {
   return (
     <Card
@@ -38,6 +38,7 @@ const Goods = ({ goods }) => {
             text={`${product.numReviews} reviews`}
           />
         </Card.Text> */}
+        <Card.Text as='h4'>owner: {goods.owner && goods.owner.name}</Card.Text>
         <Card.Text as='h3'>${goods.goods_price}</Card.Text>
       </Card.Body>
     </Card>

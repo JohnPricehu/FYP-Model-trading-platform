@@ -18,17 +18,19 @@ const UserFilePage = () => {
   const dispatch = useDispatch();
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-  const userUpdate = useSelector((state) => state.userUpdate);
+  const userUpdate = useSelector((state) => state.Profile);
   const { loading, error, success } = userUpdate;
 
   useEffect(() => {
     if (!userInfo) {
+      // eslint-disable-next-line no-restricted-globals
       history.push("/");
     } else {
       setEmail(userInfo.email);
       setPhone(userInfo.phone);
       setAddress(userInfo.address)
     }
+    // eslint-disable-next-line no-restricted-globals
   }, [history, userInfo]);
 
   const submitHandler = (e) => {

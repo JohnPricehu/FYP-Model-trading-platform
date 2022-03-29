@@ -18,7 +18,7 @@
     "nodemon": "^2.0.15",
     "prop-types": "15.7.2",
     "react": "^17.0.2",
-    "react-bootstrap": "^2.1.2",
+    "react-bootstrap": "^1.4.0",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
     "react-markdown": "^8.0.0",
@@ -36,6 +36,12 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -49,7 +55,9 @@
     ]
   },
   "proxy": "http://localhost:5000",
-  "devDependencies": {},
+  "devDependencies": {
+    "eslint-plugin-react-hooks": "^4.3.0"
+  },
   "main": "index.js",
   "author": "Yiming Hu",
   "license": "ISC",

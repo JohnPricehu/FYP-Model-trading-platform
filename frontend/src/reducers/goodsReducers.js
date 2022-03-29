@@ -14,15 +14,25 @@ import {
     GOODS_DETAILS_REQUEST,
     GOODS_DETAILS_SUCCESS,
     GOODS_DETAILS_FAIL,
+    GOODS_TOP_REQUEST,
+    GOODS_TOP_SUCCESS,
+    GOODS_TOP_FAIL,
+    GOODS_CREATE_REVIEW_FAIL,
+    GOODS_CREATE_REVIEW_REQUEST,
+    GOODS_CREATE_REVIEW_RESET,
+    GOODS_CREATE_REVIEW_SUCCESS,
   } from "../constants/goodsConstants";
   
   export const goodsListReducer = (state = { goods: [] }, action) => {
+      // eslint-disable-next-line default-case
     switch (action.type) {
       case GOODS_LIST_REQUEST:
         return { loading: true,
           goods: [] };
       case GOODS_LIST_SUCCESS:
-        return { loading: false, goods: action.payload.goods };
+        return { loading: false, goods: action.payload.goods, 
+          pages: action.payload.pages,
+          page: action.payload.page,};
       case GOODS_LIST_FAIL:
         return { loading: false, error: action.payload };
   
@@ -32,14 +42,14 @@ import {
   };
   
   export const goodsDetailReducer = (
-    state = { goods: [] },action
+    state = { good: {reviews: [] }},action
   ) => {
     // eslint-disable-next-line default-case
     switch (action.type) {
       case GOODS_DETAILS_REQUEST:
         return { loading: true, ...state }
       case GOODS_DETAILS_SUCCESS:
-        return { loading: false, goods: action.payload }
+        return { loading: false, good: action.payload }
       case GOODS_DETAILS_FAIL:
         return { loading: false, error: action.payload }
       default:
@@ -48,11 +58,12 @@ import {
   }
 
   export const goodsCreateReducer = (state = {}, action) => {
+      // eslint-disable-next-line default-case
     switch (action.type) {
       case GOODS_CREATE_REQUEST:
         return { loading: true };
       case GOODS_CREATE_SUCCESS:
-        return { loading: false, success: true };
+        return { loading: false, success: true, GOODS: action.payload };
       case GOODS_CREATE_FAIL:
         return { loading: false, error: action.payload };
   
@@ -62,6 +73,7 @@ import {
   };
   
   export const goodsDeleteReducer = (state = {}, action) => {
+      // eslint-disable-next-line default-case
     switch (action.type) {
       case GOODS_DELETE_REQUEST:
         return { loading: true };
@@ -75,12 +87,13 @@ import {
     }
   };
   
-  export const goodsUpdateReducer = (state = {}, action) => {
+  export const goodsUpdateReducer = (state = { goods: {}}, action) => {
+      // eslint-disable-next-line default-case
     switch (action.type) {
       case GOODS_UPDATE_REQUEST:
         return { loading: true };
       case GOODS_UPDATE_SUCCESS:
-        return { loading: false, success: true };
+        return { loading: false, success: true, goods: action.payload };
       case GOODS_UPDATE_FAIL:
         return { loading: false, error: action.payload, success: false };
   
@@ -88,3 +101,35 @@ import {
         return state;
     }
   };
+
+  export const goodsTopRatedReducer = (state = { goods: [] }, action) => {
+    // eslint-disable-next-line default-case
+    switch (action.type) {
+      case GOODS_TOP_REQUEST:
+        return { loading: true, goods: [] }
+      case GOODS_TOP_SUCCESS:
+        return { loading: false, goods: action.payload }
+      case GOODS_TOP_FAIL:
+        return { loading: false, error: action.payload }
+  
+      default:
+        return state
+    }
+  }
+
+  export const goodsReviewCreateReducer = (state = {}, action) => {
+    // eslint-disable-next-line default-case
+    switch (action.type) {
+      case GOODS_CREATE_REVIEW_REQUEST:
+        return { loading: true }
+      case GOODS_CREATE_REVIEW_SUCCESS:
+        return { loading: false, success: true }
+      case GOODS_CREATE_REVIEW_FAIL:
+        return { loading: false, error: action.payload }
+      case GOODS_CREATE_REVIEW_RESET:
+        return {}
+  
+      default:
+        return state
+    }
+  }

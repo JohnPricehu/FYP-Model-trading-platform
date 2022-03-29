@@ -5,7 +5,7 @@
   min-height: 100vh;
   align-items: center;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
 }
 .textinput {
   top: 143px;
@@ -22,8 +22,8 @@
   object-fit: cover;
 }
 .text {
-  top: 462px;
-  left: 392px;
+  top: 461px;
+  left: 390px;
   margin: auto;
   position: absolute;
 }
@@ -34,7 +34,7 @@
 }
 .text1 {
   top: 520px;
-  left: 397px;
+  left: 394px;
   position: absolute;
 }
 .textinput2 {
@@ -43,8 +43,8 @@
   position: absolute;
 }
 .text2 {
-  top: 573px;
-  left: 372px;
+  top: 572px;
+  left: 365px;
   position: absolute;
 }
 .textinput3 {
@@ -53,14 +53,14 @@
   position: absolute;
 }
 .text3 {
-  top: 632px;
-  left: 390px;
+  top: 706px;
+  left: 382px;
   margin: auto;
   position: absolute;
 }
 .textarea {
-  top: 629px;
-  left: 514px;
+  top: 689px;
+  left: 505px;
   position: absolute;
 }
 .button {
@@ -71,8 +71,8 @@
   position: absolute;
 }
 .button1 {
-  top: 346px;
-  left: 855px;
+  top: 348px;
+  left: 862px;
   width: 127px;
   height: 36px;
   position: absolute;
@@ -80,5 +80,16 @@
 .text4 {
   top: 201px;
   left: 832px;
+  position: absolute;
+}
+.text5 {
+  top: 633px;
+  left: 389px;
+  margin: auto;
+  position: absolute;
+}
+.textinput4 {
+  top: 625px;
+  left: 503px;
   position: absolute;
 }

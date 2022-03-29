@@ -13,6 +13,7 @@ import Loading from "../components/Loading";
 import ErrorMessage from "../components/ErrorMessage";
 import Paginate from '../components/Paginate'
 import Meta from '../components/Meta'
+import ProductCarousel from '../components/ProductCarousel'
 import {
   Row,
   Col,
@@ -25,16 +26,12 @@ import {
 } from "react-bootstrap";
 
 const Home = ({ 
-  // match 
+  match 
 }) => {
-  
-  // useEffect(() => {
-  //   dispatch(listProducts(keyword, pageNumber))
-  // }, [dispatch, keyword, pageNumber])
 
   // const history = useHistory();
-  // const keyword = match.params.keyword
-  // const pageNumber = match.params.pageNumber || 1
+  const keyword = match.params.keyword
+  const pageNumber = match.params.pageNumber || 1
 
   const dispatch = useDispatch();
 
@@ -43,7 +40,7 @@ const Home = ({
 
   const goodsList = useSelector((state) => state.goodsList)
   const { loading, error, goods,
-    //  page, pages
+     page, pages
     } = goodsList
   const logoutHandler = () => {
     dispatch(logout());
@@ -51,72 +48,23 @@ const Home = ({
 
   useEffect(() => {
     dispatch(listGoods(
-      // keyword, pageNumber
+      keyword, pageNumber
       ))
   }, [dispatch, 
-    // keyword, pageNumber
+    keyword, pageNumber
   ]);
   // console.log(goods)
   return (
-    // <div className={styles['container']}>
-    //       <header className={styles['Header']}>
-    //     <div className={styles['container1']}>
-    //       <div className={styles['Nav']}>
-    //         <NavigationLinks rootClassName="rootClassName1"></NavigationLinks>
-    //       </div>
-    //     </div>
-    //     <Nav>
-    //         {userInfo ? (
-    //           <>
-    //             <Nav.Link href="/">Home page</Nav.Link>
-    //             <NavDropdown.Divider />
-    //             <NavDropdown
-    //               title={`${userInfo.name}`}
-    //               id="collasible-nav-dropdown"
-    //             >
-    //             <NavDropdown.Divider />
-    //               <NavDropdown.Item href="/user-file-page">
-    //                 {/* <img
-    //                   alt=""
-    //                   src={`${userInfo.pic}`}
-    //                   width="25"
-    //                   height="25"
-    //                   style={{ marginRight: 10 }}
-    //                 /> */}
-    //                 My Profile
-    //               </NavDropdown.Item>
-
-    //               <NavDropdown.Divider />
-    //               <NavDropdown.Item onClick={logoutHandler}>
-    //                 Logout
-    //               </NavDropdown.Item>
-    //               <NavDropdown.Divider />
-    //               <NavDropdown.Item href="/sell-goods-page">
-    //               Sell
-    //               </NavDropdown.Item>
-    //             </NavDropdown>
-    //           </>
-    //         ) : (
-    //           <Nav.Link href="/login-page">Login</Nav.Link>
-    //         )}
-    //       </Nav>
-    //   </header>
-    //   {/* <div className={styles['BtnGroup']}> */}
-    //   {/* <Typography  className={classes.title}> */}
-     
-    //   {/* </div> */}
-      
-    //   <video
-    //     src
-    //     poster="https://play.teleporthq.io/static/svg/videoposter.svg"
-    //     className={styles['video']}
-    //   ></video>
     <>
     <Meta />
-      <h1 
-      // className={styles['text']}
-      >Best-selling models</h1>
-      {/* <div className={styles['container2']}> */}
+    {!keyword ? (
+        <ProductCarousel />
+      ) : (
+        <Link to='/' className='btn btn-light'>
+          Go Back
+        </Link>
+      )}
+      <h1>Best-selling models</h1>
       {loading ? (
         <Loading />
       ) : error ? (
@@ -130,10 +78,13 @@ const Home = ({
               </Col>
             ))}
           </Row>
+          <Paginate
+            pages={pages}
+            page={page}
+            keyword={keyword ? keyword : ''}
+          />
           </>
         )}
-
-  {/* // ) */}
   </>
   )
 }

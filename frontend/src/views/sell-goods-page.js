@@ -15,6 +15,7 @@ function CreateGoods({ history }) {
   const [goods_details, setGoods_details] = useState("");
   const [goods_category, setGoods_category] = useState("");
   const [goods_price, setGoods_price] = useState("");
+  const [countInStock, setCountInStock] = useState("");
   const [goods_pic, setGoods_pic] = useState(
     "https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
   );
@@ -32,13 +33,14 @@ function CreateGoods({ history }) {
     setGoods_name("");
     setGoods_details("");
     setGoods_category("");
+    setGoods_price("");
     setGoods_pic("");
-    setGoods_pic("");
+    setCountInStock("1");
   };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(createGoodsAction(goods_name, goods_details, goods_category, goods_pic,goods_price));
+    dispatch(createGoodsAction(goods_name, goods_details, goods_category, goods_pic,goods_price,countInStock));
     if (!goods_name || !goods_details || !goods_category || !goods_price) return;
 
     resetHandler();
@@ -138,7 +140,14 @@ function CreateGoods({ history }) {
         onChange={(e) => setGoods_category(e.target.value)}
         className={` ${styles['textinput3']} ${projectStyles['input']} `}
       />
-      
+      <span className={styles['text5']}>goods count:</span>
+      <input
+        type="text"
+        value={countInStock}
+        placeholder="Enter the count"
+        onChange={(e) => setCountInStock(e.target.value)}
+        className={` ${styles['textinput4']} ${projectStyles['input']} `}
+      />
       <span className={styles['text3']}>goods details:</span>
       <textarea
         value={goods_details}

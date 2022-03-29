@@ -18,6 +18,21 @@ import './bootstrap.min.css'
 import './index.css'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
+const CartScreen = React.lazy(() => import('./views/CartScreen'))
+const ProductScreen = React.lazy(() => import('./views/ProductScreen'))
+const UserListScreen = React.lazy(() => import('./views/UserListScreen'))
+const UserEditScreen = React.lazy(() => import('./views/UserEditScreen'))
+const ProductListScreen = React.lazy(() =>
+  import('./views/ProductListScreen')
+)
+const ProductEditScreen = React.lazy(() =>
+  import('./views/ProductEditScreen')
+)
+const ShippingScreen = React.lazy(() => import('./views/ShippingScreen'))
+const PaymentScreen = React.lazy(() => import('./views/PaymentScreen'))
+const PlaceOrderScreen = React.lazy(() => import('./views/PlaceOrderScreen'))
+const OrderScreen = React.lazy(() => import('./views/orderScreen'))
+const OrderListScreen = React.lazy(() => import('./views/OrderListScreen'))
 
 
 
@@ -32,14 +47,40 @@ const App = () => {
         <React.Suspense fallback={<h1>...loading...</h1>}>
         <Switch>
         <Route exact component={Home} path="/" />
+        <Route exact component={Home} path="/search/:keyword" />
+        <Route exact component={Home} path="/page/:pageNumber" />
+        <Route exact component={Home} path="/search/:keyword/page/:pageNumber" />
         <Route exact component={RegisterPage} path="/register" />
         <Route exact component={LoginPage} path="/login" />
-        <Route  component={GoodsDetailsPage} path="/goods/:id" />
+        {/* <Route  component={GoodsDetailsPage} path="/goods/:id" /> */}
+        <Route path='/goods/:id' component={ProductScreen} />
         <Route exact component={UserFilePage} path="/user-file" />
         <Route exact component={OrdersPage} path="/orders" />
         <Route exact component={OrderDetailsPage} path="/order-details" />
-        <Route exact component={ShoppingCartPage} path="/cart" />
+        {/* <Route exact component={ShoppingCartPage} path="/cart" /> */}
         <Route exact component={CreateGoods} path="/sell-goods" />
+        <Route path='/cart/:id?' component={CartScreen} />
+        <Route path='/admin/userlist' component={UserListScreen} />
+        <Route path='/admin/user/:id/edit' component={UserEditScreen} />
+        <Route
+                path='/admin/productlist'
+                component={ProductListScreen}
+                exact
+              />
+        <Route
+                path='/admin/productlist/:pageNumber'
+                component={ProductListScreen}
+                exact
+              />
+                      <Route
+                path='/admin/product/:id/edit'
+                component={ProductEditScreen}
+              />
+        <Route path='/shipping' component={ShippingScreen} />
+        <Route path='/payment' component={PaymentScreen} />
+        <Route path='/placeorder' component={PlaceOrderScreen} />
+        <Route path='/admin/orderlist' component={OrderListScreen} />
+        <Route path='/order/:id' component={OrderScreen} />      
         </Switch>
         </React.Suspense>
         </Container>
