@@ -17,6 +17,12 @@ import {
     GOODS_TOP_REQUEST,
     GOODS_TOP_SUCCESS,
     GOODS_TOP_FAIL,
+    GOODS_BEST_SALES_REQUEST,
+    GOODS_BEST_SALES_SUCCESS,
+    GOODS_BEST_SALES_FAIL,
+    GOODS_SPECIAL_REQUEST,
+    GOODS_SPECIAL_SUCCESS,
+    GOODS_SPECIAL_FAIL,
     GOODS_CREATE_REVIEW_FAIL,
     GOODS_CREATE_REVIEW_REQUEST,
     GOODS_CREATE_REVIEW_RESET,
@@ -188,6 +194,49 @@ import {
     } catch (error) {
       dispatch({
         type: GOODS_UPDATE_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      })
+    }
+  }
+
+  export const listBestSalesGoods = () => async (dispatch) => {
+    try {
+      dispatch({ type: GOODS_BEST_SALES_REQUEST })
+  
+      const { data } = await axios.get(`/api/goods/bestsales`)
+  
+      dispatch({ type: GOODS_BEST_SALES_SUCCESS, payload: data })
+    } catch (error) {
+      dispatch({
+        type: GOODS_BEST_SALES_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      })
+    }
+  }
+
+  export const listSpecialGoods = () => async (dispatch, getState) => {
+    try {
+      dispatch({ type: GOODS_SPECIAL_REQUEST })
+      const {
+        userLogin: { userInfo },
+      } = getState()
+      const config = {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      }
+      const { data } = await axios.get(`/api/goods/special`, config)
+  
+      dispatch({ type: GOODS_SPECIAL_SUCCESS, payload: data })
+    } catch (error) {
+      dispatch({
+        type: GOODS_SPECIAL_FAIL,
         payload:
           error.response && error.response.data.message
             ? error.response.data.message

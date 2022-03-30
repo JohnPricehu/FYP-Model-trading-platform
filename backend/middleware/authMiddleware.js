@@ -39,4 +39,13 @@ const admin = (req, res, next) => {
   }
 }
 
-export { protect, admin };
+const member = (req, res, next) => {
+  if (req.user && req.user.isMember) {
+    next()
+  } else {
+    res.status(404)
+    throw new Error('Not an authorized as a member')
+  }
+}
+
+export { protect, admin, member };

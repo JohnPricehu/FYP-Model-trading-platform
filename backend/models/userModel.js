@@ -20,10 +20,10 @@ const userSchema = mongoose.Schema(
       type: String,
       // required: true,
     },
-    address:{
-      type: String,
-      // required: true,
-    },
+    // address:{
+    //   type: String,
+    //   // required: true,
+    // },
     isAdmin: {
       type: Boolean,
       required: true,
@@ -33,6 +33,11 @@ const userSchema = mongoose.Schema(
       type: Boolean,
       required: true,
       default: false,
+    },
+    wallet: {
+      type: Number,
+      required: true,
+      default: 0,
     },
     // pic: {
     //   type: String,

@@ -6,13 +6,17 @@ import {
   getTopGoods,
   deleteGoods,
   updateGoods,
-  createdProductReview
+  createdProductReview,
+  getBestSalesGoods, 
+  getSpecialGoods
 } from "../controllers/goodsController.js";
 const router = express.Router();
-import { protect, admin } from "../middleware/authMiddleware.js";
+import { protect, admin, member } from "../middleware/authMiddleware.js";
 
 router.route("/").get(getGoods);
-router.get('/top', getTopGoods)
+router.get('/top', getTopGoods);
+router.get('/bestsales', getBestSalesGoods);
+router.route('/special').get(protect, member, getSpecialGoods);
 router
   .route("/:id")
   .get(getGoodsById)

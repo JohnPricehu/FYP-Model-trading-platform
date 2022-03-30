@@ -17,6 +17,6 @@ router
   .route('/:id')
   .get(protect, getOrderById)
   .delete(protect, admin, deleteOrder)
-router.route('/:id/pay').put(protect, admin, updateOrderToPaid)
-router.route('/:id/delivered').put(protect, admin, updateOrderToDelivered)
+router.route('/:id/pay').put(protect,updateOrderToPaid)
+router.route('/:id/delivered').put(protect, updateOrderToDelivered)
 export default router

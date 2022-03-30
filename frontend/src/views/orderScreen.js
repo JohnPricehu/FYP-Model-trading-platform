@@ -157,6 +157,18 @@ const OrderScreen = ({ match, history }) => {
 
               <ListGroup.Item>
                 {loadingDeliver && <Loading />}
+                {userInfo && !userInfo.isAdmin && !order.isPaid && (
+                  <ListGroup.Item>
+                    <Button
+                      type='button'
+                      className='btn btn-block'
+                      onClick={payHandler}
+                    >
+                      Pay Order
+                    </Button>
+                                        
+                  </ListGroup.Item>
+                )}
                 {userInfo && userInfo.isAdmin && !order.isPaid && (
                   <ListGroup.Item>
                     <Button

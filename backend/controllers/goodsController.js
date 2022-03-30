@@ -13,12 +13,12 @@ const getGoods = asyncHandler(async (req, res) => {
       goods_name: {
           $regex: req.query.keyword,
           $options: 'i',
-        },
+        },goods_category: { $ne: 'special' }
       }
-    : {}
-
+    : {goods_category: { $ne: 'special' }}
+      
   const count = await Goods.countDocuments({ ...keword })
-  const goods = await Goods.find({ ...keword }).populate(
+  const goods = await Goods.find({ ...keword } ).populate(
     'owner',
     'name'
   )
@@ -153,5 +153,23 @@ const createdProductReview = asyncHandler(async (req, res) => {
   }
 })
 
-export { getGoods, getGoodsById, createGoods, getTopGoods,updateGoods,deleteGoods, createdProductReview };
+const getBestSalesGoods = asyncHandler(async (req, res) => {
+  const goods = await Goods.find({}).sort({ sales: -1 }).limit(4).populate(
+    'owner',
+    'name'
+  )
+
+  res.json(goods)
+})
+
+const getSpecialGoods = asyncHandler(async (req, res) => {
+  const goods = await Goods.find({goods_category: { $eq: 'special' }}).populate(
+    'owner',
+    'name'
+  )
+
+  res.json(goods)
+})
+
+export { getGoods, getGoodsById, createGoods, getTopGoods,updateGoods,deleteGoods, createdProductReview, getBestSalesGoods, getSpecialGoods };
 

@@ -1,6 +1,7 @@
 import asyncHandler from 'express-async-handler'
 import Order from '../models/orderModel.js'
 import Goods from '../models/goodsModel.js'
+import User from '../models/userModel.js'
 
 // @desc  create new order
 // @route POST api/orders
@@ -71,8 +72,12 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
     // res.json(good)
     // return good;
   }
-  
+  const user = await User.findById(order.user)
+
   if (order) {
+    if(user.wallet >= order.totalPrice ){
+    user.wallet = user.wallet - order.totalPrice
+    await user.save()
     order.isPaid = true
     order.paidAt = Date.now()
     order.paymentResult = {
@@ -81,11 +86,12 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
       update_time: req.body.update_time,
       // email_address: req.body.payer.email_address,    
     }
-    // good.countInStock =  good.countInStock - order.orderItems.qty 
-    // good.sales = good.sales + order.orderItems.qty 
     const updatedOrder = await order.save()
     res.json(updatedOrder)
-    // res.json(good)
+    }else {
+      res.status(404)
+      throw new Error('Payment Failed')
+    }
   } else {
     res.status(404)
     throw new Error('Order not found! ')

@@ -18,6 +18,8 @@ import {
   goodsUpdateReducer,
   goodsDetailReducer,
   goodsTopRatedReducer,
+  goodsBestSalesReducer,
+  goodsSpecialReducer,
   goodsReviewCreateReducer
 } from "./reducers/goodsReducers";
 import {
@@ -46,6 +48,8 @@ const reducer = combineReducers({
   goodsList: goodsListReducer,
   goodsDetails: goodsDetailReducer,
   goodsTopRated:goodsTopRatedReducer,
+  goodsSpecial:goodsSpecialReducer,
+  goodsBestSales:goodsBestSalesReducer,
   goodsReviewCreate: goodsReviewCreateReducer,
   orderCreate: orderCreatedReducer,
   orderDetails: orderDetailsReducer,

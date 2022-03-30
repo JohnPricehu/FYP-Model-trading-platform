@@ -17,6 +17,12 @@ import {
     GOODS_TOP_REQUEST,
     GOODS_TOP_SUCCESS,
     GOODS_TOP_FAIL,
+    GOODS_BEST_SALES_REQUEST,
+    GOODS_BEST_SALES_SUCCESS,
+    GOODS_BEST_SALES_FAIL,
+    GOODS_SPECIAL_REQUEST,
+    GOODS_SPECIAL_SUCCESS,
+    GOODS_SPECIAL_FAIL,
     GOODS_CREATE_REVIEW_FAIL,
     GOODS_CREATE_REVIEW_REQUEST,
     GOODS_CREATE_REVIEW_RESET,
@@ -110,6 +116,36 @@ import {
       case GOODS_TOP_SUCCESS:
         return { loading: false, goods: action.payload }
       case GOODS_TOP_FAIL:
+        return { loading: false, error: action.payload }
+  
+      default:
+        return state
+    }
+  }
+
+  export const goodsBestSalesReducer = (state = { bsgoods: [] }, action) => {
+    // eslint-disable-next-line default-case
+    switch (action.type) {
+      case GOODS_BEST_SALES_REQUEST:
+        return { loading: true, bsgoods: [] }
+      case GOODS_BEST_SALES_SUCCESS:
+        return { loading: false, bsgoods: action.payload }
+      case GOODS_BEST_SALES_FAIL:
+        return { loading: false, error: action.payload }
+  
+      default:
+        return state
+    }
+  }
+
+  export const goodsSpecialReducer = (state = { sgoods: [] }, action) => {
+    // eslint-disable-next-line default-case
+    switch (action.type) {
+      case GOODS_SPECIAL_REQUEST:
+        return { loading: true, sgoods: [] }
+      case GOODS_SPECIAL_SUCCESS:
+        return { loading: false, sgoods: action.payload }
+      case GOODS_SPECIAL_FAIL:
         return { loading: false, error: action.payload }
   
       default:
