@@ -38,6 +38,7 @@ const Goods = ({ goods }) => {
             text={`${product.numReviews} reviews`}
           />
         </Card.Text> */}
+        <Card.Text as='h4'>Sales: {goods.sales}</Card.Text>
         <Card.Text as='h4'>owner: {goods.owner && goods.owner.name}</Card.Text>
         <Card.Text as='h3'>${goods.goods_price}</Card.Text>
       </Card.Body>

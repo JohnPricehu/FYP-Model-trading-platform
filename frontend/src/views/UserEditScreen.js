@@ -13,6 +13,7 @@ const UserEditScreen = ({ match, history }) => {
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
+  const [wallet, setWallet] = useState('')
   const [isAdmin, setIsAdmin] = useState(false)
   const [isMember, setIsMember] = useState(false)
 
@@ -38,6 +39,7 @@ const UserEditScreen = ({ match, history }) => {
       } else {
         setName(user.name)
         setEmail(user.email)
+        setWallet(user.wallet)
         setIsAdmin(user.isAdmin)
         setIsMember(user.isMember)
       }
@@ -52,11 +54,12 @@ const UserEditScreen = ({ match, history }) => {
     user.isMember,
     user.name,
     userId,
+    user.wallet
   ])
 
   const submitHandler = (e) => {
     e.preventDefault()
-    dispatch(updateUser({ _id: userId, name, email, isAdmin, isMember }))
+    dispatch(updateUser({ _id: userId, name, email, isAdmin, isMember, wallet }))
   }
 
   return (
@@ -92,6 +95,16 @@ const UserEditScreen = ({ match, history }) => {
                 placeholder='Enter email'
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
+
+            <Form.Group controlId='wallet'>
+              <Form.Label>wallet</Form.Label>
+              <Form.Control
+                type='text'
+                placeholder='Change wallet'
+                value={wallet}
+                onChange={(e) => setWallet(e.target.value)}
               ></Form.Control>
             </Form.Group>
 

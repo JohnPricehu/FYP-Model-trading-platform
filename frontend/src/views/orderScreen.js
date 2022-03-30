@@ -181,7 +181,7 @@ const OrderScreen = ({ match, history }) => {
                                         
                   </ListGroup.Item>
                 )}
-                {order.isPaid && (
+                {order.isPaid && !order.isDelivered && (
                   <ListGroup.Item>
                 <Button
                       type='button'

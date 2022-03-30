@@ -149,7 +149,26 @@ const ProductScreen = ({ history, match }) => {
                       </Row>
                     </ListGroup.Item>
                   )}
+                  
                   <ListGroup.Item>
+                      {!userInfo ?(
+                    //   <Button
+                    //   onClick={'/login'}
+                    //   // link={}
+                    //   className='btn-block'
+                    //   style={{
+                    //     backgroundColor: 'rgb(63 57 63)',
+                    //   }}
+                    //   type='button'
+                    //   disabled={good.countInStock === 0}
+                    // >
+                    //   Go to login
+                    // </Button>
+                    <ErrorMessage>
+                      Please <Link to='/login'>login</Link> to buy the special goods{' '}
+                    </ErrorMessage>
+                    ):
+                    (! good.goods_category === 'special' ? (
                     <Button
                       onClick={addToCartHandler}
                       className='btn-block'
@@ -161,6 +180,34 @@ const ProductScreen = ({ history, match }) => {
                     >
                       Add To Cart
                     </Button>
+                    ):(
+                      userInfo && !userInfo.isMember ? (
+                        <Button
+                      // onClick={}
+                      className='btn-block'
+                      style={{
+                        backgroundColor: 'rgb(63 57 63)',
+                      }}
+                      type='button'
+                      disabled={good.countInStock === 0}
+                    >
+                      Be a prime member
+                    </Button>
+                      ):(
+                        <Button
+                      onClick={addToCartHandler}
+                      className='btn-block'
+                      style={{
+                        backgroundColor: 'rgb(63 57 63)',
+                      }}
+                      type='button'
+                      disabled={good.countInStock === 0}
+                    >
+                      Add To Cart
+                    </Button>
+                      )))
+                    }
+                  
                   </ListGroup.Item>
                 </ListGroup>
               </Card>
@@ -223,7 +270,7 @@ const ProductScreen = ({ history, match }) => {
                     </Form>
                   ) : (
                     <ErrorMessage>
-                      Please <Link to='/login'>sign in</Link> to write a review{' '}
+                      Please <Link to='/login'>login</Link> to write a review{' '}
                     </ErrorMessage>
                   )}
                 </ListGroup.Item>

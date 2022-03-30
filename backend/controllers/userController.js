@@ -16,9 +16,10 @@ const authUser = asyncHandler(async (req, res) => {
       name: user.name,
       email: user.email,
       phone: user.phone,
-      address: user.address,
+      // address: user.address,
       isAdmin: user.isAdmin,
       isMember: user.isMember,
+      wallet:user.wallet,
       // pic: user.pic,
       token: generateToken(user._id),
     });
@@ -71,7 +72,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
     user.phone = req.body.phone || user.phone;
-    user.address = req.body.address || user.address;
+    // user.address = req.body.address || user.address;
     
     // user.pic = req.body.pic || user.pic;
     if (req.body.password) {
@@ -85,7 +86,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       name: updatedUser.name,
       email: updatedUser.email,
       phone: updatedUser.phone,
-      address: updatedUser.address,
+      // address: updatedUser.address,
       // pic: updatedUser.pic,
       isAdmin: updatedUser.isAdmin,
       isMember: updatedUser.isMember,
@@ -138,18 +139,20 @@ const updateUser = asyncHandler(async (req, res) => {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
     user.phone = req.body.phone || user.phone;
-    user.address = req.body.address || user.address;
+    // user.address = req.body.address || user.address;
     user.isAdmin = req.body.isAdmin || user.isAdmin;
     user.isMember = req.body.isMember || user.isMember;
+    user.wallet = req.body.wallet || user.wallet;
     const updatedUser = await user.save()
     res.json({
       _id: updatedUser._id,
       name: updatedUser.name,
       email: updatedUser.email,
       phone: updatedUser.phone,
-      address: updatedUser.address,
+      // address: updatedUser.address,
       isAdmin: updatedUser.isAdmin,
       isMember: updatedUser.isMember,
+      wallet: updatedUser.wallet,
       token: generateToken(updatedUser._id),
     })
   } else {

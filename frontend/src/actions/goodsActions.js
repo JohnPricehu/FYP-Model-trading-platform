@@ -11,6 +11,9 @@ import {
     GOODS_LIST_FAIL,
     GOODS_LIST_REQUEST,
     GOODS_LIST_SUCCESS,
+    GOODS_ALL_LIST_FAIL,
+    GOODS_ALL_LIST_REQUEST,
+    GOODS_ALL_LIST_SUCCESS,
     GOODS_DETAILS_REQUEST,
     GOODS_DETAILS_SUCCESS,
     GOODS_DETAILS_FAIL,
@@ -63,6 +66,43 @@ import {
           : error.message;
       dispatch({
         type: GOODS_LIST_FAIL,
+        payload: message,
+      });
+    }
+  };
+
+  export const listAllGoods = (
+    keyword = '', pageNumber = ''
+    ) => async (dispatch,getState
+      ) => {
+    try {
+      dispatch({
+        type: GOODS_ALL_LIST_REQUEST,
+      });
+  
+      const {
+        userLogin: { userInfo },
+      } = getState();
+  
+      const config = {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      };
+  
+      const { data } = await axios.get(`/api/goods/all?keyword=${keyword}&pageNumber=${pageNumber}`, config);
+  
+      dispatch({
+        type: GOODS_ALL_LIST_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      const message =
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message;
+      dispatch({
+        type: GOODS_ALL_LIST_FAIL,
         payload: message,
       });
     }

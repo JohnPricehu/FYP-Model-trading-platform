@@ -11,6 +11,9 @@ import {
     GOODS_LIST_FAIL,
     GOODS_LIST_REQUEST,
     GOODS_LIST_SUCCESS,
+    GOODS_ALL_LIST_FAIL,
+    GOODS_ALL_LIST_REQUEST,
+    GOODS_ALL_LIST_SUCCESS,
     GOODS_DETAILS_REQUEST,
     GOODS_DETAILS_SUCCESS,
     GOODS_DETAILS_FAIL,
@@ -46,7 +49,25 @@ import {
         return state;
     }
   };
-  
+
+  export const goodsAllListReducer = (state = { goods: [] }, action) => {
+    // eslint-disable-next-line default-case
+  switch (action.type) {
+    case GOODS_ALL_LIST_REQUEST:
+      return { loading: true,
+        goods: [] };
+    case GOODS_ALL_LIST_SUCCESS:
+      return { loading: false, goods: action.payload.goods, 
+        pages: action.payload.pages,
+        page: action.payload.page,};
+    case GOODS_ALL_LIST_FAIL:
+      return { loading: false, error: action.payload };
+
+    default:
+      return state;
+  }
+};
+
   export const goodsDetailReducer = (
     state = { good: {reviews: [] }},action
   ) => {

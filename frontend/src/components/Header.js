@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {} from "react-router-dom";
 import { logout } from "../actions/userActions";
 import SearchBox from './SearchBox'
+import MemberSearchBox from './memberSearchBox'
 
 function Header(
   // { setSearch }
@@ -44,7 +45,12 @@ function Header(
 
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
-          <Route render={({ history }) => <SearchBox history={history} />} />
+          {userInfo && userInfo.isMember ? (
+            <Route render={({ history }) => <MemberSearchBox history={history} />} />
+          ) : (
+            <Route render={({ history }) => <SearchBox history={history} />} />
+          )}
+          
           <Nav className='ml-auto' sticky="true">
           {/* <LinkContainer to='/sell-goods'>
               <Nav.Link>
@@ -56,6 +62,13 @@ function Header(
                 <i className='fas fa-shopping-cart'></i>Cart
               </Nav.Link>
             </LinkContainer> */}
+            {userInfo && userInfo.isMember && (
+              <LinkContainer to='/special'>
+                <Nav.Link>
+                  <i className='fas fa-user'>Special</i>
+                </Nav.Link>
+              </LinkContainer>
+            )}
             {userInfo ? (
               <NavDropdown title={userInfo.name} id='username'>
                 <LinkContainer to='/profile'>
@@ -74,7 +87,7 @@ function Header(
             ) : (
               <LinkContainer to='/login'>
                 <Nav.Link>
-                  <i className='fas fa-user'></i>Login
+                  <i className='fas fa-user'>Login</i>
                 </Nav.Link>
               </LinkContainer>
             )}

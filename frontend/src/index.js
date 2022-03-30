@@ -7,7 +7,7 @@ import Home from './views/home'
 import RegisterPage from './views/register-page'
 import LoginPage from './views/login-page'
 import GoodsDetailsPage from './views/goods-details-page'
-import UserFilePage from './views/user-file-page'
+// import UserFilePage from './views/user-file-page'
 import OrdersPage from './views/orders-page'
 import OrderDetailsPage from './views/order-details-page'
 import ShoppingCartPage from './views/shopping-cart-page'
@@ -33,6 +33,8 @@ const PaymentScreen = React.lazy(() => import('./views/PaymentScreen'))
 const PlaceOrderScreen = React.lazy(() => import('./views/PlaceOrderScreen'))
 const OrderScreen = React.lazy(() => import('./views/orderScreen'))
 const OrderListScreen = React.lazy(() => import('./views/OrderListScreen'))
+const SpecialScreen = React.lazy(() => import('./views/specialScreen'))
+const ProfileScreen = React.lazy(() => import('./views/ProfileScreen'))
 
 
 
@@ -50,11 +52,15 @@ const App = () => {
         <Route exact component={Home} path="/search/:keyword" />
         <Route exact component={Home} path="/page/:pageNumber" />
         <Route exact component={Home} path="/search/:keyword/page/:pageNumber" />
+        <Route exact component={SpecialScreen} path="/special" />
+        <Route exact component={SpecialScreen} path="/member/search/:keyword" />
+        <Route exact component={SpecialScreen} path="/member/page/:pageNumber" />
+        <Route exact component={SpecialScreen} path="/member/search/:keyword/page/:pageNumber" />
         <Route exact component={RegisterPage} path="/register" />
         <Route exact component={LoginPage} path="/login" />
         {/* <Route  component={GoodsDetailsPage} path="/goods/:id" /> */}
         <Route path='/goods/:id' component={ProductScreen} />
-        <Route exact component={UserFilePage} path="/user-file" />
+        <Route exact component={ProfileScreen} path="/profile" />
         <Route exact component={OrdersPage} path="/orders" />
         <Route exact component={OrderDetailsPage} path="/order-details" />
         {/* <Route exact component={ShoppingCartPage} path="/cart" /> */}

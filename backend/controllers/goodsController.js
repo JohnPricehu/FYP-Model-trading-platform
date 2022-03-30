@@ -120,7 +120,10 @@ const deleteGoods = asyncHandler(async (req, res) => {
 const createdProductReview = asyncHandler(async (req, res) => {
   const { rating, comment } = req.body
 
-  const product = await Goods.findById(req.params.id)
+  const product = await Goods.findById(req.params.id).populate(
+    'user',
+    'name'
+  )
 
   if (product) {
     const alreadyReviewed = product.reviews.find(
@@ -171,5 +174,32 @@ const getSpecialGoods = asyncHandler(async (req, res) => {
   res.json(goods)
 })
 
-export { getGoods, getGoodsById, createGoods, getTopGoods,updateGoods,deleteGoods, createdProductReview, getBestSalesGoods, getSpecialGoods };
+const getAllGoods = asyncHandler(async (req, res) => {
+  const pageSize = 10
+  const page = Number(req.query.pageNumber) || 1
+
+  const keword = req.query.keyword
+    ? {
+      goods_name: {
+          $regex: req.query.keyword,
+          $options: 'i',
+        }
+      }
+    : {}
+      
+  const count = await Goods.countDocuments({ ...keword })
+  const goods = await Goods.find({ ...keword } ).populate(
+    'owner',
+    'name'
+  )
+    .sort({ updatedAt: 'desc' })
+    .limit(pageSize)
+    .skip(pageSize * (page - 1))
+  // const goods = await Goods.find({})
+  res.json({ goods
+    , page, pages: Math.ceil(count / pageSize) 
+  })
+})
+
+export { getGoods, getGoodsById, createGoods, getTopGoods,updateGoods,deleteGoods, createdProductReview, getBestSalesGoods, getSpecialGoods, getAllGoods };
 
