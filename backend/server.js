@@ -8,6 +8,7 @@ import path from "path";
 import userRoutes from "./routes/userRoutes.js";
 import goodsRoutes from "./routes/goodsRoutes.js";
 import orderRoutes from './routes/orderRoute.js'
+import cartRoutes from './routes/cartRoutes.js'
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 
 dotenv.config();
@@ -22,6 +23,7 @@ app.use(express.json()); // to accept json data
 app.use("/api/goods", goodsRoutes);
 app.use("/api/users", userRoutes);
 app.use('/api/orders', orderRoutes)
+app.use('/api/cart', cartRoutes)
 
 // --------------------------deployment------------------------------
 const __dirname = path.resolve();

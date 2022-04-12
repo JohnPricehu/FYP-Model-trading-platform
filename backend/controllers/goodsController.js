@@ -79,7 +79,7 @@ const updateGoods = asyncHandler(async (req, res) => {
     price,
     description,
     imageURL,
-    brand,
+    // brand,
     category,
     countInStock,
   } = req.body
