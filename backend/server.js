@@ -1,9 +1,10 @@
 import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./config/db.js";
+import passport from "passport";
 import colors from "colors";
 import path from "path";
-
+import session from "expression-session"
 // import noteRoutes from "./routes/noteRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import goodsRoutes from "./routes/goodsRoutes.js";
@@ -14,11 +15,29 @@ import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 
 dotenv.config();
 
+// Passport config
+require('./config/passport')(passport)
+
 connectDB();
 
 const app = express(); // main thing
 
 app.use(express.json()); // to accept json data
+
+
+// Sessions
+app.use(
+  session({
+    secret: 'keyboard cat',
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({mongoUrl: process.env.MONGO_DB,}),
+  })
+)
+
+// Passport middleware
+app.use(passport.initialize())
+app.use(passport.session())
 
 // app.use("/api/notes", noteRoutes);
 app.use("/api/goods", goodsRoutes);

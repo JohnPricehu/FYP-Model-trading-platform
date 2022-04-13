@@ -39,6 +39,10 @@ const userSchema = mongoose.Schema(
       required: true,
       default: 0,
     },
+    googleId: {
+      type: String,
+      // required: true,
+    },
     // pic: {
     //   type: String,
     //   required: true,
