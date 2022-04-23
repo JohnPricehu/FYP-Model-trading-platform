@@ -21,6 +21,7 @@ import {
   goodsTopRatedReducer,
   goodsBestSalesReducer,
   goodsSpecialReducer,
+  goodsMyReducer,
   goodsReviewCreateReducer
 } from "./reducers/goodsReducers";
 import {
@@ -53,6 +54,7 @@ const reducer = combineReducers({
   goodsSpecial:goodsSpecialReducer,
   goodsBestSales:goodsBestSalesReducer,
   goodsReviewCreate: goodsReviewCreateReducer,
+  goodsMy:goodsMyReducer,
   orderCreate: orderCreatedReducer,
   orderDetails: orderDetailsReducer,
   orderPay: orderPayReducer,

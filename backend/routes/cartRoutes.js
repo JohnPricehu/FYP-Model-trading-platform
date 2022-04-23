@@ -11,7 +11,9 @@ import { protect } from "../middleware/authMiddleware.js";
 router.route("/mycart").get(protect,getMyCart);
 router
   .route("/goods/:id")
-  .post(protect, addToCart)
+  .post(protect, addToCart);
+router
+  .route("/:id")
   .delete(protect, deleteCartGoods)
 router.route("/clean").delete(protect, cleanCart);
 

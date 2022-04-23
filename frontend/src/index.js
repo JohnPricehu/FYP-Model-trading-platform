@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 // import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Header from './components/Header'
+import Footer from './components/Footer'
 import './style.module.css'
 import Home from './views/home'
 import RegisterPage from './views/register-page'
@@ -91,6 +92,7 @@ const App = () => {
         </React.Suspense>
         </Container>
       </main>
+      <Footer />
     </Router>
     </Provider>
   )

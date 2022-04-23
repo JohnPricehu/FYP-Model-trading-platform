@@ -30,6 +30,9 @@ import {
     GOODS_CREATE_REVIEW_REQUEST,
     GOODS_CREATE_REVIEW_RESET,
     GOODS_CREATE_REVIEW_SUCCESS,
+    GOODS_LIST_MY_REQUEST,
+    GOODS_LIST_MY_SUCCESS,
+    GOODS_LIST_MY_FAIL,
   } from "../constants/goodsConstants";
   import axios from "axios";
   
@@ -284,7 +287,30 @@ import {
       })
     }
   }
-
+  export const listMyGoods = () => async (dispatch, getState) => {
+    try {
+      dispatch({ type: GOODS_LIST_MY_REQUEST })
+      const {
+        userLogin: { userInfo },
+      } = getState()
+      const config = {
+        headers: {
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      }
+      const { data } = await axios.get(`/api/goods/my`, config)
+  
+      dispatch({ type: GOODS_LIST_MY_SUCCESS, payload: data })
+    } catch (error) {
+      dispatch({
+        type: GOODS_LIST_MY_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      })
+    }
+  }
   export const listTopGoods = () => async (dispatch) => {
     try {
       dispatch({ type: GOODS_TOP_REQUEST })

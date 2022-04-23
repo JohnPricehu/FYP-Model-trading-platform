@@ -165,7 +165,7 @@ const ProductScreen = ({ history, match }) => {
                     //   Go to login
                     // </Button>
                     <ErrorMessage>
-                      Please <Link to='/login'>login</Link> to buy the special goods{' '}
+                      Please <Link to='/login'>login</Link> to buy the goods{' '}
                     </ErrorMessage>
                     ):
                     (! good.goods_category === 'special' ? (
@@ -181,7 +181,7 @@ const ProductScreen = ({ history, match }) => {
                       Add To Cart
                     </Button>
                     ):(
-                      userInfo && !userInfo.isMember ? (
+                      userInfo && ! userInfo.isMember ? (
                         <Button
                       // onClick={}
                       className='btn-block'

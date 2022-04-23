@@ -174,6 +174,12 @@ const getSpecialGoods = asyncHandler(async (req, res) => {
   res.json(goods)
 })
 
+const getMyGoods = asyncHandler(async (req, res) => {
+  const goods = await Goods.find({ owner: req.user._id })
+  res.json(goods)
+})
+
+
 const getAllGoods = asyncHandler(async (req, res) => {
   const pageSize = 10
   const page = Number(req.query.pageNumber) || 1
@@ -201,5 +207,5 @@ const getAllGoods = asyncHandler(async (req, res) => {
   })
 })
 
-export { getGoods, getGoodsById, createGoods, getTopGoods,updateGoods,deleteGoods, createdProductReview, getBestSalesGoods, getSpecialGoods, getAllGoods };
+export { getGoods, getGoodsById, createGoods, getTopGoods,updateGoods,deleteGoods, createdProductReview, getBestSalesGoods, getSpecialGoods, getAllGoods,getMyGoods };
 

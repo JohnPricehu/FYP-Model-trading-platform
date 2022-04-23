@@ -30,6 +30,9 @@ import {
     GOODS_CREATE_REVIEW_REQUEST,
     GOODS_CREATE_REVIEW_RESET,
     GOODS_CREATE_REVIEW_SUCCESS,
+    GOODS_LIST_MY_REQUEST,
+    GOODS_LIST_MY_SUCCESS,
+    GOODS_LIST_MY_FAIL,
   } from "../constants/goodsConstants";
   
   export const goodsListReducer = (state = { goods: [] }, action) => {
@@ -173,7 +176,20 @@ import {
         return state
     }
   }
-
+  export const goodsMyReducer = (state = { mgoods: [] }, action) => {
+    // eslint-disable-next-line default-case
+    switch (action.type) {
+      case GOODS_LIST_MY_REQUEST:
+        return { loading: true, mgoods: [] }
+      case GOODS_LIST_MY_SUCCESS:
+        return { loading: false, mgoods: action.payload }
+      case GOODS_LIST_MY_FAIL:
+        return { loading: false, error: action.payload }
+  
+      default:
+        return state
+    }
+  }
   export const goodsReviewCreateReducer = (state = {}, action) => {
     // eslint-disable-next-line default-case
     switch (action.type) {

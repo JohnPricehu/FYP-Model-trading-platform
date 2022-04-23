@@ -9,6 +9,7 @@ import {
   createdProductReview,
   getBestSalesGoods, 
   getSpecialGoods,
+  getMyGoods,
   getAllGoods
 } from "../controllers/goodsController.js";
 const router = express.Router();
@@ -19,6 +20,7 @@ router.get('/top', getTopGoods);
 router.get('/bestsales', getBestSalesGoods);
 router.route('/special').get(protect, member, getSpecialGoods);
 router.route('/all').get(protect, member, getAllGoods);
+router.route('/my').get(protect, getMyGoods);
 router
   .route("/:id")
   .get(getGoodsById)
