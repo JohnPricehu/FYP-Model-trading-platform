@@ -1,17 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-// import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import './style.module.css'
 import Home from './views/home'
-import RegisterPage from './views/register-page'
-import LoginPage from './views/login-page'
-// import GoodsDetailsPage from './views/goods-details-page'
-// import UserFilePage from './views/user-file-page'
-import OrdersPage from './views/orders-page'
-import OrderDetailsPage from './views/order-details-page'
-// import ShoppingCartPage from './views/shopping-cart-page'
 import CreateGoods from './views/sell-goods-page'
 import { Provider } from 'react-redux'
 import store from "./store"
@@ -40,6 +32,8 @@ const FavouriteScreen = React.lazy(() => import('./views/favourites'))
 const WantedScreen = React.lazy(() => import('./views/wanted'))
 const HistoryScreen = React.lazy(() => import('./views/history'))
 const PaymemberScreen = React.lazy(() => import('./views/paymember'))
+const LoginScreen = React.lazy(() => import('./views/LoginScreen'))
+const RegisterScreen = React.lazy(() => import('./views/RegisterScreen'))
 
 
 
@@ -63,14 +57,10 @@ const App = () => {
         <Route exact component={SpecialScreen} path="/member/search/:keyword" />
         <Route exact component={SpecialScreen} path="/member/page/:pageNumber" />
         <Route exact component={SpecialScreen} path="/member/search/:keyword/page/:pageNumber" />
-        <Route exact component={RegisterPage} path="/register" />
-        <Route exact component={LoginPage} path="/login" />
-        {/* <Route  component={GoodsDetailsPage} path="/goods/:id" /> */}
+        <Route exact component={RegisterScreen} path="/register" />
+        <Route exact component={LoginScreen} path="/login" />
         <Route path='/goods/:id' component={ProductScreen} />
         <Route exact component={ProfileScreen} path="/profile" />
-        <Route exact component={OrdersPage} path="/orders" />
-        <Route exact component={OrderDetailsPage} path="/order-details" />
-        {/* <Route exact component={ShoppingCartPage} path="/cart" /> */}
         <Route exact component={CreateGoods} path="/sell-goods" />
         <Route path='/cart/:id?' component={CartScreen} />
         <Route path='/admin/userlist' component={UserListScreen} />

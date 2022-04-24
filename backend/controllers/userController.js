@@ -35,9 +35,14 @@ const authUser = asyncHandler(async (req, res) => {
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password, } = req.body;
   const userExists = await User.findOne({ name });
+  const emailExists = await User.findOne({ email });
   if (userExists) {
     res.status(404);
     throw new Error("User already exists");
+  }
+  if (emailExists) {
+    res.status(404);
+    throw new Error("This email has already been used");
   }
 
   const user = await User.create({

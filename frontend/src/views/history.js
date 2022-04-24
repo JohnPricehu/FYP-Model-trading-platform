@@ -5,7 +5,7 @@ import { Button, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import ErrorMessage from '../components/ErrorMessage'
 import Loading from '../components/Loading'
-import { listMyHistory } from '../actions/historyActions'
+import { listMyHistory } from '../actions/historyAction.js'
 
 const HistoryScreen = ({ history }) => {
   const dispatch = useDispatch()

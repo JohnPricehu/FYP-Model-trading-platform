@@ -43,16 +43,14 @@ const WantedScreen = ({ history }) => {
               <tr>
                 <th>Photo</th>
                 <th>Name</th>
-                {/* <th>Create Date</th>
-                <th>Latest Transaction</th> */}
                 <th>Price</th>
                 <th>Count In Stock</th>
-                {/* <th>Sales</th> */}
                 <th></th>
               </tr>
             </thead>
             <tbody>
               {mwanteds.map((wanted) => (
+                  
                 <tr key={wanted._id}>
                   <td>
                     {' '}
@@ -66,7 +64,7 @@ const WantedScreen = ({ history }) => {
                   <td>{wanted.product && wanted.product.goods_name}</td>
                   <td>${wanted.product && wanted.product.goods_price}</td>
                   <td>
-                  {wanted.product && wanted.product.countInStock === 0 ? (
+                  {wanted.product && wanted.product.countInStock <= 0 ? (
                     <i className='fas fa-times' style={{ color: 'red' }}>No count</i>
                   ) : (
                     <i className='fas fa-times' style={{ color: 'green' }}>{wanted.product && wanted.product.countInStock}</i>
@@ -87,8 +85,9 @@ const WantedScreen = ({ history }) => {
                       <i className='fas fa-trash'>Delete</i>
                     </Button>
                   </td>
-                </tr>
-              ))}
+                </tr>           
+              ))         
+              }
             </tbody>
           </Table>
         )}

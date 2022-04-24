@@ -16,6 +16,9 @@ const OrderScreen = ({ match, history }) => {
   const orderDeliver = useSelector((state) => state.orderDeliver)
   const { loading: loadingDeliver, success: successDeliver } = orderDeliver
 
+  const orderPay = useSelector((state) => state.orderPay)
+  const { loading: loadingPay, success: successPay, error:errorPay } = orderPay
+
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
@@ -24,7 +27,6 @@ const OrderScreen = ({ match, history }) => {
     const addDcimal = (num) => {
       return (Math.round(num * 100) / 100).toFixed(2)
     }
-
     order.itemsPrice = addDcimal(
       order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0)
     )
@@ -34,8 +36,12 @@ const OrderScreen = ({ match, history }) => {
     if (!userInfo) {
       history.push('/login')
     }
+    if(errorPay){
+      history.go(0)
+      alert('Payment Failed! Check your wallet!')
+    }
     dispatch(getOrderDetails(orderId))
-  }, [dispatch, orderId, successDeliver, history, userInfo])
+  }, [dispatch, orderId, errorPay, history, userInfo])
 
   const deliverHandler = () => {
     dispatch(deliverOrder(order))
@@ -158,7 +164,7 @@ const OrderScreen = ({ match, history }) => {
               </ListGroup.Item>
 
               <ListGroup.Item>
-                {loadingDeliver && <Loading />}
+              {loadingPay && <Loading />}
                 {userInfo && !userInfo.isAdmin && !order.isPaid && (
                   <ListGroup.Item>
                     <Button
@@ -183,7 +189,9 @@ const OrderScreen = ({ match, history }) => {
                                         
                   </ListGroup.Item>
                 )}
+                {loadingDeliver && <Loading />}
                 {order.isPaid && !order.isDelivered && (
+                  
                   <ListGroup.Item>
                 <Button
                       type='button'

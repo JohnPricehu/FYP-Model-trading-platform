@@ -65,9 +65,9 @@ const ProductScreen = ({ history, match }) => {
     if (successadd){
       alert('Add Favourites successfully!')
     }
-    if (successaddwanted){
-      alert('Add Wanted successfully!')
-    }
+    // if (successaddwanted){
+    //   alert('Add Wanted successfully!')
+    // }
     dispatch(listGoodsDetails(match.params.id))
     
   }, [dispatch, match.params.id,  
@@ -200,7 +200,7 @@ const ProductScreen = ({ history, match }) => {
                       Be a prime member
                     </Button>                                                           
                     ):(
-
+                      good.countInStock > 0 ? (
                       <>
                       <Button
                     onClick={addToCartHandler}
@@ -223,31 +223,11 @@ const ProductScreen = ({ history, match }) => {
                       >
                         Add To Favourite
                       </Button>
-                      <Button
-                        onClick={() => addToWantedHandler(good._id,userInfo._id)}
-                        className='btn-block'
-                        style={{
-                          backgroundColor: 'rgb(63 57 63)',
-                        }}
-                        type='button'
-                      >
-                        Add To Wanted
-                      </Button>
                       </>
-                      )):(
+                      ):
+                      (
                         <>
                         <Button
-                      onClick={addToCartHandler}
-                      className='btn-block'
-                      style={{
-                        backgroundColor: 'rgb(63 57 63)',
-                      }}
-                      type='button'
-                      disabled={good.countInStock === 0}
-                    >
-                      Add To Cart
-                    </Button>
-                    <Button
                         onClick={() => addToFavouriteHandler(good._id,userInfo._id)}
                         className='btn-block'
                         style={{
@@ -267,10 +247,62 @@ const ProductScreen = ({ history, match }) => {
                       >
                         Add To Wanted
                       </Button>
-                    </>
+                      </>
+                      )
+                      )):(
+                        good.countInStock > 0 ? (
+                          <>
+                          <Button
+                        onClick={addToCartHandler}
+                        className='btn-block'
+                        style={{
+                          backgroundColor: 'rgb(63 57 63)',
+                        }}
+                        type='button'
+                        disabled={good.countInStock === 0}
+                      >
+                        Add To Cart
+                      </Button>
+                      <Button
+                            onClick={() => addToFavouriteHandler(good._id,userInfo._id)}
+                            className='btn-block'
+                            style={{
+                              backgroundColor: 'rgb(63 57 63)',
+                            }}
+                            type='button'
+                          >
+                            Add To Favourite
+                          </Button>
+                          </>
+                          ):
+                          (
+                            <>
+                            <Button
+                            onClick={() => addToFavouriteHandler(good._id,userInfo._id)}
+                            className='btn-block'
+                            style={{
+                              backgroundColor: 'rgb(63 57 63)',
+                            }}
+                            type='button'
+                          >
+                            Add To Favourite
+                          </Button>
+                          <Button
+                            onClick={() => addToWantedHandler(good._id,userInfo._id)}
+                            className='btn-block'
+                            style={{
+                              backgroundColor: 'rgb(63 57 63)',
+                            }}
+                            type='button'
+                          >
+                            Add To Wanted
+                          </Button>
+                          </>
                       )
                       
                       )
+                    )
+      
                     }
                   
                   </ListGroup.Item>
