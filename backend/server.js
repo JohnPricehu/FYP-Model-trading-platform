@@ -11,6 +11,8 @@ import goodsRoutes from "./routes/goodsRoutes.js";
 import orderRoutes from './routes/orderRoute.js'
 import cartRoutes from './routes/cartRoutes.js'
 import favouriteRoutes from './routes/favouriteRoutes.js'
+import wantedRoutes from './routes/wantedRoutes.js'
+import historyRoutes from './routes/historyRoutes.js'
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 
 dotenv.config();
@@ -44,6 +46,8 @@ app.use("/api/users", userRoutes);
 app.use('/api/orders', orderRoutes)
 app.use('/api/cart', cartRoutes)
 app.use('/api/favourite', favouriteRoutes)
+app.use('/api/wanted', wantedRoutes)
+app.use('/api/history', historyRoutes)
 
 // --------------------------deployment------------------------------
 const __dirname = path.resolve();

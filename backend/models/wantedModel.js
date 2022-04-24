@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 // import bcrypt from "bcryptjs";
 
-const historySchema = mongoose.Schema(
+const wantedSchema = mongoose.Schema(
   {
     product: {
       type: mongoose.Schema.Types.ObjectId,
@@ -19,6 +19,6 @@ const historySchema = mongoose.Schema(
   }
 );
 
-const History = mongoose.model("History", historySchema);
+const Wanted = mongoose.model("Wanted", wantedSchema);
 
-export default History;
+export default Wanted;
