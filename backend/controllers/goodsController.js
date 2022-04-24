@@ -120,16 +120,24 @@ const deleteGoods = asyncHandler(async (req, res) => {
 const createdProductReview = asyncHandler(async (req, res) => {
   const { rating, comment } = req.body
 
-  const product = await Goods.findById(req.params.id).populate(
-    'user',
-    'name'
-  )
+  const product = await Goods.findById(req.params.id)
+  // .populate(
+  //   {
+  //     path: 'reviews.user',
+  //     select:
+  //       'name',
+  //   }
+  // )
 
   if (product) {
     const alreadyReviewed = product.reviews.find(
       (r) => r.user.toString() === req.user._id.toString()
     )
-
+  const buyer = await product.buyers.find(
+    (r) => r.user.toString() === req.user._id.toString()
+    // {buyers: { $elemMatch: { user: req.user._id} }}  )
+  )
+  if (buyer){
     if (alreadyReviewed) {
       res.status(400)
       throw new Error('Product already reviewed')
@@ -151,6 +159,9 @@ const createdProductReview = asyncHandler(async (req, res) => {
     await product.save()
     res.status(201).json({ message: 'Review added' })
   } else {
+    res.status(404)
+    throw new Error('After buy the model you can review')
+  }}else {
     res.status(404)
     throw new Error('Product not found')
   }

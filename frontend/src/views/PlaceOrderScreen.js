@@ -10,6 +10,9 @@ const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch()
   const cart = useSelector((state) => state.cart)
 
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
   const addDcimal = (num) => {
     return (Math.round(num * 100) / 100).toFixed(2)
   }
@@ -23,11 +26,20 @@ const PlaceOrderScreen = ({ history }) => {
   cart.shippingPrice = 0
   cart.taxPrice = 0
 
+if(userInfo && userInfo.isMember){
+  cart.totalPrice = (
+    Number(cart.itemsPrice)*0.8 +
+    Number(cart.shippingPrice)*0.8 +
+    Number(cart.taxPrice)*0.8
+  ).toFixed(2)
+}else{
   cart.totalPrice = (
     Number(cart.itemsPrice) +
     Number(cart.shippingPrice) +
     Number(cart.taxPrice)
   ).toFixed(2)
+}
+  
 
   const orderCreate = useSelector((state) => state.orderCreate)
   const { order, success, error } = orderCreate

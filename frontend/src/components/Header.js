@@ -30,6 +30,7 @@ function Header(
   useEffect(() => {}, [userInfo]);
 
   return (
+    <div>
     <header>
     <Navbar
       style={{ backgroundColor: '#2E2E2E' }}
@@ -110,6 +111,7 @@ function Header(
       </Container>
     </Navbar>
   </header>
+  </div>
   );
 }
 

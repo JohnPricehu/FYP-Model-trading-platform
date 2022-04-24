@@ -16,6 +16,9 @@ const CartScreen = ({ match, location, history }) => {
   const cart = useSelector((state) => state.cart)
   const { cartItems } = cart
 
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
   useEffect(() => {
     if (productId) {
       dispatch(addToCart(productId, qty))
@@ -84,7 +87,22 @@ const CartScreen = ({ match, location, history }) => {
       <Col md={4}>
         <Card>
           <ListGroup variant='flush'>
+            {userInfo && userInfo.isMember ? (
             <ListGroup.Item>
+            
+              <h2>
+                Subtotal ( {cartItems.reduce((acc, item) => acc + item.qty, 0)})
+                items
+              </h2>
+              ${cartItems
+                .reduce((acc, item) => acc + item.qty * item.price, 0)
+                .toFixed(2)} * 80% =  ${cartItems
+                  .reduce((acc, item) => acc + item.qty * item.price * 0.8, 0)
+                  .toFixed(2)}
+            </ListGroup.Item>
+            ):(
+              <ListGroup.Item>
+            
               <h2>
                 Subtotal ( {cartItems.reduce((acc, item) => acc + item.qty, 0)})
                 items
@@ -94,6 +112,7 @@ const CartScreen = ({ match, location, history }) => {
                 .reduce((acc, item) => acc + item.qty * item.price, 0)
                 .toFixed(2)}
             </ListGroup.Item>
+            )}
             <ListGroup.Item>
               <Button
                 type='button'

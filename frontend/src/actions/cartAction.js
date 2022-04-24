@@ -1,76 +1,37 @@
 import axios from 'axios'
 import {
-  CART_ADD_ITEM_REQUEST,
-  CART_ADD_ITEM_SUCCESS,
-  CART_ADD_ITEM_FAIL,
-  CART_REMOVE_ITEM_REQUEST,
-  CART_REMOVE_ITEM_SUCCESS,
-  CART_REMOVE_ITEM_FAIL,
+  CART_ADD_ITEM,
+  CART_REMOVE_ITEM,
   CART_SAVE_SHIPPING_ADDRESS,
   CART_SAVE_PAYMENT_METHOD,
 } from '../constants/cartConstants'
 
 // (getState.js) allows as to get what ever we want from our state in the store.js
-export const addToCart = (cart) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: CART_ADD_ITEM_REQUEST,
-    })
-    const {
-      userLogin: { userInfo },
-    } = getState()
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    }
-  const { data } = await axios.post(`/goods/:id`, cart, config)
+export const addToCart = (id, qty) => async (dispatch, getState) => {
+  const { data } = await axios.get(`/api/goods/${id}`)
+
   dispatch({
-    type: CART_ADD_ITEM_SUCCESS,
-    payload: data
+    type: CART_ADD_ITEM,
+    payload: {
+      product: data._id,
+      name: data.goods_name,
+      image: data.goods_pic,
+      price: data.goods_price,
+      countInStock: data.countInStock,
+      qty,
+    },
   })
 
-} catch (error) {
-  dispatch({
-    type: CART_ADD_ITEM_FAIL,
-    payload:
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message,
-  })
-}
+  localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
 }
 
-
-export const removeFromCart = (id) => async (dispatch, getState) => {
-  try {
-    dispatch({
-      type: CART_REMOVE_ITEM_REQUEST,
-    })
-    const {
-      userLogin: { userInfo },
-    } = getState()
-    const config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${userInfo.token}`,
-      },
-    }
-    await axios.delete(`/api/cart/${id}`, config)
+export const removeFromCart = (id) => (dispatch, getState) => {
   dispatch({
-    type: CART_REMOVE_ITEM_SUCCESS,
+    type: CART_REMOVE_ITEM,
+    payload: id,
   })
 
-} catch (error) {
-  dispatch({
-    type: CART_REMOVE_ITEM_FAIL,
-    payload:
-      error.response && error.response.data.message
-        ? error.response.data.message
-        : error.message,
-  })
-}
+  localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
 }
 
 export const saveShippingAddress = (data) => (dispatch) => {

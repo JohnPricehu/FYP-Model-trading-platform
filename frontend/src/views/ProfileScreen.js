@@ -8,6 +8,7 @@ import Loading from "../components/Loading";
 import ErrorMessage from "../components/ErrorMessage";
 import { updateProfile} from '../actions/userActions'
 import { listMyOrders } from '../actions/orderAction'
+import { listMyGoods } from '../actions/goodsActions'
 
 const ProfileScreen = ({ location, history }) => {
   const [name, setName] = useState('');
@@ -32,6 +33,9 @@ const ProfileScreen = ({ location, history }) => {
   const orderListMy = useSelector((state) => state.orderListMy)
   const { loading: loadingOrders, error: errorOrders, orders } = orderListMy
 
+  const goodsMy = useSelector((state) => state.goodsMy)
+  const { loading: loadingGoods, error: errorGoods, mgoods } = goodsMy
+
   useEffect(() => {
     if (!userInfo) {
       // eslint-disable-next-line no-restricted-globals
@@ -45,6 +49,7 @@ const ProfileScreen = ({ location, history }) => {
         setEmail(userInfo.email)
         setPhone(userInfo.phone)
         dispatch(listMyOrders())
+        dispatch(listMyGoods())
       // }
     }
   }, [history, userInfo, dispatch])
@@ -64,7 +69,7 @@ const ProfileScreen = ({ location, history }) => {
   }
 
   return (
-    <Row>
+    <Row className='my-5'>
       <Col md={3}>
         <h2>User Profile</h2>
         {message && <ErrorMessage variant='danger'>{message}</ErrorMessage>}
@@ -102,26 +107,6 @@ const ProfileScreen = ({ location, history }) => {
             ></Form.Control>
           </Form.Group>
 
-          {/* <Form.Group controlId='password'>
-            <Form.Label>Password</Form.Label>
-            <Form.Control
-              type='password'
-              placeholder='Enter password'
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-
-          <Form.Group controlId='confirmPassword'>
-            <Form.Label>Confirm Password</Form.Label>
-            <Form.Control
-              type='password'
-              placeholder='Confirm password'
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            ></Form.Control>
-          </Form.Group> */}
-
           <Button type='submit' variant='primary'>
             Update
           </Button>
@@ -132,7 +117,7 @@ const ProfileScreen = ({ location, history }) => {
         <h2>wallet: $ {userInfo.wallet}</h2>
       </Col>
       <Col md={9}>
-        <h2>my order</h2>
+        <h2>My Order</h2>
         {loadingOrders ? (
           <Loading />
         ) : errorOrders ? (
@@ -185,49 +170,50 @@ const ProfileScreen = ({ location, history }) => {
             </tbody>
           </Table>
         )}
-        <h2>my models</h2>
-          {loadingOrders ? (
+        </Col>
+        <Col md={10}>
+        <h2>My Models</h2>
+          {loadingGoods ? (
           <Loading />
-        ) : errorOrders ? (
-          <ErrorMessage variant='danger'>{errorOrders}</ErrorMessage>
+        ) : errorGoods ? (
+          <ErrorMessage variant='danger'>{errorGoods}</ErrorMessage>
         ) : (
           <Table striped bordered hover responsive className='tabel-sm'>
             <thead>
               <tr>
-                <th>ID</th>
-                <th>DATE</th>
-                <th>TOTAL</th>
-                <th>PAID</th>
-                <th>DELIVERED</th>
+                <th>Photo</th>
+                <th>Name</th>
+                <th>Create Date</th>
+                <th>Latest Transaction</th>
+                <th>Price</th>
+                <th>Count In Stock</th>
+                <th>Sales</th>
                 <th></th>
               </tr>
             </thead>
             <tbody>
-              {orders.map((order) => (
-                <tr key={order._id}>
-                  <td>{order._id}</td>
-                  <td>{order.createdAt.substring(0, 10)}</td>
-                  <td>{order.totalPrice}</td>
+              {mgoods.map((goods) => (
+                <tr key={goods._id}>
                   <td>
                     {' '}
-                    {order.isPaid ? (
-                      order.paidAt.substring(0, 10)
-                    ) : (
-                      <i className='fas fa-times' style={{ color: 'red' }}></i>
-                    )}{' '}
+                    <img
+                      width='50'
+                      height='50'
+                      alt={goods.goods_name}
+                      src={goods.goods_pic}
+                    />{' '}
                   </td>
-
+                  <td>{goods.goods_name}</td>
+                  <td>{goods.createdAt.substring(0, 10)}</td>
+                  {/* if ({goods.createdAt} == {goods.updatedAt}) {                    
+                  <td>{goods.updatedAt.substring(0, 10)}</td>
+                  }{  <td></td>} */}
+                  <td>{goods.updatedAt.substring(0, 10)}</td>
+                  <td>${goods.goods_price}</td>
+                  <td>{goods.countInStock}</td>
+                  <td>{goods.sales}</td>
                   <td>
-                    {' '}
-                    {order.isDelivered ? (
-                      order.deliveredAt.substring(0, 10)
-                    ) : (
-                      <i className='fas fa-times' style={{ color: 'red' }}></i>
-                    )}{' '}
-                  </td>
-
-                  <td>
-                    <LinkContainer to={`/order/${order._id}`}>
+                    <LinkContainer to={`/goods/${goods._id}`}>
                       <Button className='btn-sm' variant='light'>
                         Details
                       </Button>

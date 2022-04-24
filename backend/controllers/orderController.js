@@ -68,6 +68,11 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
     const good = await Goods.findById(order.orderItems[i].product)
     good.countInStock =  good.countInStock - order.orderItems[i].qty
     good.sales = good.sales + order.orderItems[i].qty
+    // const buyer = await Goods.find({ buyers.user: req.user._id })
+    const buyer = {
+      user: req.user._id,
+    }
+    good.buyers.push(buyer)
     await good.save()
     // res.json(good)
     // return good;

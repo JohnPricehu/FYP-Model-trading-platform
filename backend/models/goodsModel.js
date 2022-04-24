@@ -17,6 +17,19 @@ const reviewSchema = mongoose.Schema(
   }
 )
 
+const buyerSchema = mongoose.Schema(
+  {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'User',
+    },
+  },
+  {
+    timestamps: true,
+  }
+)
+
 const goodsSchema = mongoose.Schema(
   {
     // goods_id: {
@@ -53,6 +66,9 @@ const goodsSchema = mongoose.Schema(
       required: true,
       default: 0,
     },
+    buyers:[
+      buyerSchema
+  ],
     countInStock: {
       type: Number,
       required: true,

@@ -168,20 +168,8 @@ const ProductScreen = ({ history, match }) => {
                       Please <Link to='/login'>login</Link> to buy the goods{' '}
                     </ErrorMessage>
                     ):
-                    (! good.goods_category === 'special' ? (
-                    <Button
-                      onClick={addToCartHandler}
-                      className='btn-block'
-                      style={{
-                        backgroundColor: 'rgb(63 57 63)',
-                      }}
-                      type='button'
-                      disabled={good.countInStock === 0}
-                    >
-                      Add To Cart
-                    </Button>
-                    ):(
-                      userInfo && ! userInfo.isMember ? (
+                    (good.goods_category === 'special' ? (
+                      userInfo && !userInfo.isMember ? (
                         <Button
                       // onClick={}
                       className='btn-block'
@@ -193,7 +181,19 @@ const ProductScreen = ({ history, match }) => {
                     >
                       Be a prime member
                     </Button>
-                      ):(
+                    ):(
+                      <Button
+                    onClick={addToCartHandler}
+                    className='btn-block'
+                    style={{
+                      backgroundColor: 'rgb(63 57 63)',
+                    }}
+                    type='button'
+                    disabled={good.countInStock === 0}
+                  >
+                    Add To Cart
+                  </Button>
+                      )):(
                         <Button
                       onClick={addToCartHandler}
                       className='btn-block'
@@ -205,7 +205,7 @@ const ProductScreen = ({ history, match }) => {
                     >
                       Add To Cart
                     </Button>
-                      )))
+                      ))
                     }
                   
                   </ListGroup.Item>
