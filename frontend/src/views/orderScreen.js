@@ -39,9 +39,11 @@ const OrderScreen = ({ match, history }) => {
 
   const deliverHandler = () => {
     dispatch(deliverOrder(order))
+    history.go(0)
   }
   const payHandler = () => {
     dispatch(payOrder(order))
+    history.go(0)
   }
   return loading ? (
     <Loading  />

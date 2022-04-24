@@ -161,4 +161,22 @@ const updateUser = asyncHandler(async (req, res) => {
   }
 })
 
-export { authUser, updateUserProfile, registerUser, deleteUser, getUserById, viewUsers, updateUser };
+const payMembership = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id)
+  if (user.isMember === false) {
+    if(user.wallet >= 10 ){
+    user.wallet = user.wallet - 10
+    user.isMember = true
+    const updatedUser =await user.save()
+    res.json(updatedUser)   
+    }else{
+    res.status(404)
+    throw new Error('Payment Failed! Check you wallet!')
+    }
+  }else {
+      res.status(404)
+      throw new Error('You are already a Member')
+    }
+})
+
+export { authUser, updateUserProfile, registerUser, deleteUser, getUserById, viewUsers, updateUser,payMembership };

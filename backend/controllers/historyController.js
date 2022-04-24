@@ -23,7 +23,7 @@ const addToHistory = asyncHandler(async (req, res) => {
 // @route GET api/orders/myorders
 // @access  Private
 const getMyHistory = asyncHandler(async (req, res) => {
-    const history = await History.find({ user: req.user._id }).populate(
+    const history = await History.find({ user: req.user._id }).sort({'createdAt':-1}).populate(
       'product'
     )
     res.json(history)

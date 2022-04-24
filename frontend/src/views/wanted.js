@@ -5,14 +5,13 @@ import { Button, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import ErrorMessage from '../components/ErrorMessage'
 import Loading from '../components/Loading'
-// import { listOrders, deleteOrder } from '../actions/orderAction'
-import { listMyFavourite,deleteFavouriteAction  } from '../actions/favouriteActions'
+import { listMyWanted,deleteWantedAction  } from '../actions/wantedActions'
 
-const FavouriteScreen = ({ history }) => {
+const WantedScreen = ({ history }) => {
   const dispatch = useDispatch()
 
-  const  myFavourite = useSelector((state) => state.myFavourite)
-  const { loading: loadingfavourites, error: errorfavourites, mfavourites } =  myFavourite
+  const  myWanted= useSelector((state) => state.myWanted)
+  const { loading: loadingwanteds, error: errorwanteds, mwanteds } =  myWanted
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
@@ -20,25 +19,24 @@ const FavouriteScreen = ({ history }) => {
 
 
   useEffect(() => {
-        dispatch(listMyFavourite())
+        dispatch(listMyWanted())
   }, [dispatch, history, userInfo])
 
 
-
-  const deleteHandler = async (id) => {
+  const deleteWantedHandler = async (id) => {
     if (window.confirm('Are you sure ?')) {
-      dispatch(deleteFavouriteAction(id))
+      dispatch(deleteWantedAction(id))
       history.go(0)
     }
   }
 
   return (
     <>
-      <h1 className='mt-5'>My Favourites</h1>
-          {loadingfavourites ? (
+      <h1 className='mt-5'>My Wanted</h1>
+          {loadingwanteds ? (
           <Loading />
-        ) : errorfavourites ? (
-          <ErrorMessage variant='danger'>{errorfavourites}</ErrorMessage>
+        ) : errorwanteds ? (
+          <ErrorMessage variant='danger'>{errorwanteds}</ErrorMessage>
         ) : (
           <Table striped bordered hover responsive className='tabel-sm'>
             <thead>
@@ -48,27 +46,35 @@ const FavouriteScreen = ({ history }) => {
                 {/* <th>Create Date</th>
                 <th>Latest Transaction</th> */}
                 <th>Price</th>
-                {/* <th>Count In Stock</th>
-                <th>Sales</th> */}
+                <th>Count In Stock</th>
+                {/* <th>Sales</th> */}
                 <th></th>
               </tr>
             </thead>
             <tbody>
-              {mfavourites.map((favourites) => (
-                <tr key={favourites._id}>
+              {mwanteds.map((wanted) => (
+                <tr key={wanted._id}>
                   <td>
                     {' '}
                     <img
                       width='50'
                       height='50'
-                      alt={favourites.product && favourites.product.goods_name}
-                      src={favourites.product && favourites.product.goods_pic}
+                      alt={wanted.product && wanted.product.goods_name}
+                      src={wanted.product && wanted.product.goods_pic}
                     />{' '}
                   </td>
-                  <td>{favourites.product && favourites.product.goods_name}</td>
-                  <td>${favourites.product && favourites.product.goods_price}</td>
+                  <td>{wanted.product && wanted.product.goods_name}</td>
+                  <td>${wanted.product && wanted.product.goods_price}</td>
                   <td>
-                    <LinkContainer to={`/goods/${favourites.product && favourites.product._id}`}>
+                  {wanted.product && wanted.product.countInStock === 0 ? (
+                    <i className='fas fa-times' style={{ color: 'red' }}>No count</i>
+                  ) : (
+                    <i className='fas fa-times' style={{ color: 'green' }}>{wanted.product && wanted.product.countInStock}</i>
+                  )}
+                    
+                    </td>
+                  <td>
+                    <LinkContainer to={`/goods/${wanted.product && wanted.product._id}`}>
                       <Button className='btn-sm' variant='light'>
                         Details
                       </Button>
@@ -76,7 +82,7 @@ const FavouriteScreen = ({ history }) => {
                     <Button
                       variant='danger'
                       className='btn-sm'
-                      onClick={() => deleteHandler(favourites.product && favourites.product._id)}
+                      onClick={() => deleteWantedHandler(wanted.product && wanted.product._id)}
                     >
                       <i className='fas fa-trash'>Delete</i>
                     </Button>
@@ -90,4 +96,4 @@ const FavouriteScreen = ({ history }) => {
   )
 }
 
-export default FavouriteScreen
+export default WantedScreen

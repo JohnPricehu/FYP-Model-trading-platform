@@ -81,6 +81,15 @@ function Header(
                 <LinkContainer to='/cart'>
                   <NavDropdown.Item>Shopping Cart</NavDropdown.Item>
                 </LinkContainer>
+                <LinkContainer to='/favourite'>
+                  <NavDropdown.Item>Favourites</NavDropdown.Item>
+                </LinkContainer>
+                <LinkContainer to='/wanted'>
+                  <NavDropdown.Item>Wanted</NavDropdown.Item>
+                </LinkContainer>
+                <LinkContainer to='/history'>
+                  <NavDropdown.Item>History</NavDropdown.Item>
+                </LinkContainer>
                 <NavDropdown.Item onClick={logoutHandler}>
                   Logout
                 </NavDropdown.Item>

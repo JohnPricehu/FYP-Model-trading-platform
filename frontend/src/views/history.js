@@ -5,14 +5,13 @@ import { Button, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import ErrorMessage from '../components/ErrorMessage'
 import Loading from '../components/Loading'
-// import { listOrders, deleteOrder } from '../actions/orderAction'
-import { listMyFavourite,deleteFavouriteAction  } from '../actions/favouriteActions'
+import { listMyHistory } from '../actions/historyActions'
 
-const FavouriteScreen = ({ history }) => {
+const HistoryScreen = ({ history }) => {
   const dispatch = useDispatch()
 
-  const  myFavourite = useSelector((state) => state.myFavourite)
-  const { loading: loadingfavourites, error: errorfavourites, mfavourites } =  myFavourite
+  const  myHistory = useSelector((state) => state.myHistory)
+  const { loading: loadinghistory, error: errorhistory, mhistorys } =  myHistory
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
@@ -20,25 +19,18 @@ const FavouriteScreen = ({ history }) => {
 
 
   useEffect(() => {
-        dispatch(listMyFavourite())
+        dispatch(listMyHistory())
   }, [dispatch, history, userInfo])
 
 
 
-  const deleteHandler = async (id) => {
-    if (window.confirm('Are you sure ?')) {
-      dispatch(deleteFavouriteAction(id))
-      history.go(0)
-    }
-  }
-
   return (
     <>
-      <h1 className='mt-5'>My Favourites</h1>
-          {loadingfavourites ? (
+      <h1 className='mt-5'>History</h1>
+          {loadinghistory ? (
           <Loading />
-        ) : errorfavourites ? (
-          <ErrorMessage variant='danger'>{errorfavourites}</ErrorMessage>
+        ) : errorhistory ? (
+          <ErrorMessage variant='danger'>{errorhistory}</ErrorMessage>
         ) : (
           <Table striped bordered hover responsive className='tabel-sm'>
             <thead>
@@ -54,7 +46,7 @@ const FavouriteScreen = ({ history }) => {
               </tr>
             </thead>
             <tbody>
-              {mfavourites.map((favourites) => (
+              {mhistorys.map((favourites) => (
                 <tr key={favourites._id}>
                   <td>
                     {' '}
@@ -73,13 +65,6 @@ const FavouriteScreen = ({ history }) => {
                         Details
                       </Button>
                     </LinkContainer>
-                    <Button
-                      variant='danger'
-                      className='btn-sm'
-                      onClick={() => deleteHandler(favourites.product && favourites.product._id)}
-                    >
-                      <i className='fas fa-trash'>Delete</i>
-                    </Button>
                   </td>
                 </tr>
               ))}
@@ -90,4 +75,4 @@ const FavouriteScreen = ({ history }) => {
   )
 }
 
-export default FavouriteScreen
+export default HistoryScreen

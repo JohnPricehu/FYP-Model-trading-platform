@@ -36,6 +36,10 @@ const OrderScreen = React.lazy(() => import('./views/orderScreen'))
 const OrderListScreen = React.lazy(() => import('./views/OrderListScreen'))
 const SpecialScreen = React.lazy(() => import('./views/specialScreen'))
 const ProfileScreen = React.lazy(() => import('./views/ProfileScreen'))
+const FavouriteScreen = React.lazy(() => import('./views/favourites'))
+const WantedScreen = React.lazy(() => import('./views/wanted'))
+const HistoryScreen = React.lazy(() => import('./views/history'))
+
 
 
 
@@ -69,6 +73,9 @@ const App = () => {
         <Route path='/cart/:id?' component={CartScreen} />
         <Route path='/admin/userlist' component={UserListScreen} />
         <Route path='/admin/user/:id/edit' component={UserEditScreen} />
+        <Route path='/favourite' component={FavouriteScreen} />
+        <Route path='/wanted' component={WantedScreen} />
+        <Route path='/history' component={HistoryScreen} />
         <Route
                 path='/admin/productlist'
                 component={ProductListScreen}

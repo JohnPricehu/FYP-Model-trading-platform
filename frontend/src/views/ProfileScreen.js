@@ -9,8 +9,6 @@ import ErrorMessage from "../components/ErrorMessage";
 import { updateProfile} from '../actions/userActions'
 import { listMyOrders } from '../actions/orderAction'
 import { listMyGoods } from '../actions/goodsActions'
-import { listMyFavourite,deleteFavouriteAction  } from '../actions/favouriteActions'
-import { listMyWanted,deleteWantedAction  } from '../actions/wantedActions'
 
 const ProfileScreen = ({ location, history }) => {
   const [name, setName] = useState('');
@@ -38,12 +36,6 @@ const ProfileScreen = ({ location, history }) => {
   const goodsMy = useSelector((state) => state.goodsMy)
   const { loading: loadingGoods, error: errorGoods, mgoods } = goodsMy
 
-  const  myFavourite = useSelector((state) => state.myFavourite)
-  const { loading: loadingfavourites, error: errorfavourites, mfavourites } =  myFavourite
-
-  const  myWanted= useSelector((state) => state.myWanted)
-  const { loading: loadingwanteds, error: errorwanteds, mwanteds } =  myWanted
-
   useEffect(() => {
     if (!userInfo) {
       // eslint-disable-next-line no-restricted-globals
@@ -58,23 +50,9 @@ const ProfileScreen = ({ location, history }) => {
         setPhone(userInfo.phone)
         dispatch(listMyOrders())
         dispatch(listMyGoods())
-        dispatch(listMyFavourite())
-        dispatch(listMyWanted())
       // }
     }
   }, [history, userInfo, dispatch])
-
-  const deleteHandler = async (id) => {
-    if (window.confirm('Are you sure ?')) {
-      dispatch(deleteFavouriteAction(id))
-    }
-  }
-
-  const deleteWantedHandler = async (id) => {
-    if (window.confirm('Are you sure ?')) {
-      dispatch(deleteWantedAction(id))
-    }
-  }
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -240,122 +218,6 @@ const ProfileScreen = ({ location, history }) => {
                         Details
                       </Button>
                     </LinkContainer>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        )}
-      </Col>
-      <Col md={10}>
-        <h2>My Favourites</h2>
-          {loadingfavourites ? (
-          <Loading />
-        ) : errorfavourites ? (
-          <ErrorMessage variant='danger'>{errorfavourites}</ErrorMessage>
-        ) : (
-          <Table striped bordered hover responsive className='tabel-sm'>
-            <thead>
-              <tr>
-                <th>Photo</th>
-                <th>Name</th>
-                {/* <th>Create Date</th>
-                <th>Latest Transaction</th> */}
-                <th>Price</th>
-                {/* <th>Count In Stock</th>
-                <th>Sales</th> */}
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {mfavourites.map((favourites) => (
-                <tr key={favourites._id}>
-                  <td>
-                    {' '}
-                    <img
-                      width='50'
-                      height='50'
-                      alt={favourites.product && favourites.product.goods_name}
-                      src={favourites.product && favourites.product.goods_pic}
-                    />{' '}
-                  </td>
-                  <td>{favourites.product && favourites.product.goods_name}</td>
-                  <td>${favourites.product && favourites.product.goods_price}</td>
-                  <td>
-                    <LinkContainer to={`/goods/${favourites.product && favourites.product._id}`}>
-                      <Button className='btn-sm' variant='light'>
-                        Details
-                      </Button>
-                    </LinkContainer>
-                    <Button
-                      variant='danger'
-                      className='btn-sm'
-                      onClick={() => deleteHandler(favourites.product && favourites.product._id)}
-                    >
-                      <i className='fas fa-trash'>Delete</i>
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        )}
-      </Col>
-      <Col md={10}>
-        <h2>My Wanted</h2>
-          {loadingfavourites ? (
-          <Loading />
-        ) : errorfavourites ? (
-          <ErrorMessage variant='danger'>{errorfavourites}</ErrorMessage>
-        ) : (
-          <Table striped bordered hover responsive className='tabel-sm'>
-            <thead>
-              <tr>
-                <th>Photo</th>
-                <th>Name</th>
-                {/* <th>Create Date</th>
-                <th>Latest Transaction</th> */}
-                <th>Price</th>
-                <th>Count In Stock</th>
-                {/* <th>Sales</th> */}
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {mwanteds.map((wanted) => (
-                <tr key={wanted._id}>
-                  <td>
-                    {' '}
-                    <img
-                      width='50'
-                      height='50'
-                      alt={wanted.product && wanted.product.goods_name}
-                      src={wanted.product && wanted.product.goods_pic}
-                    />{' '}
-                  </td>
-                  <td>{wanted.product && wanted.product.goods_name}</td>
-                  <td>${wanted.product && wanted.product.goods_price}</td>
-                  <td>
-                  {wanted.product && wanted.product.countInStock === 0 ? (
-                    <i className='fas fa-times' style={{ color: 'red' }}>No count</i>
-                  ) : (
-                    <i className='fas fa-times' style={{ color: 'green' }}>{wanted.product && wanted.product.countInStock}</i>
-                  )}
-                    
-                    </td>
-                  <td>
-                    <LinkContainer to={`/goods/${wanted.product && wanted.product._id}`}>
-                      <Button className='btn-sm' variant='light'>
-                        Details
-                      </Button>
-                    </LinkContainer>
-                    <Button
-                      variant='danger'
-                      className='btn-sm'
-                      onClick={() => deleteWantedHandler(wanted.product && wanted.product._id)}
-                    >
-                      <i className='fas fa-trash'>Delete</i>
-                    </Button>
                   </td>
                 </tr>
               ))}
