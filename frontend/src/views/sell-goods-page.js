@@ -26,9 +26,6 @@ function CreateGoods({ history }) {
   const goodsCreate = useSelector((state) => state.goodsCreate);
   const { loading, error, goods } = goodsCreate;
 
-
-  console.log(document.getElementsByTagName("input"))
-
   const resetHandler = () => {
     setGoods_name("");
     setGoods_details("");

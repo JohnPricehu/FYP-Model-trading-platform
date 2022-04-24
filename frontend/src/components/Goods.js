@@ -16,7 +16,7 @@ const Goods = ({ goods }) => {
         borderRadius: '10px',
       }}
     >
-      <Link to={`/goods/${goods._id}`}>
+      <Link to={`/goods/${goods._id}`} >
         <Card.Img
           src={goods.goods_pic}
           variant='top'

@@ -9,6 +9,7 @@ import ErrorMessage from "../components/ErrorMessage";
 import { updateProfile} from '../actions/userActions'
 import { listMyOrders } from '../actions/orderAction'
 import { listMyGoods } from '../actions/goodsActions'
+import { listMyFavourite,deleteFavouriteAction  } from '../actions/favouriteActions'
 
 const ProfileScreen = ({ location, history }) => {
   const [name, setName] = useState('');
@@ -36,6 +37,9 @@ const ProfileScreen = ({ location, history }) => {
   const goodsMy = useSelector((state) => state.goodsMy)
   const { loading: loadingGoods, error: errorGoods, mgoods } = goodsMy
 
+  const  myFavourite = useSelector((state) => state.myFavourite)
+  const { loading: loadingfavourites, error: errorfavourites, mfavourites } =  myFavourite
+
   useEffect(() => {
     if (!userInfo) {
       // eslint-disable-next-line no-restricted-globals
@@ -50,10 +54,16 @@ const ProfileScreen = ({ location, history }) => {
         setPhone(userInfo.phone)
         dispatch(listMyOrders())
         dispatch(listMyGoods())
+        dispatch(listMyFavourite())
       // }
     }
   }, [history, userInfo, dispatch])
 
+  const deleteHandler = async (id) => {
+    if (window.confirm('Are you sure ?')) {
+      dispatch(deleteFavouriteAction(id))
+    }
+  }
   const submitHandler = (e) => {
     e.preventDefault()
     // if (password !== confirmPassword) {
@@ -218,6 +228,60 @@ const ProfileScreen = ({ location, history }) => {
                         Details
                       </Button>
                     </LinkContainer>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        )}
+      </Col>
+      <Col md={10}>
+        <h2>My Favourites</h2>
+          {loadingfavourites ? (
+          <Loading />
+        ) : errorfavourites ? (
+          <ErrorMessage variant='danger'>{errorfavourites}</ErrorMessage>
+        ) : (
+          <Table striped bordered hover responsive className='tabel-sm'>
+            <thead>
+              <tr>
+                <th>Photo</th>
+                <th>Name</th>
+                {/* <th>Create Date</th>
+                <th>Latest Transaction</th> */}
+                <th>Price</th>
+                {/* <th>Count In Stock</th>
+                <th>Sales</th> */}
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {mfavourites.map((favourites) => (
+                <tr key={favourites._id}>
+                  <td>
+                    {' '}
+                    <img
+                      width='50'
+                      height='50'
+                      alt={favourites.product && favourites.product.goods_name}
+                      src={favourites.product && favourites.product.goods_pic}
+                    />{' '}
+                  </td>
+                  <td>{favourites.product && favourites.product.goods_name}</td>
+                  <td>${favourites.product && favourites.product.goods_price}</td>
+                  <td>
+                    <LinkContainer to={`/goods/${favourites.product && favourites.product._id}`}>
+                      <Button className='btn-sm' variant='light'>
+                        Details
+                      </Button>
+                    </LinkContainer>
+                    <Button
+                      variant='danger'
+                      className='btn-sm'
+                      onClick={() => deleteHandler(favourites.product && favourites.product._id)}
+                    >
+                      <i className='fas fa-trash'>Delete</i>
+                    </Button>
                   </td>
                 </tr>
               ))}

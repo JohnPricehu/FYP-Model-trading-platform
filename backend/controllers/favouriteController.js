@@ -26,7 +26,9 @@ const addToFavourite = asyncHandler(async (req, res) => {
 // @route GET api/orders/myorders
 // @access  Private
 const getMyFavourite = asyncHandler(async (req, res) => {
-  const favourites = await Favourite.find({ user: req.user._id })
+  const favourites = await Favourite.find({ user: req.user._id }).populate(
+    'product'
+  )
   res.json(favourites)
 })
 

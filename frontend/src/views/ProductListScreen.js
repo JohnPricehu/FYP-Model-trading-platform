@@ -9,7 +9,6 @@ import Paginate from '../components/Paginate'
 import {
   listGoods,
   deleteGoodsAction,
-  createGoodsAction,
 } from '../actions/goodsActions'
 import { GOODS_CREATE_RESET } from '../constants/goodsConstants'
 // import { app } from '../base'

@@ -39,7 +39,6 @@ app.use(express.json()); // to accept json data
 // app.use(passport.initialize())
 // app.use(passport.session())
 
-// app.use("/api/notes", noteRoutes);
 app.use("/api/goods", goodsRoutes);
 app.use("/api/users", userRoutes);
 app.use('/api/orders', orderRoutes)

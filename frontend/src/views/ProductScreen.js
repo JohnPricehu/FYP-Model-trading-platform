@@ -19,6 +19,9 @@ import {
   listGoodsDetails,
   createGoodsReview,
 } from '../actions/goodsActions'
+import {
+  addToFavouriteAction
+} from '../actions/favouriteActions'
 import { GOODS_CREATE_REVIEW_RESET } from '../constants/goodsConstants'
 
 const ProductScreen = ({ history, match }) => {
@@ -28,8 +31,15 @@ const ProductScreen = ({ history, match }) => {
 
   const dispatch = useDispatch()
 
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
   const listDetails = useSelector((state) => state.goodsDetails)
   const { loading, good, error } = listDetails
+
+  const addFavourite = useSelector((state) => state.addFavourite);
+  const { success: successadd,
+    error: erroradd, } = addFavourite;
 
   const productReviewCreate = useSelector((state) => state.goodsReviewCreate)
   const {
@@ -37,8 +47,6 @@ const ProductScreen = ({ history, match }) => {
     error: errorProductReview,
   } = productReviewCreate
 
-  const userLogin = useSelector((state) => state.userLogin)
-  const { userInfo } = userLogin
 
   useEffect(() => {
     if (successProductReview) {
@@ -47,18 +55,26 @@ const ProductScreen = ({ history, match }) => {
       setComment('')
       dispatch({ type: GOODS_CREATE_REVIEW_RESET })
     }
+    if (successadd){
+      alert('Add Favourites successfully!')
+    }
     dispatch(listGoodsDetails(match.params.id))
-  }, [dispatch, match.params.id, 
-    successProductReview
+    
+  }, [dispatch, match.params.id,  
+    successProductReview,
+    successadd
   ])
 
   const addToCartHandler = () => {
     history.push(`/cart/${match.params.id}/?qty=${qty}`)
   }
-
+  const addToFavouriteHandler = async (id, user) => {
+      dispatch(addToFavouriteAction(id,user))
+  }
   const submitHandler = (e) => {
     e.preventDefault()
     dispatch(createGoodsReview(match.params.id, { rating, comment }))
+    // dispatch(addToFavouriteAction(match.params.id))
   }
   // console.log(good.reviews.length);
   return (
@@ -152,26 +168,15 @@ const ProductScreen = ({ history, match }) => {
                   
                   <ListGroup.Item>
                       {!userInfo ?(
-                    //   <Button
-                    //   onClick={'/login'}
-                    //   // link={}
-                    //   className='btn-block'
-                    //   style={{
-                    //     backgroundColor: 'rgb(63 57 63)',
-                    //   }}
-                    //   type='button'
-                    //   disabled={good.countInStock === 0}
-                    // >
-                    //   Go to login
-                    // </Button>
                     <ErrorMessage>
                       Please <Link to='/login'>login</Link> to buy the goods{' '}
                     </ErrorMessage>
                     ):
                     (good.goods_category === 'special' ? (
                       userInfo && !userInfo.isMember ? (
+                        
                         <Button
-                      // onClick={}
+
                       className='btn-block'
                       style={{
                         backgroundColor: 'rgb(63 57 63)',
@@ -180,8 +185,10 @@ const ProductScreen = ({ history, match }) => {
                       disabled={good.countInStock === 0}
                     >
                       Be a prime member
-                    </Button>
+                    </Button>                    
+                                       
                     ):(
+                      <>
                       <Button
                     onClick={addToCartHandler}
                     className='btn-block'
@@ -193,7 +200,20 @@ const ProductScreen = ({ history, match }) => {
                   >
                     Add To Cart
                   </Button>
+
+                  <Button
+                        onClick={() => addToFavouriteHandler(good._id,userInfo._id)}
+                        className='btn-block'
+                        style={{
+                          backgroundColor: 'rgb(63 57 63)',
+                        }}
+                        type='button'
+                      >
+                        Add To Favourite
+                      </Button>
+                      </>
                       )):(
+                        <>
                         <Button
                       onClick={addToCartHandler}
                       className='btn-block'
@@ -205,10 +225,24 @@ const ProductScreen = ({ history, match }) => {
                     >
                       Add To Cart
                     </Button>
-                      ))
+                    <Button
+                        onClick={() => addToFavouriteHandler(good._id,userInfo._id)}
+                        className='btn-block'
+                        style={{
+                          backgroundColor: 'rgb(63 57 63)',
+                        }}
+                        type='button'
+                      >
+                        Add To Favourite
+                      </Button>
+                    </>
+                      )
+                      
+                      )
                     }
                   
                   </ListGroup.Item>
+                  
                 </ListGroup>
               </Card>
             </Col>
