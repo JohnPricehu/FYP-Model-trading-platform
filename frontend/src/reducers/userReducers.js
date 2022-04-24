@@ -24,6 +24,10 @@ import {
     USER_LIST_SUCCESS,
     USER_LIST_FAIL,
     USER_LIST_RESET,
+    USER_PAY_REQUEST,
+    USER_PAY_SUCCESS,
+    USER_PAY_FAIL,
+    USER_PAY_RESET
   } from "../constants/userConstants";
   
   export const userLoginReducer = (state = {}, action) => {
@@ -133,4 +137,29 @@ import {
         return state
     }
   }
+
+  // eslint-disable-next-line no-unused-vars
+export const userPayReducer = (state = {}, action) => {
+  switch (action.type) {
+    case USER_PAY_REQUEST:
+      return {
+        loading: true,
+      }
+    case USER_PAY_SUCCESS:
+      return {
+        loading: false,
+        succes: true,
+      }
+    case USER_PAY_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      }
+
+    case USER_PAY_RESET:
+      return {}
+    default:
+      return state
+  }
+}
   

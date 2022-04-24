@@ -39,6 +39,8 @@ const ProfileScreen = React.lazy(() => import('./views/ProfileScreen'))
 const FavouriteScreen = React.lazy(() => import('./views/favourites'))
 const WantedScreen = React.lazy(() => import('./views/wanted'))
 const HistoryScreen = React.lazy(() => import('./views/history'))
+const PaymemberScreen = React.lazy(() => import('./views/paymember'))
+
 
 
 
@@ -76,6 +78,7 @@ const App = () => {
         <Route path='/favourite' component={FavouriteScreen} />
         <Route path='/wanted' component={WantedScreen} />
         <Route path='/history' component={HistoryScreen} />
+        <Route path='/paymember' component={PaymemberScreen} />
         <Route
                 path='/admin/productlist'
                 component={ProductListScreen}

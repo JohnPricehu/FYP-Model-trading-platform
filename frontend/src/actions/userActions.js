@@ -23,6 +23,10 @@ import {
     USER_DETAILS_FAIL,
     USER_DETAILS_REQUEST,
     USER_DETAILS_SUCCESS,
+    USER_PAY_REQUEST,
+    USER_PAY_SUCCESS,
+    USER_PAY_FAIL,
+    USER_PAY_RESET
   } from "../constants/userConstants";
   import axios from "axios";
   
@@ -237,4 +241,38 @@ import {
       })
     }
   }
-  
+  export const payMember= (user) => async (
+    dispatch,
+    getState
+  ) => {
+    try {
+      dispatch({
+        type: USER_PAY_REQUEST,
+      })
+      const {
+        userLogin: { userInfo },
+      } = getState()
+      const config = {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+      }
+      const { data } = await axios.put(
+        `/api/users/paymember`, user,
+        config
+      )
+      dispatch({
+        type: USER_PAY_SUCCESS,
+        payload: data,
+      })
+    } catch (error) {
+      dispatch({
+        type: USER_PAY_FAIL,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      })
+    }
+  }

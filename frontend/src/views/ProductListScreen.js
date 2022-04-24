@@ -30,14 +30,6 @@ const productListScreen = ({ history, match }) => {
     success: successDelete,
   } = goodDelete
 
-  // const goodsCreate = useSelector((state) => state.goodsCreate)
-  // const {
-  //   loading: loadingCreate,
-  //   error: errorCreate,
-  //   success: successCreate,
-  //   good: createdgood,
-  // } = goodsCreate
-
   const listDetails = useSelector((state) => state.goodsDetails)
   const { good } = listDetails
 
@@ -46,12 +38,7 @@ const productListScreen = ({ history, match }) => {
     if (!userInfo.isAdmin) {
       history.push('/login')
     }
-
-    // if (successCreate) {
-    //   history.push(`/admin/good/${createdgood._id}/edit`)
-    // } else {
       dispatch(listGoods('', pageNumber))
-    // }
   }, [
     dispatch,
     history,
@@ -64,20 +51,9 @@ const productListScreen = ({ history, match }) => {
 
   const deleteHandler = async (id) => {
     if (window.confirm('Are you sure ?')) {
-      // const storageRef = app
-      //   .storage()
-      //   .ref()
-      //   .child(good.goods_pic)
-      //   .name.split('?')
-      // const imageName = storageRef[0]
-      // await app.storage().ref().child(imageName).delete()
       dispatch(deleteGoodsAction(id))
     }
   }
-
-  // const creategoodHandler = () => {
-  //   dispatch(createGoodsAction())
-  // }
 
   return (
     <>

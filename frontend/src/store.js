@@ -9,6 +9,7 @@ import {
   userListReducer,
   userDeleteReducer,
   userUpdateReducer,
+  userPayReducer
 } from "./reducers/userReducers";
 import { cartReducer } from './reducers/cartReducer';
 import {
@@ -82,7 +83,8 @@ const reducer = combineReducers({
   deleteWanted:deleteWantedReducer,
   myWanted:myWantedReducer,
   addHistory:addHistoryReducer,
-  myHistory:myHistoryReducer
+  myHistory:myHistoryReducer,
+  userPay:userPayReducer
   
 });
 
