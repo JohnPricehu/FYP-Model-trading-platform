@@ -38,6 +38,15 @@ import {
   deleteFavouriteReducer,
   myFavouriteReducer
 } from './reducers/favouriteReducers'
+import {
+  addWantedReducer,
+  deleteWantedReducer,
+  myWantedReducer
+} from './reducers/wantedReducers'
+import {
+  addHistoryReducer,
+  myHistoryReducer
+} from './reducers/historyReducers'
 
 const reducer = combineReducers({
   userLogin: userLoginReducer,
@@ -68,7 +77,13 @@ const reducer = combineReducers({
   delettOrder: orderDeleteReducer,
   addFavourite:addFavouriteReducer,
   deleteFavourite:deleteFavouriteReducer,
-  myFavourite:myFavouriteReducer
+  myFavourite:myFavouriteReducer,
+  addWanted:addWantedReducer,
+  deleteWanted:deleteWantedReducer,
+  myWanted:myWantedReducer,
+  addHistory:addHistoryReducer,
+  myHistory:myHistoryReducer
+  
 });
 
 const userInfoFromStorage = localStorage.getItem("userInfo")

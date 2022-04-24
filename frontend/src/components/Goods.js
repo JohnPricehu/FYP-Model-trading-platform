@@ -1,9 +1,30 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 // import Rating from './Rating'
+import { useDispatch, useSelector } from 'react-redux'
 import { Card } from 'react-bootstrap'
 // import User from '../../../backend/models/userModel.js'
+import {
+  addToHistoryAction
+} from '../actions/historyActions'
+
+
+
 const Goods = ({ goods }) => {
+
+  const dispatch = useDispatch()
+
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
+  const addHistory = useSelector((state) => state.addHistory);
+  const { success: successaddhistory,
+    error: erroraddhistory } = addHistory;
+
+  const addToHistoryHandler = async (id, user) => {
+    dispatch(addToHistoryAction(id,user))
+  }
+
   return (
     <Card
       className='my-3 rounded'
@@ -16,7 +37,9 @@ const Goods = ({ goods }) => {
         borderRadius: '10px',
       }}
     >
-      <Link to={`/goods/${goods._id}`} >
+      <Link to={`/goods/${goods._id}`} 
+      onClick={() => addToHistoryHandler(goods._id,userInfo._id)}
+      >
         <Card.Img
           src={goods.goods_pic}
           variant='top'
@@ -27,7 +50,9 @@ const Goods = ({ goods }) => {
       </Link>
 
       <Card.Body>
-        <Link to={`/goods/${goods._id}`}>
+        <Link to={`/goods/${goods._id}`}
+        onClick={() => addToHistoryHandler(goods._id,userInfo._id)}
+        >
           <Card.Title as='div'>
             <strong style={{ color: 'black' }}>{goods.goods_name}</strong>
           </Card.Title>

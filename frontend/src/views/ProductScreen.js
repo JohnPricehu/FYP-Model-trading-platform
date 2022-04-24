@@ -22,6 +22,9 @@ import {
 import {
   addToFavouriteAction
 } from '../actions/favouriteActions'
+import {
+  addToWantedAction
+} from '../actions/wantedActions'
 import { GOODS_CREATE_REVIEW_RESET } from '../constants/goodsConstants'
 
 const ProductScreen = ({ history, match }) => {
@@ -41,6 +44,10 @@ const ProductScreen = ({ history, match }) => {
   const { success: successadd,
     error: erroradd, } = addFavourite;
 
+    const addWanted = useSelector((state) => state.addWanted);
+    const { success: successaddwanted,
+      error: erroraddwanted, } = addWanted;
+
   const productReviewCreate = useSelector((state) => state.goodsReviewCreate)
   const {
     success: successProductReview,
@@ -58,11 +65,15 @@ const ProductScreen = ({ history, match }) => {
     if (successadd){
       alert('Add Favourites successfully!')
     }
+    if (successaddwanted){
+      alert('Add Wanted successfully!')
+    }
     dispatch(listGoodsDetails(match.params.id))
     
   }, [dispatch, match.params.id,  
     successProductReview,
-    successadd
+    successadd,
+    successaddwanted
   ])
 
   const addToCartHandler = () => {
@@ -71,6 +82,10 @@ const ProductScreen = ({ history, match }) => {
   const addToFavouriteHandler = async (id, user) => {
       dispatch(addToFavouriteAction(id,user))
   }
+
+  const addToWantedHandler = async (id, user) => {
+    dispatch(addToWantedAction(id,user))
+}
   const submitHandler = (e) => {
     e.preventDefault()
     dispatch(createGoodsReview(match.params.id, { rating, comment }))
@@ -173,10 +188,8 @@ const ProductScreen = ({ history, match }) => {
                     </ErrorMessage>
                     ):
                     (good.goods_category === 'special' ? (
-                      userInfo && !userInfo.isMember ? (
-                        
+                      userInfo && !userInfo.isMember ? (                       
                         <Button
-
                       className='btn-block'
                       style={{
                         backgroundColor: 'rgb(63 57 63)',
@@ -185,9 +198,9 @@ const ProductScreen = ({ history, match }) => {
                       disabled={good.countInStock === 0}
                     >
                       Be a prime member
-                    </Button>                    
-                                       
+                    </Button>                                                           
                     ):(
+
                       <>
                       <Button
                     onClick={addToCartHandler}
@@ -200,7 +213,6 @@ const ProductScreen = ({ history, match }) => {
                   >
                     Add To Cart
                   </Button>
-
                   <Button
                         onClick={() => addToFavouriteHandler(good._id,userInfo._id)}
                         className='btn-block'
@@ -210,6 +222,16 @@ const ProductScreen = ({ history, match }) => {
                         type='button'
                       >
                         Add To Favourite
+                      </Button>
+                      <Button
+                        onClick={() => addToWantedHandler(good._id,userInfo._id)}
+                        className='btn-block'
+                        style={{
+                          backgroundColor: 'rgb(63 57 63)',
+                        }}
+                        type='button'
+                      >
+                        Add To Wanted
                       </Button>
                       </>
                       )):(
@@ -234,6 +256,16 @@ const ProductScreen = ({ history, match }) => {
                         type='button'
                       >
                         Add To Favourite
+                      </Button>
+                      <Button
+                        onClick={() => addToWantedHandler(good._id,userInfo._id)}
+                        className='btn-block'
+                        style={{
+                          backgroundColor: 'rgb(63 57 63)',
+                        }}
+                        type='button'
+                      >
+                        Add To Wanted
                       </Button>
                     </>
                       )
