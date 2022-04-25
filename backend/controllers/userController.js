@@ -1,6 +1,7 @@
 import asyncHandler from "express-async-handler";
 import User from "../models/userModel.js";
 import generateToken from "../utils/generateToken.js";
+import {sendEmail} from '../sendEmail.js'
 
 //@description     Auth the user
 //@route           POST /api/users/login
@@ -171,7 +172,8 @@ const payMembership = asyncHandler(async (req, res) => {
     user.wallet = user.wallet - 10
     user.isMember = true
     const updatedUser =await user.save()
-    res.json(updatedUser)   
+    res.json(updatedUser)
+    const result = sendEmail(user.email,"Payment Attention","You are now a member, go and enjoy the privileges")   
     }else{
     res.status(404)
     throw new Error('Payment Failed! Check you wallet!')

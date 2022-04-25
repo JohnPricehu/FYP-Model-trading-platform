@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Form, Button, Row, Col, Table } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
-// import Message from '../components/Message'
-// import Loader from '../components/Loader'
+import { Link } from 'react-router-dom'
 import Loading from "../components/Loading";
 import ErrorMessage from "../components/ErrorMessage";
 import { updateProfile} from '../actions/userActions'
@@ -71,7 +70,9 @@ const ProfileScreen = ({ location, history }) => {
   return (
     <Row className='my-5'>
       <Col md={3}>
-        <h2>User Profile</h2>
+        <h2>User Profile</h2>        
+        {userInfo && ! userInfo.isMember && <ErrorMessage>You are not a <Link to='/paymember'>member</Link> yet, hurry up and buy to enjoy more power!{' '}</ErrorMessage>}
+        {userInfo && userInfo.isMember && <ErrorMessage variant='success'>Dear member, enjoy this system</ErrorMessage>}
         {message && <ErrorMessage variant='danger'>{message}</ErrorMessage>}
         {error && <ErrorMessage variant='danger'>{error}</ErrorMessage>}
         {success && <ErrorMessage variant='success'>Profile Updated!</ErrorMessage>}

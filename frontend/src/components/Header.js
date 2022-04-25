@@ -14,17 +14,21 @@ import {} from "react-router-dom";
 import { logout } from "../actions/userActions";
 import SearchBox from './SearchBox'
 import MemberSearchBox from './memberSearchBox'
+import { useHistory } from "react-router-dom";
 
-function Header(
-  // { setSearch }
-  ) {
+const Header= (
+  // {history}
+  ) => {
+
   const dispatch = useDispatch();
-
+  let history = useHistory();
+  
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
 
   const logoutHandler = () => {
     dispatch(logout());
+    history.push('/');
   };
 
   useEffect(() => {}, [userInfo]);
