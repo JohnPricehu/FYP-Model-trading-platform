@@ -3,13 +3,10 @@ import { Form, Button, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import FormContainer from '../components/FormContainer'
 import CheckOutSteps from '../components/CheckOutSteps'
-// import { savePaymentMethod } from '../actions/cartAction'
 import { payMember } from '../actions/userActions'
 
 
 const PaymemberScreen = ({ history }) => {
-
-//   const [paymentMethod, setPaymentMethod] = useState('Credit')
 
   const dispatch = useDispatch()
 

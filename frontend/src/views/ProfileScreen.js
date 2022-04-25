@@ -13,6 +13,8 @@ const ProfileScreen = ({ location, history }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState("");
+  const [isAdmin, setIsAdmin] = useState();
+  const [isMember, setIsMember] = useState();
 
   // const [password, setPassword] = useState('')
   // const [confirmPassword, setConfirmPassword] = useState('')
@@ -47,7 +49,8 @@ const ProfileScreen = ({ location, history }) => {
         setName(userInfo.name)
         setEmail(userInfo.email)
         setPhone(userInfo.phone)
-        dispatch(listMyOrders())
+        setIsAdmin(userInfo.isAdmin)
+        setIsMember(userInfo.isMember)
         dispatch(listMyGoods())
       // }
     }
@@ -60,7 +63,7 @@ const ProfileScreen = ({ location, history }) => {
     // } else {
       dispatch(updateProfile({ 
         // id: user._id,
-        name, email, phone
+        name, email, phone, isAdmin,isMember
         // password
        }
        ))

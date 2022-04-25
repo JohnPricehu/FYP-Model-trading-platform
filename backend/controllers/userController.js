@@ -153,7 +153,6 @@ const updateUser = asyncHandler(async (req, res) => {
       name: updatedUser.name,
       email: updatedUser.email,
       phone: updatedUser.phone,
-      // address: updatedUser.address,
       isAdmin: updatedUser.isAdmin,
       isMember: updatedUser.isMember,
       wallet: updatedUser.wallet,
