@@ -2,6 +2,7 @@ import asyncHandler from 'express-async-handler'
 import Order from '../models/orderModel.js'
 import Goods from '../models/goodsModel.js'
 import User from '../models/userModel.js'
+import {sendEmail} from '../sendEmail.js'
 
 // @desc  create new order
 // @route POST api/orders
@@ -60,25 +61,7 @@ const getOrderById = asyncHandler(async (req, res) => {
 // @access  Private
 const updateOrderToPaid = asyncHandler(async (req, res) => {
   const order = await Order.findById(req.params.id)
-  // .populate(
-  //   'product',
-  //   'countInStock sales'
-  // )
-  for (let i = 0;i < order.orderItems.length;i++){
-    const good = await Goods.findById(order.orderItems[i].product)
-    good.countInStock =  good.countInStock - order.orderItems[i].qty
-    good.sales = good.sales + order.orderItems[i].qty
-    // const buyer = await Goods.find({ buyers.user: req.user._id })
-    const buyer = {
-      user: req.user._id,
-    }
-    good.buyers.push(buyer)
-    await good.save()
-    // res.json(good)
-    // return good;
-  }
-  const user = await User.findById(order.user)
-
+  const user = await User.findById(order.user)  
   if (order) {
     if(user.wallet >= order.totalPrice ){
     user.wallet = user.wallet - order.totalPrice
@@ -93,6 +76,15 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
     }
     const updatedOrder = await order.save()
     res.json(updatedOrder)
+    const result = sendEmail(user.email,"Transaction Record","Your Order "+order._id+" has been processed. "+" You have paid"+order.totalPrice+" ."
+    )
+    if(result === 0) {
+    console.log('邮件发送失败')
+    }
+    else if(result === 1) {
+    console.log('邮件发送成功')
+  }
+
     }else {
       res.status(404)
       throw new Error('Payment Failed')
@@ -101,7 +93,32 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
     res.status(404)
     throw new Error('Order not found! ')
   }
+  for (let i = 0;i < order.orderItems.length;i++){
+    const good = await Goods.findById(order.orderItems[i].product)
+    good.countInStock =  good.countInStock - order.orderItems[i].qty
+    good.sales = good.sales + order.orderItems[i].qty
+    // const buyer = await Goods.find({ buyers.user: req.user._id })
+    const buyer = {
+      user: req.user._id,
+    }
+    good.buyers.push(buyer)
+    await good.save()
+    const owner = await User.findById(good.owner)
+  const result = sendEmail(owner.email,"Transaction Record","Your Model"+good.goods_name+"solded "
+  +order.orderItems[i].qty
+  )
+  if(result === 0) {
+  console.log('邮件发送失败')
+  }
+  else if(result === 1) {
+  console.log('邮件发送成功')
+}
+    // res.json(good)
+    // return good;
+  }
+
 })
+
 
 // @desc  Update order to delivered
 // @route GET api/orders/:id/delivered

@@ -15,13 +15,15 @@ const LoginScreen = ({ location, history }) => {
   const userLogin = useSelector((state) => state.userLogin)
   const { loading, error, userInfo } = userLogin
 
-  const redirect = location.search ? location.search.split('=')[1] : '/'
+  // const redirect = location.search ? location.search.split('=')[1] : '/'
 
   useEffect(() => {
     if (userInfo) {
-      history.push(redirect)
+      history.push("/")
     }
-  }, [history, userInfo, redirect])
+  }, [history, userInfo, 
+    // redirect
+  ])
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -61,7 +63,9 @@ const LoginScreen = ({ location, history }) => {
       <Row className='py-3'>
         <Col>
           New Customer?{' '}
-          <Link to={redirect ? `/register?redirect=${redirect}` : '/register'}>
+          <Link to='/register'
+          // {redirect ? `/register?redirect=${redirect}` : '/register'}
+          >
             Register
           </Link>
         </Col>

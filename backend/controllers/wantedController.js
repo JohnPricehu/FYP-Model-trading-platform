@@ -1,5 +1,6 @@
 import asyncHandler from 'express-async-handler'
 import Wanted from '../models/wantedModel.js'
+import Goods  from '../models/goodsModel.js'
 
 // @desc  create new order
 // @route POST api/orders
@@ -18,7 +19,20 @@ const addToWanted = asyncHandler(async (req, res) => {
 
     const createdWanted = await wanted.save()
     res.status(201).json(createdWanted)
-  
+    const good = await Goods.findById(req.params.id)
+    const alreadyaddedd = await good.likers.find(
+      (r) => r.user.toString() === req.user._id.toString()
+    )
+    if(alreadyaddedd){
+      res.status(400)
+      throw new Error('liker already reviewed')
+    }else{
+    const wanter = {
+      user: req.user._id,
+    }
+    good.wanters.push(wanter)
+    await good.save()
+  }
 })
 
 // @desc  Get logged in user orders

@@ -1,5 +1,7 @@
 import Goods from "../models/goodsModel.js";
 import asyncHandler from "express-async-handler";
+import {sendEmail} from '../sendEmail.js'
+import User from "../models/userModel.js";
 
 // @desc    Get logged in user notes
 // @route   GET /api/goods
@@ -75,28 +77,46 @@ const getTopGoods = asyncHandler(async (req, res) => {
 // @access  Private/Admin
 const updateGoods = asyncHandler(async (req, res) => {
   const {
-    name,
-    price,
-    description,
-    imageURL,
-    // brand,
-    category,
+    // name,
+    // price,
+    // description,
+    // imageURL,
+    // category,
+    // countInStock,
+    goods_name,
+    goods_price,
+    goods_pic,
+    goods_category,
+    goods_details,
     countInStock,
   } = req.body
 
   const product = await Goods.findById(req.params.id)
 
   if (product) {
-    product.goods_name = name
-    product.goods_price = price
-    product.goods_details = description
-    product.goods_pic = imageURL
-    // product.brand = brand
-    product.category = category
+    product.goods_name = goods_name
+    product.goods_price = goods_price
+    product.goods_details = goods_details
+    product.goods_pic = goods_pic
+    product.category = goods_category
     product.countInStock = countInStock
 
     const updatedProduct = await product.save()
     res.json(updatedProduct)
+    for (let i = 0;i < product.likers.length;i++){
+      const user = await User.findById( product.likers[i].user)
+    const result = sendEmail(user.email,"Attention","Your favourite "+updatedProduct.goods_name+" has been updated. Hurry up to check it!"
+    )
+  }
+    
+
+    for (let i = 0;i < product.wanters.length;i++){
+    const user = await User.findById( product.wanters[i].user)
+    const result = sendEmail(user.email,"Attention","Your wanted "+updatedProduct.goods_name+" has been updated. Hurry up to check it!"
+    )
+  }
+    
+
   } else {
     res.status(404)
     throw new Error('Product not found')
@@ -130,7 +150,7 @@ const createdProductReview = asyncHandler(async (req, res) => {
   // )
 
   if (product) {
-    const alreadyReviewed = product.reviews.find(
+    const alreadyReviewed = await product.reviews.find(
       (r) => r.user.toString() === req.user._id.toString()
     )
   const buyer = await product.buyers.find(

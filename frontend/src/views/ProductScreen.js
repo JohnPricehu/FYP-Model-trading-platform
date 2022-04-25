@@ -62,9 +62,9 @@ const ProductScreen = ({ history, match }) => {
       setComment('')
       dispatch({ type: GOODS_CREATE_REVIEW_RESET })
     }
-    if (successadd){
-      alert('Add Favourites successfully!')
-    }
+    // if (successadd){
+    //   alert('Add Favourites successfully!')
+    // }
     // if (successaddwanted){
     //   alert('Add Wanted successfully!')
     // }

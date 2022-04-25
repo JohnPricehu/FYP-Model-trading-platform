@@ -77,9 +77,9 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
     user.phone = req.body.phone || user.phone;
-    // user.address = req.body.address || user.address;
-    
-    // user.pic = req.body.pic || user.pic;
+    user.wallet = req.body.wallet || user.wallet;
+    user.isAdmin = req.body.isAdmin ;
+    user.isMember = req.body.isMember ;
     if (req.body.password) {
       user.password = req.body.password;
     }
@@ -91,8 +91,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
       name: updatedUser.name,
       email: updatedUser.email,
       phone: updatedUser.phone,
-      // address: updatedUser.address,
-      // pic: updatedUser.pic,
+      wallet: updatedUser.wallet,
       isAdmin: updatedUser.isAdmin,
       isMember: updatedUser.isMember,
       token: generateToken(updatedUser._id),
@@ -144,9 +143,8 @@ const updateUser = asyncHandler(async (req, res) => {
     user.name = req.body.name || user.name;
     user.email = req.body.email || user.email;
     user.phone = req.body.phone || user.phone;
-    // user.address = req.body.address || user.address;
-    user.isAdmin = req.body.isAdmin || user.isAdmin;
-    user.isMember = req.body.isMember || user.isMember;
+    user.isAdmin = req.body.isAdmin 
+    user.isMember = req.body.isMember 
     user.wallet = req.body.wallet || user.wallet;
     const updatedUser = await user.save()
     res.json({

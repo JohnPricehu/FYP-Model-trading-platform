@@ -1,5 +1,6 @@
 import asyncHandler from 'express-async-handler'
 import Favourite from '../models/favouriteModel.js'
+import Goods  from '../models/goodsModel.js'
 
 // @desc  create new order
 // @route POST api/orders
@@ -15,10 +16,25 @@ const addToFavourite = asyncHandler(async (req, res) => {
       user: req.user._id,
       product:req.params.id,
     })
-
+    
     const createdfavourite = await favourite.save()
     res.status(201).json(createdfavourite)
-  
+    const good = await Goods.findById(req.params.id)
+    const alreadyaddedd = await good.likers.find(
+      (r) => r.user.toString() === req.user._id.toString()
+    )
+    if(alreadyaddedd){
+      res.status(400)
+      throw new Error('liker already reviewed')
+    }else{
+      const liker = {
+        user: req.user._id,
+      }
+      good.likers.push(liker)
+      await good.save() }
+
+
+
 })
 
 
@@ -40,11 +56,23 @@ const deleteFavouriteGoods = asyncHandler(async (req, res) => {
   const favourite = await Favourite.find({product: req.params.id}, { user: req.user._id })
   if (favourite) {
     await Favourite.deleteMany({product: req.params.id}, { user: req.user._id })
+    // const good = await Goods.findById(req.params.id)
+    
+    // db.collection.update({_id: ObjectId( "4f8dcb06ee21783d7400003c" )}, 
+    //                  {$pull: {attendees: {_id: ObjectId( "4f8dfb06ee21783d7134503a" )}}})
+    // // const liker = await good.buyers.find(
+    // //   (r) => r.user.toString() === req.user._id.toString()
+    // // )
+    // good.likers.deleteOne({user : req.user._id})
+  // const good =  
+  // await Goods.updateMany({"_id": req.params.id}, {$pull: {likers:[ {user: req.user._id} ]  } });
+  // await good.save()
     res.json({ message: 'Favourite goods removed' })
   } else {
     res.status(404)
     throw new Error('Favourite goods not found')
   }
+
 })
 
 const cleanFavourite = asyncHandler(async (req, res) => {

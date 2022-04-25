@@ -30,6 +30,32 @@ const buyerSchema = mongoose.Schema(
   }
 )
 
+const likerSchema = mongoose.Schema(
+  {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'User',
+    },
+  },
+  {
+    timestamps: true,
+  }
+)
+
+const wanterSchema = mongoose.Schema(
+  {
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: 'User',
+    },
+  },
+  {
+    timestamps: true,
+  }
+)
+
 const goodsSchema = mongoose.Schema(
   {
     // goods_id: {
@@ -67,7 +93,13 @@ const goodsSchema = mongoose.Schema(
       default: 0,
     },
     buyers:[
-      buyerSchema
+    buyerSchema
+  ],
+    likers:[
+    likerSchema
+  ],
+    wanters:[
+    wanterSchema
   ],
     countInStock: {
       type: Number,

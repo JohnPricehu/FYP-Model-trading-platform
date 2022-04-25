@@ -11,7 +11,6 @@ import { GOODS_UPDATE_RESET } from '../constants/goodsConstants'
 
 const ProductEditScreen = ({ match, history }) => {
   const productId = match.params.id
-
   const [goods_name, setName] = useState('')
   const [goods_price, setPrice] = useState(0)
   // const [image, setImage] = useState('')
@@ -34,14 +33,6 @@ const ProductEditScreen = ({ match, history }) => {
     error: errorUpdate,
     success: successUpdate,
   } = goodsUpdate
-
-  // const onFileChange = async (e) => {
-  //   const file = e.target.files[0]
-  //   const storageRef = app.storage().ref()
-  //   const fileRef = storageRef.child(file.name)
-  //   await fileRef.put(file)
-  //   setImageURL(await fileRef.getDownloadURL())
-  // }
 
   const postDetails = (pics) => {
     if (
@@ -83,7 +74,6 @@ const ProductEditScreen = ({ match, history }) => {
         setName(good.goods_name)
         setPrice(good.goods_price)
         setGoods_pic(good.goods_pic)
-        // setBrand(product.brand)
         setCategory(good.goods_category)
         setCountInStock(good.countInStock)
         setDescription(good.goods_details)
@@ -99,7 +89,6 @@ const ProductEditScreen = ({ match, history }) => {
         goods_name,
         goods_price,
         goods_pic,
-        // brand,
         goods_category,
         goods_details,
         countInStock,
@@ -160,16 +149,6 @@ const ProductEditScreen = ({ match, history }) => {
                 <img height='100' width='100' src={goods_pic} alt={goods_name} />
               )}
             </Form.Group>
-
-            {/* <Form.Group controlId='brand'>
-              <Form.Label>Brand</Form.Label>
-              <Form.Control
-                type='text'
-                placeholder='Enter brand'
-                value={brand}
-                onChange={(e) => setBrand(e.target.value)}
-              ></Form.Control>
-            </Form.Group> */}
 
             <Form.Group controlId='countInStock'>
               <Form.Label>Count In Stock</Form.Label>
