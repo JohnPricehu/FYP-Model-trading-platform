@@ -26,6 +26,9 @@ function CreateGoods({ history }) {
   const goodsCreate = useSelector((state) => state.goodsCreate);
   const { loading, error, goods } = goodsCreate;
 
+  const userLogin = useSelector((state) => state.userLogin)
+  const { userInfo } = userLogin
+
   const resetHandler = () => {
     setGoods_name("");
     setGoods_details("");
@@ -91,17 +94,15 @@ function CreateGoods({ history }) {
 
   return (
           <Form onSubmit={submitHandler}>
-            {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
-
       <div className={styles['container']}>
       <Helmet>
-        <title>sellGoodsPage - FYP</title>
+        <title>Sell</title>
         <meta property="og:title" content="sellGoodsPage - FYP" />
       </Helmet>
       <input                    
         id={goods_pic}
         type="file"
-        label="Upload Profile Picture"
+        label="Upload Model Picture"
         custom
         accept="image/*"
         // placeholder="Upload Profile Picture"
@@ -113,7 +114,7 @@ function CreateGoods({ history }) {
         src={goods_pic}
         className={styles['image']}
       />
-      <span className={styles['text']}>goods name:</span>
+      <span className={styles['text']}>Model name:</span>
       <input
         type="text"
         value={goods_name}
@@ -121,7 +122,7 @@ function CreateGoods({ history }) {
         onChange={(e) => setGoods_name(e.target.value)}
         className={` ${styles['textinput1']} ${projectStyles['input']} `}
       />
-      <span className={styles['text1']}>goods price:</span>
+      <span className={styles['text1']}>Model price:</span>
       <input
         type="text"
         value={goods_price}
@@ -129,15 +130,23 @@ function CreateGoods({ history }) {
         onChange={(e) => setGoods_price(e.target.value)}
         className={` ${styles['textinput2']} ${projectStyles['input']} `}
       />
-      <span className={styles['text2']}>goods category:</span>
+      <span className={styles['text2']}>Model category:</span>
       <input
-        type="content"
+        type="text"
+        list="categorylist"
         value={goods_category}
-        placeholder="Enter the Category"
+        placeholder="Select the  Model Category"
         onChange={(e) => setGoods_category(e.target.value)}
         className={` ${styles['textinput3']} ${projectStyles['input']} `}
       />
-      <span className={styles['text5']}>goods count:</span>
+      <datalist id="categorylist">
+          <option>Ultraman</option>
+          <option>Gundam</option>
+          <option>Marvel</option>
+　　      <option>Other</option>
+          {userInfo.isAdmin && <option>Special</option>}
+      </datalist>
+      <span className={styles['text5']}>Model count:</span>
       <input
         type="text"
         value={countInStock}
@@ -145,7 +154,7 @@ function CreateGoods({ history }) {
         onChange={(e) => setCountInStock(e.target.value)}
         className={` ${styles['textinput4']} ${projectStyles['input']} `}
       />
-      <span className={styles['text3']}>goods details:</span>
+      <span className={styles['text3']}>Model details:</span>
       <textarea
         value={goods_details}
         placeholder="Enter the goods more details"
@@ -166,7 +175,7 @@ function CreateGoods({ history }) {
             {loading && <Loading size={50} />}
       <button className={` ${styles['button']} ${projectStyles['button']} `}
       type="submit" variant="primary">
-          Add a new goods
+          Add a new model
       </button>
       <button className={` ${styles['button1']} ${projectStyles['button']} `}
       onClick={resetHandler} variant="danger">
@@ -175,6 +184,7 @@ function CreateGoods({ history }) {
       <span className={styles['text4']}>
         Creating on - {new Date().toLocaleDateString()}
       </span>
+      {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
     </div>
     </Form>
   );

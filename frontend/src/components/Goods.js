@@ -17,9 +17,11 @@ const Goods = ({ goods }) => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
-  const addHistory = useSelector((state) => state.addHistory);
-  const { success: successaddhistory,
-    error: erroraddhistory } = addHistory;
+  // const addHistory = useSelector((state) => state.addHistory);
+  // const { 
+  //   success: successaddhistory,
+  //   error: erroraddhistory 
+  // } = addHistory;
 
   const addToHistoryHandler = async (id, user) => {
     dispatch(addToHistoryAction(id,user))

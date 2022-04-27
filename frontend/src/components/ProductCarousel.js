@@ -7,7 +7,7 @@ import ErrorMessage from "./ErrorMessage";
 import { listTopGoods } from '../actions/goodsActions'
 
 
-const ProductCarousel = ({}) => {
+const ProductCarousel = () => {
   const dispatch = useDispatch()
 
   const goodsTopRated = useSelector((state) => state.goodsTopRated)

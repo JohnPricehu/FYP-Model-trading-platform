@@ -7,7 +7,7 @@ import Loading from "../components/Loading";
 import ErrorMessage from "../components/ErrorMessage";
 import Paginate from '../components/Paginate'
 import {
-  listGoods,
+  listAllGoods,
   deleteGoodsAction,
 } from '../actions/goodsActions'
 import { GOODS_CREATE_RESET } from '../constants/goodsConstants'
@@ -17,7 +17,7 @@ const productListScreen = ({ history, match }) => {
   const pageNumber = match.params.pageNumber || 1
   const dispatch = useDispatch()
 
-  const goodsList = useSelector((state) => state.goodsList)
+  const goodsList = useSelector((state) => state.goodsListAll)
   const { loading, error, goods, page, pages } = goodsList
 
   const userLogin = useSelector((state) => state.userLogin)
@@ -38,14 +38,12 @@ const productListScreen = ({ history, match }) => {
     if (!userInfo.isAdmin) {
       history.push('/login')
     }
-      dispatch(listGoods('', pageNumber))
+      dispatch(listAllGoods('', pageNumber))
   }, [
     dispatch,
     history,
     userInfo,
     successDelete,
-    // successCreate,
-    // createdgood,
     pageNumber,
   ])
 
@@ -61,17 +59,9 @@ const productListScreen = ({ history, match }) => {
         <Col>
           <h1>Models List</h1>
         </Col>
-        {/* <Col className='text-right'>
-          <Button className='my-3' onClick={creategoodHandler}>
-            <i className='fas fa-plus'></i> Create good
-          </Button>
-        </Col> */}
       </Row>
       {loadingDelete && <Loading />}
-      {errorDelete && <ErrorMessage variant='danger'>{errorDelete}</ErrorMessage>}
-      {/* {loadingCreate && <Loading />}
-      {errorCreate && <ErrorMessage variant='danger'>{errorCreate}</ErrorMessage>} */}
-
+      {/* {errorDelete && <ErrorMessage variant='danger'>{errorDelete}</ErrorMessage>} */}
       {loading ? (
         <Loading />
       ) : error ? (
@@ -85,7 +75,6 @@ const productListScreen = ({ history, match }) => {
                 <th>Name</th>
                 <th>Price</th>
                 <th>Category</th>
-                {/* <th>BRAND</th> */}
                 <th>Count In Stock</th>
                 <th>Owner</th>
                 <th>Create Time</th>
@@ -107,7 +96,6 @@ const productListScreen = ({ history, match }) => {
                   <td>{good.goods_name}</td>
                   <td>${good.goods_price}</td>
                   <td>{good.goods_category}</td>
-                  {/* <td>{good.brand}</td> */}
                   <td>{good.countInStock}</td>
                   <td>{good.owner && good.owner.name}</td>
                   <td>{good.createdAt}</td>

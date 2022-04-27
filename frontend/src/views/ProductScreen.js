@@ -86,6 +86,7 @@ const ProductScreen = ({ history, match }) => {
   const addToWantedHandler = async (id, user) => {
     dispatch(addToWantedAction(id,user))
 }
+
   const submitHandler = (e) => {
     e.preventDefault()
     dispatch(createGoodsReview(match.params.id, { rating, comment }))
@@ -188,17 +189,21 @@ const ProductScreen = ({ history, match }) => {
                     </ErrorMessage>
                     ):
                     (good.goods_category === 'special' ? (
-                      userInfo && !userInfo.isMember ? (                       
-                        <Button
-                      className='btn-block'
-                      style={{
-                        backgroundColor: 'rgb(63 57 63)',
-                      }}
-                      type='button'
-                      disabled={good.countInStock === 0}
-                    >
-                      Be a prime member
-                    </Button>                                                           
+                      userInfo && !userInfo.isMember ? (
+                    <ErrorMessage>
+                      First you need to be a <Link to='/paymember'>member</Link> .{' '}
+                    </ErrorMessage>                       
+                    //     <Button
+                    //   className='btn-block'
+                    //   style={{
+                    //     backgroundColor: 'rgb(63 57 63)',
+                    //   }}
+                    //   type='button'
+                    //   disabled={good.countInStock === 0}
+                    //   onClick={() => gotobuymemberHandler()}
+                    // >
+                    //   Be a prime member
+                    // </Button>                                                           
                     ):(
                       good.countInStock > 0 ? (
                       <>
