@@ -2,6 +2,9 @@ import Goods from "../models/goodsModel.js";
 import asyncHandler from "express-async-handler";
 import {sendEmail} from '../sendEmail.js'
 import User from "../models/userModel.js";
+import History from '../models/HistoryModel.js'
+import Wanted from '../models/wantedModel.js'
+import Favourite from '../models/favouriteModel.js'
 
 // @desc    Get goods
 // @route   GET /api/goods
@@ -122,11 +125,19 @@ const updateGoods = asyncHandler(async (req, res) => {
     throw new Error('Product not found')
   }
 })
-
+// @desc  Delete good
+// @route DELETE /api/goods/:id
+// @access  Private/Admin
 const deleteGoods = asyncHandler(async (req, res) => {
   const goods = await Goods.findById(req.params.id)
   if (goods) {
     await goods.remove()
+    const history = await History.findOne({product : req.params.id})
+    await history.remove()
+    const wanted = await Wanted.findOne({product : req.params.id})
+    await wanted.remove()
+    const favourite = await Favourite.findOne({product : req.params.id})
+    await favourite.remove()
     res.json({ message: 'Goods removed' })
   } else {
     res.status(404)
