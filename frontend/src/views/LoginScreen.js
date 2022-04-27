@@ -37,11 +37,11 @@ const LoginScreen = ({ location, history }) => {
       {loading && <Loading />}
 
       <Form onSubmit={submitHandler}>
-        <Form.Group controlId='email'>
+        <Form.Group controlId='name'>
           <Form.Label>Username</Form.Label>
           <Form.Control
             type='text'
-            placeholder='Enter email'
+            placeholder='Enter username'
             value={name}
             onChange={(e) => setName(e.target.value)}
           ></Form.Control>
@@ -57,7 +57,7 @@ const LoginScreen = ({ location, history }) => {
           ></Form.Control>
         </Form.Group>
         <Button type='submit' variant='primary'>
-          Sign In
+          Login In
         </Button>
       </Form>
       <Row className='py-3'>
