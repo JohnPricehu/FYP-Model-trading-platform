@@ -1,8 +1,8 @@
 import asyncHandler from 'express-async-handler'
 import History from '../models/HistoryModel.js'
 
-// @desc  create new order
-// @route POST api/orders
+// @desc  create new history
+// @route POST api/historys
 // @access  Private
 const addToHistory = asyncHandler(async (req, res) => {
     const historyExists = await History.findOne({product: req.params.id}, { user: req.user._id })
@@ -19,8 +19,8 @@ const addToHistory = asyncHandler(async (req, res) => {
   
 })
 
-// @desc  Get logged in user orders
-// @route GET api/orders/myorders
+// @desc  Get logged in user historys
+// @route GET api/historys/myhistory
 // @access  Private
 const getMyHistory = asyncHandler(async (req, res) => {
     const history = await History.find({ user: req.user._id }).sort({'createdAt':-1}).populate(

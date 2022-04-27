@@ -7,6 +7,9 @@ import ErrorMessage from '../components/ErrorMessage'
 import Loading from '../components/Loading'
 // import { listOrders, deleteOrder } from '../actions/orderAction'
 import { listMyFavourite,deleteFavouriteAction  } from '../actions/favouriteActions'
+import {
+  addToHistoryAction
+} from '../actions/historyAction.js'
 
 const FavouriteScreen = ({ history }) => {
   const dispatch = useDispatch()
@@ -17,7 +20,9 @@ const FavouriteScreen = ({ history }) => {
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
-
+  const addHistory = useSelector((state) => state.addHistory);
+  const { success: successaddhistory,
+    error: erroraddhistory } = addHistory;
 
   useEffect(() => {
         dispatch(listMyFavourite())
@@ -30,6 +35,10 @@ const FavouriteScreen = ({ history }) => {
       dispatch(deleteFavouriteAction(id))
       history.go(0)
     }
+  }
+
+  const addToHistoryHandler = async (id, user) => {
+    dispatch(addToHistoryAction(id,user))
   }
 
   return (
@@ -68,7 +77,7 @@ const FavouriteScreen = ({ history }) => {
                   <td>{favourites.product && favourites.product.goods_name}</td>
                   <td>${favourites.product && favourites.product.goods_price}</td>
                   <td>
-                    <LinkContainer to={`/goods/${favourites.product && favourites.product._id}`}>
+                    <LinkContainer to={`/goods/${favourites.product && favourites.product._id}`} onClick={() => addToHistoryHandler(favourites.product && favourites.product._id,userInfo._id)}>
                       <Button className='btn-sm' variant='light'>
                         Details
                       </Button>

@@ -6,6 +6,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import ErrorMessage from '../components/ErrorMessage'
 import Loading from '../components/Loading'
 import { listMyWanted,deleteWantedAction  } from '../actions/wantedActions'
+import {
+  addToHistoryAction
+} from '../actions/historyAction.js'
+
 
 const WantedScreen = ({ history }) => {
   const dispatch = useDispatch()
@@ -15,6 +19,10 @@ const WantedScreen = ({ history }) => {
 
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
+
+  const addHistory = useSelector((state) => state.addHistory);
+  const { success: successaddhistory,
+    error: erroraddhistory } = addHistory;
 
 
 
@@ -28,6 +36,10 @@ const WantedScreen = ({ history }) => {
       dispatch(deleteWantedAction(id))
       history.go(0)
     }
+  }
+
+  const addToHistoryHandler = async (id, user) => {
+    dispatch(addToHistoryAction(id,user))
   }
 
   return (
@@ -72,7 +84,7 @@ const WantedScreen = ({ history }) => {
                     
                     </td>
                   <td>
-                    <LinkContainer to={`/goods/${wanted.product && wanted.product._id}`}>
+                    <LinkContainer to={`/goods/${wanted.product && wanted.product._id}`} onClick={() => addToHistoryHandler(wanted.product && wanted.product._id,userInfo._id)}>
                       <Button className='btn-sm' variant='light'>
                         Details
                       </Button>

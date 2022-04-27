@@ -3,8 +3,8 @@ import Cart from '../models/cartModel.js'
 import Goods from '../models/goodsModel.js'
 import User from '../models/userModel.js'
 
-// @desc  create new order
-// @route POST api/orders
+// @desc  create new cart
+// @route POST api/carts
 // @access  Private
 const addToCart = asyncHandler(async (req, res) => {
   const {
@@ -23,8 +23,8 @@ const addToCart = asyncHandler(async (req, res) => {
 })
 
 
-// @desc  Get logged in user orders
-// @route GET api/orders/myorders
+// @desc  Get logged in user carts
+// @route GET api/carts/mycarts
 // @access  Private
 const getMyCart = asyncHandler(async (req, res) => {
   const carts = await Cart.find({ user: req.user._id })
@@ -32,8 +32,8 @@ const getMyCart = asyncHandler(async (req, res) => {
 })
 
 
-// @desc  Delete order
-// @route DELETE /api/orders/:id
+// @desc  Delete cart
+// @route DELETE /api/carts/:id
 // @access  Private/Admin
 const deleteCartGoods = asyncHandler(async (req, res) => {
   const cart = await Cart.find({product: req.params.id}, { user: req.user._id })

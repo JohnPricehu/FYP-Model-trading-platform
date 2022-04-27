@@ -103,7 +103,7 @@ const ProductEditScreen = ({ match, history }) => {
       </Link>
 
       <FormContainer>
-        <h1>Edit Product</h1>
+        <h1>Edit Model</h1>
         {loadingUpdate && <Loading />}
         {errorUpdate && <ErrorMessage variant='danger'>{errorUpdate}</ErrorMessage>}
 

@@ -3,7 +3,7 @@ import asyncHandler from "express-async-handler";
 import {sendEmail} from '../sendEmail.js'
 import User from "../models/userModel.js";
 
-// @desc    Get logged in user notes
+// @desc    Get goods
 // @route   GET /api/goods
 // @access  Private
 const getGoods = asyncHandler(async (req, res) => {
@@ -34,7 +34,7 @@ const getGoods = asyncHandler(async (req, res) => {
 })
 
 
-//@description     Fetch single Note
+//@description     Fetch good
 //@route           GET /api/goods/:id
 //@access          Public
 const getGoodsById = asyncHandler(async (req, res) => {
@@ -49,7 +49,7 @@ const getGoodsById = asyncHandler(async (req, res) => {
   res.json(goods);
 });
 
-//@description     Create single Note
+//@description     Create goods
 //@route           GET /api/goods/create
 //@access          Private
 const createGoods = asyncHandler(async (req, res) => {

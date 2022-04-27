@@ -2,8 +2,8 @@ import asyncHandler from 'express-async-handler'
 import Favourite from '../models/favouriteModel.js'
 import Goods  from '../models/goodsModel.js'
 
-// @desc  create new order
-// @route POST api/orders
+// @desc  create new favourite
+// @route POST api/favourites
 // @access  Private
 const addToFavourite = asyncHandler(async (req, res) => {
     const favouriteExists = await Favourite.findOne({product: req.params.id}, { user: req.user._id })
@@ -38,8 +38,8 @@ const addToFavourite = asyncHandler(async (req, res) => {
 })
 
 
-// @desc  Get logged in user orders
-// @route GET api/orders/myorders
+// @desc  Get logged in user favourites
+// @route GET api/favourites/myfavourites
 // @access  Private
 const getMyFavourite = asyncHandler(async (req, res) => {
   const favourites = await Favourite.find({ user: req.user._id }).populate(
@@ -49,8 +49,8 @@ const getMyFavourite = asyncHandler(async (req, res) => {
 })
 
 
-// @desc  Delete order
-// @route DELETE /api/orders/:id
+// @desc  Delete favourite
+// @route DELETE /api/favourites/:id
 // @access  Private/Admin
 const deleteFavouriteGoods = asyncHandler(async (req, res) => {
   const favourite = await Favourite.find({product: req.params.id}, { user: req.user._id })

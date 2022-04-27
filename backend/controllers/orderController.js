@@ -74,9 +74,9 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
       update_time: req.body.update_time,
       // email_address: req.body.payer.email_address,    
     }
-    const updatedOrder = await order.save()
-    res.json(updatedOrder)
-    const result = sendEmail(user.email,"Transaction Record","Your Order "+order._id+" has been processed. "+" You have paid"+order.totalPrice+" ."
+    
+    
+    const result = sendEmail(user.email,"Transaction Record","Your Order "+order._id+" has been processed. "+" You have paid "+order.totalPrice+" ."
     )
     if(result === 0) {
     console.log('邮件发送失败')
@@ -84,7 +84,8 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
     else if(result === 1) {
     console.log('邮件发送成功')
   }
-
+  const updatedOrder = await order.save()
+  res.json(updatedOrder)
     }else {
       res.status(404)
       throw new Error('Payment Failed')

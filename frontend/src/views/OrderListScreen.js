@@ -39,7 +39,7 @@ const OrderListScreen = ({ history }) => {
 
   return (
     <>
-      <h1 className='mt-5'>Orders</h1>
+      <h1 className='mt-5'>Orders List</h1>
       {orderLoading && <Loading />}
       {orderError && <ErrorMessage variant='danger'>{orderError}</ErrorMessage>}
       {loading ? (

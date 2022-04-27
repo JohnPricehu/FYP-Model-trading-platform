@@ -2,8 +2,8 @@ import asyncHandler from 'express-async-handler'
 import Wanted from '../models/wantedModel.js'
 import Goods  from '../models/goodsModel.js'
 
-// @desc  create new order
-// @route POST api/orders
+// @desc  create new wanted
+// @route POST api/wanteds
 // @access  Private
 const addToWanted = asyncHandler(async (req, res) => {
     const wantedExists = await Wanted.findOne({product: req.params.id}, { user: req.user._id })
@@ -35,8 +35,8 @@ const addToWanted = asyncHandler(async (req, res) => {
   }
 })
 
-// @desc  Get logged in user orders
-// @route GET api/orders/myorders
+// @desc  Get logged in user wanteds
+// @route GET api/wanteds/mywanteds
 // @access  Private
 const getMyWanted = asyncHandler(async (req, res) => {
     const wanted = await Wanted.find({ user: req.user._id }).populate(
@@ -46,8 +46,8 @@ const getMyWanted = asyncHandler(async (req, res) => {
   })
   
   
-  // @desc  Delete order
-  // @route DELETE /api/orders/:id
+  // @desc  Delete wanted
+  // @route DELETE /api/wanteds/:id
   // @access  Private/Admin
   const deleteWanted = asyncHandler(async (req, res) => {
     const wanted = await Wanted.find({product: req.params.id}, { user: req.user._id })
