@@ -6,6 +6,7 @@ import Loading from "../components/Loading";
 import ErrorMessage from "../components/ErrorMessage";
 import FormContainer from '../components/FormContainer'
 import { register } from '../actions/userActions'
+import zxcvbn from 'zxcvbn';
 
 const RegisterScreen = ({ location, history }) => {
   const [name, setName] = useState('')
@@ -30,15 +31,27 @@ const RegisterScreen = ({ location, history }) => {
   const submitHandler = (e) => {
     e.preventDefault()
     const reg =/^[A-Za-z0-9-_\u4e00-\u9fa5]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
-    if(reg.test(email)){
-      if (password !== confirmPassword) {
-        setMessage('Passwords do not match!')
-      } else {
-        dispatch(register(name, email, password))
-      }
-    }else {
-      setMessage('Wrong email type!')}    
-  }
+    if(zxcvbn(password).guesses_log10  >= 8){
+      if(reg.test(email)){
+        if (password !== confirmPassword) {
+          setMessage('Passwords do not match!')
+          setPassword("")
+          setConfirmPassword("")
+        } else {
+          dispatch(register(name, email, password))
+        }
+      }else {
+        setMessage('Wrong email type!')}
+        setEmail("")
+        setPassword("")
+        setConfirmPassword("")    
+    }else{
+      setMessage('The password strength is too weak, please reset the password!')
+      setPassword("")
+      setConfirmPassword("")
+    }
+    }
+
 
   return (
     <FormContainer>
@@ -75,6 +88,11 @@ const RegisterScreen = ({ location, history }) => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           ></Form.Control>
+        </Form.Group>
+
+        <Form.Group controlId='password'>
+        <Form.Label>Password Strength : </Form.Label>     
+        <meter min="0" max="12" low="4" high="8" optimum="10" value={zxcvbn(password).guesses_log10}></meter>
         </Form.Group>
 
         <Form.Group controlId='confirmPassword'>

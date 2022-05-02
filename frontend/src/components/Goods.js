@@ -1,19 +1,18 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-// import Rating from './Rating'
 import { useDispatch, useSelector } from 'react-redux'
 import { Card } from 'react-bootstrap'
-// import User from '../../../backend/models/userModel.js'
 import {
   addToHistoryAction
 } from '../actions/historyAction.js'
+// import { useHistory } from "react-router-dom";
 
 
 
-const Goods = ({ goods }) => {
+const Goods = ({ goods}) => {
 
   const dispatch = useDispatch()
-
+  // let history = useHistory();
   const userLogin = useSelector((state) => state.userLogin)
   const { userInfo } = userLogin
 
@@ -25,6 +24,7 @@ const Goods = ({ goods }) => {
 
   const addToHistoryHandler = async (id, user) => {
     dispatch(addToHistoryAction(id,user))
+    // history.go(0)
   }
 
   return (

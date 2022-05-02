@@ -31,6 +31,8 @@ const ProductScreen = ({ history, match }) => {
   const [qty, setQty] = useState(1)
   const [rating, setRating] = useState(0)
   const [comment, setComment] = useState('')
+  const [successmessage, setSuccessMessage] = useState(null)
+  const [failmessage, setFailMessage] = useState(null)
 
   const dispatch = useDispatch()
 
@@ -55,7 +57,7 @@ const ProductScreen = ({ history, match }) => {
   } = productReviewCreate
 
 
-  useEffect(() => {
+  useEffect(() => {    
     if (successProductReview) {
       alert('Review Submitted!')
       setRating(0)
@@ -63,16 +65,20 @@ const ProductScreen = ({ history, match }) => {
       dispatch({ type: GOODS_CREATE_REVIEW_RESET })
     }
     if (successadd){
-      alert('Add Favourites successfully!')
+      setSuccessMessage('Add Favourites successfully!')
+      // alert('Add Favourites successfully!')
           }
            if(erroradd){
-      alert('You already add this model to Favourites!')
+      setFailMessage('You already add this model to Favourites!')
+      // alert('You already add this model to Favourites!')
           }
     if (successaddwanted){
-      alert('Add Wanted successfully!')
+      setSuccessMessage('Add Wanted successfully!')
+      // alert('Add Wanted successfully!')
           }
     if (erroraddwanted){
-      alert('You already add this model to wanteds!')
+      setFailMessage('You already add this model to Favourites!')
+      // alert('You already add this model to wanteds!')
           }
     dispatch(listGoodsDetails(match.params.id))
     
@@ -318,7 +324,8 @@ const ProductScreen = ({ history, match }) => {
                     )
       
                     }
-                  
+                  {successmessage && <ErrorMessage variant='success'>{successmessage}</ErrorMessage>}
+                  {failmessage && <ErrorMessage variant='danger'>{failmessage}</ErrorMessage>}
                   </ListGroup.Item>
                   
                 </ListGroup>
