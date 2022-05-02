@@ -69,7 +69,7 @@ const ProductScreen = ({ history, match }) => {
       alert('You already add this model to Favourites!')
           }
     if (successaddwanted){
-      alert('Add Favourites successfully!')
+      alert('Add Wanted successfully!')
           }
     if (erroraddwanted){
       alert('You already add this model to wanteds!')

@@ -6,8 +6,10 @@ import Goods  from "../models/goodsModel.js"
 // @route POST api/favourites
 // @access  Private
 const addToFavourite = asyncHandler(async (req, res) => {
-    const favouriteExists = await Favourite.findOne({product: req.params.id}, { user: req.user._id })
-    if (favouriteExists) {
+    const favouriteExists = await Favourite.find({product: req.params.id,user: req.user._id })
+    // const favouriteExists = await Goods.find({ _id: req.params.id},{likers:{ user: req.user._id } })
+    if (favouriteExists.length != 0) {
+        // res.json(favouriteExists)
         res.status(404);
         throw new Error("Goods already add to favourite");
       }
@@ -54,9 +56,9 @@ const getMyFavourite = asyncHandler(async (req, res) => {
 // @route DELETE /api/favourites/:id
 // @access  Private/Admin
 const deleteFavouriteGoods = asyncHandler(async (req, res) => {
-  const favourite = await Favourite.find({product: req.params.id}, { user: req.user._id })
+  const favourite = await Favourite.find({product: req.params.id, user: req.user._id })
   if (favourite) {
-    await Favourite.deleteMany({product: req.params.id}, { user: req.user._id })
+    await Favourite.deleteMany({product: req.params.id,  user: req.user._id })
     // const good = await Goods.findById(req.params.id)
     
     // db.collection.update({_id: ObjectId( "4f8dcb06ee21783d7400003c" )}, 

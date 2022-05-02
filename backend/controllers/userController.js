@@ -3,6 +3,9 @@ import User from "../models/userModel.js";
 import generateToken from "../utils/generateToken.js";
 import {sendEmail} from "../sendEmail.js"
 import Goods from "../models/goodsModel.js";
+import Favourite from "../models/favouriteModel.js"
+import Wanted from "../models/wantedModel.js"
+import History from "../models/historyModel.js"
 
 //@description     Auth the user
 //@route           POST /api/users/login
@@ -117,8 +120,26 @@ const deleteUser = asyncHandler(async (req, res) => {
 
   if (user) {
     await user.remove();
-    const model = await Goods.findOne({owner : req.params.id})
-    await model.remove()
+    await Goods.deleteMany({owner : req.params.id})
+    // const model = await Goods.find({owner : req.params.id})
+    // await model.remove()
+    await Goods.updateMany({}, {$pull: {likers:{ user: req.params.id } } });
+    await Goods.updateMany({}, {$pull: {wanters:{ user: req.params.id } } });
+    await History.deleteMany({user: req.params.id })
+    await Wanted.deleteMany({user: req.params.id })
+    await Favourite.deleteMany({user: req.params.id})
+    // const history = await History.find({user: req.params.id})
+    // res.json(history)
+    // await history.remove()
+
+    // const wanted = await Wanted.find({user: req.params.id})
+    // res.json(wanted)
+    // await wanted.remove()
+
+    // const favourite = await Favourite.find({user: req.params.id})
+    // res.json(favourite)
+    // await favourite.remove()
+
     res.json({ message: "User Removed" });
   } else {
     res.status(404);

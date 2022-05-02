@@ -6,8 +6,8 @@ import Goods  from "../models/goodsModel.js"
 // @route POST api/wanteds
 // @access  Private
 const addToWanted = asyncHandler(async (req, res) => {
-    const wantedExists = await Wanted.findOne({product: req.params.id}, { user: req.user._id })
-    if (wantedExists) {
+    const wantedExists = await Wanted.find({product: req.params.id,  user: req.user._id})
+    if (wantedExists.length != 0) {
         res.status(404);
         throw new Error("Goods already add to wanted");
       }
@@ -50,9 +50,9 @@ const getMyWanted = asyncHandler(async (req, res) => {
   // @route DELETE /api/wanteds/:id
   // @access  Private/Admin
   const deleteWanted = asyncHandler(async (req, res) => {
-    const wanted = await Wanted.find({product: req.params.id}, { user: req.user._id })
+    const wanted = await Wanted.find({product: req.params.id, user: req.user._id })
     if (wanted) {
-      await Wanted.deleteMany({product: req.params.id}, { user: req.user._id })
+      await Wanted.deleteMany({product: req.params.id, user: req.user._id })
       await Goods.updateMany({ _id: req.params.id}, {$pull: {wanters:{ user: req.user._id } } });
       res.json({ message: 'Wanted goods removed' })
     } else {
