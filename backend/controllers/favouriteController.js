@@ -1,6 +1,6 @@
 import asyncHandler from 'express-async-handler'
-import Favourite from '../models/favouriteModel.js'
-import Goods  from '../models/goodsModel.js'
+import Favourite from "../models/favouriteModel.js"
+import Goods  from "../models/goodsModel.js"
 
 // @desc  create new favourite
 // @route POST api/favourites
@@ -31,7 +31,8 @@ const addToFavourite = asyncHandler(async (req, res) => {
         user: req.user._id,
       }
       good.likers.push(liker)
-      await good.save() }
+      await good.save() 
+    }
 
 
 
@@ -65,7 +66,7 @@ const deleteFavouriteGoods = asyncHandler(async (req, res) => {
     // // )
     // good.likers.deleteOne({user : req.user._id})
   // const good =  
-  // await Goods.updateMany({"_id": req.params.id}, {$pull: {likers:[ {user: req.user._id} ]  } });
+  await Goods.updateMany({ _id: req.params.id}, {$pull: {likers:{ user: req.user._id } } });
   // await good.save()
     res.json({ message: 'Favourite goods removed' })
   } else {

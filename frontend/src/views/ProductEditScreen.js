@@ -18,7 +18,9 @@ const ProductEditScreen = ({ match, history }) => {
   const [goods_category, setCategory] = useState('')
   const [countInStock, setCountInStock] = useState(0)
   const [goods_details, setDescription] = useState('')
-  const [picMessage, setPicMessage] = useState(null);
+  const [
+    // picMessage,
+     setPicMessage] = useState(null);
   const [goods_pic, setGoods_pic] = useState("");
   // const [imageURL, setImageURL] = useState('')
 

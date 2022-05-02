@@ -4,6 +4,7 @@ import {
   CART_REMOVE_ITEM,
   CART_SAVE_SHIPPING_ADDRESS,
   CART_SAVE_PAYMENT_METHOD,
+  CART_CLEAN_ITEM
 } from '../constants/cartConstants'
 
 // (getState.js) allows as to get what ever we want from our state in the store.js
@@ -33,6 +34,11 @@ export const removeFromCart = (id) => (dispatch, getState) => {
 
   localStorage.setItem('cartItems', JSON.stringify(getState().cart.cartItems))
 }
+
+export const cleanCart = () => async (dispatch) => {
+  localStorage.removeItem("cartItems");
+  dispatch({ type: CART_CLEAN_ITEM });
+};
 
 export const saveShippingAddress = (data) => (dispatch) => {
   dispatch({

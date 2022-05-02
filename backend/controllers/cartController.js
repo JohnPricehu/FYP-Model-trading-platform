@@ -1,5 +1,5 @@
 import asyncHandler from 'express-async-handler'
-import Cart from '../models/cartModel.js'
+import Cart from "../models/cartModel.js"
 import Goods from '../models/goodsModel.js'
 import User from '../models/userModel.js'
 

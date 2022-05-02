@@ -6,6 +6,7 @@ import CheckOutSteps from '../components/CheckOutSteps'
 import { Link } from 'react-router-dom'
 import { createOrder } from '../actions/orderAction'
 
+
 const PlaceOrderScreen = ({ history }) => {
   const dispatch = useDispatch()
   const cart = useSelector((state) => state.cart)
@@ -60,8 +61,9 @@ if(userInfo && userInfo.isMember){
         shippingPrice: cart.shippingPrice,
         taxPrice: cart.taxPrice,
         totalPrice: cart.totalPrice,
-      })
+      }),
     )
+
   }
 
   return (

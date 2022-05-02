@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { Row, Col, Image, ListGroup, Form, Card, Button } from 'react-bootstrap'
 import ErrorMessage from "../components/ErrorMessage";
-import { addToCart, removeFromCart } from '../actions/cartAction'
+import { addToCart, removeFromCart, cleanCart} from '../actions/cartAction'
 
 // location is used to get ?qty= from the url
 const CartScreen = ({ match, location, history }) => {
@@ -28,7 +28,12 @@ const CartScreen = ({ match, location, history }) => {
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id))
   }
-
+  const cleanHandler = () => {
+    dispatch(cleanCart());
+    // history.go("0");
+    history.push("/cart");
+    history.go("0");
+  };
   const checkOutHandler = () => {
     history.push('/shipping')
   }
@@ -118,12 +123,29 @@ const CartScreen = ({ match, location, history }) => {
                 type='button'
                 className='btn-block'
                 style={{
+                  backgroundColor: 'red',
+                  border: '1px solid #B375B0 ',
+                  borderRadius: '20px',
+                }}
+                disabled={cartItems.length === 0}
+                onClick={cleanHandler}
+                
+              >
+                Clean Your Cart
+              </Button>
+            </ListGroup.Item>
+            <ListGroup.Item>
+              <Button
+                type='button'
+                className='btn-block'
+                style={{
                   backgroundColor: 'rgb(63 57 63)',
                   border: '1px solid #B375B0 ',
                   borderRadius: '20px',
                 }}
                 disabled={cartItems.length === 0}
                 onClick={checkOutHandler}
+                
               >
                 Procced To Check Out
               </Button>

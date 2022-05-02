@@ -49,9 +49,9 @@ app.use('/api/favourite', favouriteRoutes)
 app.use('/api/wanted', wantedRoutes)
 app.use('/api/history', historyRoutes)
 
-app.get("/", (req, res) =>
-res.sendFile(path.join(__dirname, "frontend/index.js"))
-);
+// app.get("/", (req, res) =>
+// res.sendFile(path.join(__dirname, "frontend/index.js"))
+// );
 // --------------------------deployment------------------------------
 const __dirname = path.resolve();
 

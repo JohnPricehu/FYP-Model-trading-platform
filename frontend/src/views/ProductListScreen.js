@@ -50,6 +50,7 @@ const productListScreen = ({ history, match }) => {
   const deleteHandler = async (id) => {
     if (window.confirm('Are you sure ?')) {
       dispatch(deleteGoodsAction(id))
+      history.go(0)
     }
   }
 

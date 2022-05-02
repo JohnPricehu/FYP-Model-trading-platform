@@ -62,18 +62,26 @@ const ProductScreen = ({ history, match }) => {
       setComment('')
       dispatch({ type: GOODS_CREATE_REVIEW_RESET })
     }
-    // if (successadd){
-    //   alert('Add Favourites successfully!')
-    // }
-    // if (successaddwanted){
-    //   alert('Add Wanted successfully!')
-    // }
+    if (successadd){
+      alert('Add Favourites successfully!')
+          }
+           if(erroradd){
+      alert('You already add this model to Favourites!')
+          }
+    if (successaddwanted){
+      alert('Add Favourites successfully!')
+          }
+    if (erroraddwanted){
+      alert('You already add this model to wanteds!')
+          }
     dispatch(listGoodsDetails(match.params.id))
     
   }, [dispatch, match.params.id,  
     successProductReview,
     successadd,
-    successaddwanted
+    erroradd,
+    successaddwanted,
+    erroraddwanted
   ])
 
   const addToCartHandler = () => {
@@ -85,6 +93,7 @@ const ProductScreen = ({ history, match }) => {
 
   const addToWantedHandler = async (id, user) => {
     dispatch(addToWantedAction(id,user))
+
 }
 
   const submitHandler = (e) => {

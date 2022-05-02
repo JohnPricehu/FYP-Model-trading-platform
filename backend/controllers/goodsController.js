@@ -1,10 +1,10 @@
 import Goods from "../models/goodsModel.js";
 import asyncHandler from "express-async-handler";
-import {sendEmail} from '../sendEmail.js'
+import {sendEmail} from "../sendEmail.js"
 import User from "../models/userModel.js";
-import History from '../models/HistoryModel.js'
-import Wanted from '../models/wantedModel.js'
-import Favourite from '../models/favouriteModel.js'
+import History from "../models/historyModel.js"
+import Wanted from "../models/wantedModel.js"
+import Favourite from "../models/favouriteModel.js"
 
 // @desc    Get goods
 // @route   GET /api/goods
@@ -107,7 +107,7 @@ const updateGoods = asyncHandler(async (req, res) => {
     const updatedProduct = await product.save()
     res.json(updatedProduct)
     for (let i = 0;i < product.likers.length;i++){
-      const user = await User.findById( product.likers[i].user)
+    const user = await User.findById( product.likers[i].user)
     const result = sendEmail(user.email,"Attention","Your favourite "+updatedProduct.goods_name+" has been updated. Hurry up to check it!"
     )
   }

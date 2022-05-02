@@ -1,5 +1,5 @@
-import asyncHandler from 'express-async-handler'
-import History from '../models/HistoryModel.js'
+import asyncHandler from "express-async-handler"
+import History from "../models/historyModel.js"
 
 // @desc  create new history
 // @route POST api/historys

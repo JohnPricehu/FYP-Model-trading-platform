@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom'
-import { Helmet } from 'react-helmet'
 import Goods from "../components/Goods"
-import {listGoods,listBestSalesGoods,listSpecialGoods} from "../actions/goodsActions"
-import NavigationLinks from '../components/navigation-links'
-import projectStyles from '../style.module.css'
-// import styles from './home.module.css'
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
+import {listGoods,listBestSalesGoods} from "../actions/goodsActions"
 import { useDispatch,useSelector } from "react-redux";
-import { logout } from "../actions/userActions";
+
 import Loading from "../components/Loading";
 import ErrorMessage from "../components/ErrorMessage";
 import Paginate from '../components/Paginate'
@@ -17,12 +12,12 @@ import ProductCarousel from '../components/ProductCarousel'
 import {
   Row,
   Col,
-  Container,
-  Form,
-  FormControl,
-  Nav,
-  Navbar,
-  NavDropdown,
+  // Container,
+  // Form,
+  // FormControl,
+  // Nav,
+  // Navbar,
+  // NavDropdown,
 } from "react-bootstrap";
 
 const Home = ({ 
@@ -58,19 +53,6 @@ const Home = ({
       dispatch(listBestSalesGoods())
     }, [dispatch])
 
-  // const goodsSpecial = useSelector((state) => state.goodsSpecial)
-  // const {sgoods } = goodsSpecial
-  
-  //   useEffect(() => {
-  //     dispatch(listSpecialGoods())
-  //   }, [dispatch])
-    
-  // const logoutHandler = () => {
-  //   dispatch(logout());
-  // };
-
-
-  // console.log(goods)
   return (
     <>
     <Meta />

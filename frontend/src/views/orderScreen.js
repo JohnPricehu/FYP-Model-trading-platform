@@ -5,6 +5,7 @@ import Loading from "../components/Loading";
 import ErrorMessage from "../components/ErrorMessage";
 import { Link } from 'react-router-dom'
 import { getOrderDetails, deliverOrder,payOrder } from '../actions/orderAction'
+import { cleanCart} from '../actions/cartAction'
 
 const OrderScreen = ({ match, history }) => {
   const orderId = match.params.id
@@ -50,6 +51,7 @@ const OrderScreen = ({ match, history }) => {
   const payHandler = () => {
     dispatch(payOrder(order))
     history.go(0)
+    dispatch(cleanCart())
   }
   return loading ? (
     <Loading  />

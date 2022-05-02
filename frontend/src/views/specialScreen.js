@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom'
-import { Helmet } from 'react-helmet'
 import Goods from "../components/Goods"
 import {listSpecialGoods,listAllGoods} from "../actions/goodsActions"
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 import { useDispatch,useSelector } from "react-redux";
 import Loading from "../components/Loading";
 import ErrorMessage from "../components/ErrorMessage";
@@ -12,19 +10,12 @@ import Meta from '../components/Meta'
 import {
   Row,
   Col,
-  Container,
-  Form,
-  FormControl,
-  Nav,
-  Navbar,
-  NavDropdown,
 } from "react-bootstrap";
 
 const SpecialScreen = ({ 
   match 
 }) => {
 
-  // const history = useHistory();
   const keyword = match.params.keyword
   const pageNumber = match.params.pageNumber || 1
 
@@ -53,12 +44,6 @@ const SpecialScreen = ({
       dispatch(listSpecialGoods())
     }, [dispatch])
     
-  // const logoutHandler = () => {
-  //   dispatch(logout());
-  // };
-
-
-  // console.log(goods)
   return (
     <>
     <Meta />
