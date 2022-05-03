@@ -205,7 +205,7 @@ const ProductScreen = ({ history, match }) => {
                       Please <Link to='/login'>login</Link> to buy the goods{' '}
                     </ErrorMessage>
                     ):
-                    (good.goods_category === 'special' ? (
+                    (good.goods_category === 'Special' ? (
                       userInfo && !userInfo.isMember ? (
                     <ErrorMessage>
                       First you need to be a <Link to='/paymember'>member</Link> .{' '}

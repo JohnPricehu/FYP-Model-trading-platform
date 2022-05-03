@@ -18,9 +18,9 @@ const getGoods = asyncHandler(async (req, res) => {
       goods_name: {
           $regex: req.query.keyword,
           $options: 'i',
-        },goods_category: { $ne: 'special' }
+        },goods_category: { $ne: 'Special' }
       }
-    : {goods_category: { $ne: 'special' }}
+    : {goods_category: { $ne: 'Special' }}
       
   const count = await Goods.countDocuments({ ...keword })
   const goods = await Goods.find({ ...keword } ).populate(
@@ -102,8 +102,11 @@ const updateGoods = asyncHandler(async (req, res) => {
   } = req.body
 
   const product = await Goods.findById(req.params.id)
-
+  
+  // const user1 = await User.findById( product.wanters[i].user)
+  // const user2 = await User.findById( product.likers[i].user)
   if (product) {
+
     product.goods_name = goods_name
     product.goods_price = goods_price
     product.goods_details = goods_details
@@ -114,18 +117,21 @@ const updateGoods = asyncHandler(async (req, res) => {
     const updatedProduct = await product.save()
     res.json(updatedProduct)
     for (let i = 0;i < product.likers.length;i++){
-    const user = await User.findById( product.likers[i].user)
-    const result = sendEmail(user.email,"Attention","Your favourite "+updatedProduct.goods_name+" has been updated. Hurry up to check it!"
-    )
-  }
-    
+      const user = await User.findById( product.likers[i].user)
+      const result = sendEmail(user.email,"Attention","Your favourite "+ updatedProduct.goods_name +" has been updated. Hurry up to check it!"
+      )
+    }
+      
+  
+      for (let i = 0;i < product.wanters.length;i++){
+      const user = await User.findById( product.wanters[i].user)
+      const result = sendEmail(user.email,"Attention","Your wanted "+updatedProduct.goods_name+" has been updated. Hurry up to check it!"
+      )
+    }
+    // res.json(updatedProduct)
 
-    for (let i = 0;i < product.wanters.length;i++){
-    const user = await User.findById( product.wanters[i].user)
-    const result = sendEmail(user.email,"Attention","Your wanted "+updatedProduct.goods_name+" has been updated. Hurry up to check it!"
-    )
-  }
-    
+   
+
 
   } else {
     res.status(404)
@@ -209,7 +215,7 @@ const getBestSalesGoods = asyncHandler(async (req, res) => {
 })
 
 const getSpecialGoods = asyncHandler(async (req, res) => {
-  const goods = await Goods.find({goods_category: { $eq: 'special' }}).populate(
+  const goods = await Goods.find({goods_category: { $eq: 'Special' }}).populate(
     'owner',
     'name'
   )
