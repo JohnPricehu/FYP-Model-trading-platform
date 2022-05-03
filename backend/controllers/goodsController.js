@@ -41,7 +41,14 @@ const getGoods = asyncHandler(async (req, res) => {
 //@route           GET /api/goods/:id
 //@access          Public
 const getGoodsById = asyncHandler(async (req, res) => {
-  const goods = await Goods.findById(req.params.id);
+  const goods = await Goods.findById(req.params.id)
+  .populate(
+    {
+      path: 'reviews.user',
+      select:
+        'name',
+    }
+  );
 
   if (goods) {
     return res.json(goods);
@@ -152,13 +159,7 @@ const createdProductReview = asyncHandler(async (req, res) => {
   const { rating, comment } = req.body
 
   const product = await Goods.findById(req.params.id)
-  // .populate(
-  //   {
-  //     path: 'reviews.user',
-  //     select:
-  //       'name',
-  //   }
-  // )
+
 
   if (product) {
     const alreadyReviewed = await product.reviews.find(

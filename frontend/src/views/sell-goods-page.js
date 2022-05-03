@@ -93,12 +93,14 @@ function CreateGoods({ history }) {
   useEffect(() => {}, []);
 
   return (
+    // {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
           <Form onSubmit={submitHandler}>
       <div className={styles['container']}>
       <Helmet>
         <title>Sell</title>
         <meta property="og:title" content="sellGoodsPage - FYP" />
       </Helmet>
+      {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
       <input                    
         id={goods_pic}
         type="file"
@@ -183,8 +185,7 @@ function CreateGoods({ history }) {
       </button>
       <span className={styles['text4']}>
         Creating on - {new Date().toLocaleDateString()}
-      </span>
-      {error && <ErrorMessage variant="danger">{error}</ErrorMessage>}
+      </span>     
     </div>
     </Form>
   );

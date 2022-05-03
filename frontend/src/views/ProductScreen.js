@@ -31,8 +31,10 @@ const ProductScreen = ({ history, match }) => {
   const [qty, setQty] = useState(1)
   const [rating, setRating] = useState(0)
   const [comment, setComment] = useState('')
-  const [successmessage, setSuccessMessage] = useState(null)
-  const [failmessage, setFailMessage] = useState(null)
+  const [successfmessage, setSuccessfMessage] = useState(null)
+  const [failfmessage, setFailfMessage] = useState(null)
+  const [successwmessage, setSuccesswMessage] = useState(null)
+  const [failwmessage, setFailwMessage] = useState(null)
 
   const dispatch = useDispatch()
 
@@ -65,19 +67,19 @@ const ProductScreen = ({ history, match }) => {
       dispatch({ type: GOODS_CREATE_REVIEW_RESET })
     }
     if (successadd){
-      setSuccessMessage('Add Favourites successfully!')
+      setSuccessfMessage('Add Favourites successfully!')
       // alert('Add Favourites successfully!')
           }
            if(erroradd){
-      setFailMessage('You already add this model to Favourites!')
+      setFailfMessage('You already add this model to Favourites!')
       // alert('You already add this model to Favourites!')
           }
     if (successaddwanted){
-      setSuccessMessage('Add Wanted successfully!')
+      setSuccesswMessage('Add Wanted successfully!')
       // alert('Add Wanted successfully!')
           }
     if (erroraddwanted){
-      setFailMessage('You already add this model to Favourites!')
+      setFailwMessage('You already add this model to Wanted!')
       // alert('You already add this model to wanteds!')
           }
     dispatch(listGoodsDetails(match.params.id))
@@ -324,8 +326,10 @@ const ProductScreen = ({ history, match }) => {
                     )
       
                     }
-                  {successmessage && <ErrorMessage variant='success'>{successmessage}</ErrorMessage>}
-                  {failmessage && <ErrorMessage variant='danger'>{failmessage}</ErrorMessage>}
+                  {successfmessage && <ErrorMessage variant='success'>{successfmessage}</ErrorMessage>}
+                  {failfmessage && <ErrorMessage variant='danger'>{failfmessage}</ErrorMessage>}
+                  {successwmessage && <ErrorMessage variant='success'>{successwmessage}</ErrorMessage>}
+                  {failwmessage && <ErrorMessage variant='danger'>{failwmessage}</ErrorMessage>}
                   </ListGroup.Item>
                   
                 </ListGroup>
@@ -340,7 +344,7 @@ const ProductScreen = ({ history, match }) => {
               <ListGroup variant='flush'>
                 {good.reviews.map((review) => (
                   <ListGroup.Item key={review._id}>
-                    <strong>{review.name}</strong>
+                    <strong>{review.user && review.user.name}</strong>
                     <Rating value={review.rating} />
                     <p>{review.createdAt.substring(0, 10)}</p>
                     <p>{review.comment}</p>

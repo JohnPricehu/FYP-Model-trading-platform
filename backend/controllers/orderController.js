@@ -56,7 +56,7 @@ const getOrderById = asyncHandler(async (req, res) => {
   }
 })
 
-// @desc  Update order to pait
+// @desc  Update order to paid
 // @route GET api/orders/:id/pay
 // @access  Private
 const updateOrderToPaid = asyncHandler(async (req, res) => {
@@ -73,17 +73,10 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
       status: req.body.status,
       update_time: req.body.update_time,
       // email_address: req.body.payer.email_address,    
-    }
-    
-    
-    const result = sendEmail(user.email,"Transaction Record","Your Order "+order._id+" has been processed. "+" You have paid "+order.totalPrice+" ."
+    }    
+    const result = sendEmail(user.email,"Transaction Record","Your Order "+order._id+" has been processed. "+" You have total paid $ "+order.totalPrice+" ."
     )
-    if(result === 0) {
-    console.log('邮件发送失败')
-    }
-    else if(result === 1) {
-    console.log('邮件发送成功')
-  }
+
   const updatedOrder = await order.save()
   for (let i = 0;i < order.orderItems.length;i++){
     const good = await Goods.findById(order.orderItems[i].product)
@@ -99,12 +92,7 @@ const updateOrderToPaid = asyncHandler(async (req, res) => {
   const result = sendEmail(owner.email,"Transaction Record","Your Model "+good.goods_name+" solded "
   +order.orderItems[i].qty+" ."
   )
-  if(result === 0) {
-  console.log('邮件发送失败')
-  }
-  else if(result === 1) {
-  console.log('邮件发送成功')
-}
+
   }
   res.json(updatedOrder)
     }else {

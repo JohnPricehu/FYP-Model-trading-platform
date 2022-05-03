@@ -125,6 +125,7 @@ const deleteUser = asyncHandler(async (req, res) => {
     // await model.remove()
     await Goods.updateMany({}, {$pull: {likers:{ user: req.params.id } } });
     await Goods.updateMany({}, {$pull: {wanters:{ user: req.params.id } } });
+    await Goods.updateMany({}, {$pull: {reviews:{ user: req.params.id } } });
     await History.deleteMany({user: req.params.id })
     await Wanted.deleteMany({user: req.params.id })
     await Favourite.deleteMany({user: req.params.id})

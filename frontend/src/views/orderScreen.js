@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Row, Col, ListGroup, Image, Card, Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Loading from "../components/Loading";
@@ -10,6 +10,7 @@ import { cleanCart} from '../actions/cartAction'
 const OrderScreen = ({ match, history }) => {
   const orderId = match.params.id
   const dispatch = useDispatch()
+  const [failpmessage, setFailpMessage] = useState(null)
 
   const orderDetails = useSelector((state) => state.orderDetails)
   const { order, loading, error } = orderDetails
@@ -39,7 +40,8 @@ const OrderScreen = ({ match, history }) => {
     }
     if(errorPay){
       history.go(0)
-      alert('Payment Failed! Check your wallet!')
+      setFailpMessage('Payment Failed! Check your wallet!')
+      // alert('Payment Failed! Check your wallet!')
     }
     dispatch(getOrderDetails(orderId))
   }, [dispatch, orderId, errorPay, history, userInfo])
@@ -205,6 +207,7 @@ const OrderScreen = ({ match, history }) => {
                     </ListGroup.Item>
                     )}
               </ListGroup.Item>
+              {failpmessage && <ErrorMessage variant='danger'>{failpmessage}</ErrorMessage>}
             </ListGroup>
           </Card>
         </Col>
